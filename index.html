@@ -78,7 +78,7 @@
                 <li><a href="#contact" class="hover:text-white transition-colors duration-300">Contact</a></li>
                 <li><a href="#meeting" class="hover:text-white transition-colors duration-300">Schedule Meeting</a></li>
             </ul>
-            <a href="#contact" class="hidden md:block btn-primary">Schedule a Meeting</a>
+            <a href="#meeting" class="hidden md:block btn-primary">Schedule a Meeting</a>
         </nav>
     </header>
 
@@ -157,7 +157,7 @@
         </div>
     </section>
 
-    <!-- Contact and Meeting Sections -->
+    <!-- Contact Section -->
     <section id="contact" class="py-16 md:py-24 px-4 bg-gray-800">
         <div class="max-w-3xl mx-auto card p-8 md:p-12">
             <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
@@ -169,6 +169,7 @@
         </div>
     </section>
 
+    <!-- Meeting Section -->
     <section id="meeting" class="py-16 md:py-24 px-4">
         <div class="max-w-3xl mx-auto card p-8 md:p-12">
             <h2 class="text-3xl font-bold text-center mb-8">Schedule an Online Meeting</h2>
@@ -208,6 +209,15 @@
         </div>
     </footer>
 
+    <!-- Message Box -->
+    <div id="messageBox" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-8 rounded-lg shadow-xl max-w-sm mx-4 text-center">
+            <h3 class="text-xl font-bold mb-4">Action Required</h3>
+            <p class="text-gray-300 mb-6">A meeting request email has been prepared for you. Please check your email client and send the message to complete the process.</p>
+            <button id="closeMessage" class="btn-primary">Close</button>
+        </div>
+    </div>
+
     <script>
         document.getElementById('meetingForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevents the form from submitting normally
@@ -220,7 +230,7 @@
             const notes = form.notes.value;
 
             // Define the recipient of the meeting request email
-            const recipientEmail = "fadelberthe24@gmail.com"; // CHANGE THIS TO YOUR EMAIL ADDRESS
+            const recipientEmail = "fadelberthe24@gmail.com";
 
             // Create the email subject and body
             const subject = encodeURIComponent(`Meeting Request from ${name}`);
@@ -246,6 +256,13 @@
             // Open the new email and calendar tabs
             window.open(mailtoUrl, '_blank');
             window.open(googleCalendarUrl, '_blank');
+
+            // Show the message box
+            document.getElementById('messageBox').classList.remove('hidden');
+        });
+
+        document.getElementById('closeMessage').addEventListener('click', function() {
+            document.getElementById('messageBox').classList.add('hidden');
         });
     </script>
 </body>
