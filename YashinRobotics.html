@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashin Robotics - Portfolio & Business</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a2e;
+            color: #E0E0E0;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #00bcd4; /* Vibrant cyan */
+            border-radius: 9999px;
+        }
+
+        .glow-on-hover {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .glow-on-hover:hover {
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .section-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section-animation.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero text animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-text {
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        /* Mobile navigation menu */
+        @media (max-width: 768px) {
+            #mobile-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 64px; /* Adjusted to be below the navbar */
+                left: 0;
+                width: 100%;
+                background-color: #1a1a2e;
+                text-align: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                z-index: 40;
+            }
+
+            #mobile-menu.active {
+                display: flex;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="flex items-center space-x-2">
+                        <img class="h-8 w-auto rounded-full" src="https://placehold.co/100x100/121212/e0e0e0?text=YR" alt="Yashin Robotics Logo">
+                        <span class="text-white text-xl font-bold">YASHIN ROBOTICS</span>
+                    </a>
+                </div>
+                <!-- Nav Links -->
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-4">
+                        <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium transition-colors">About</a>
+                        <a href="#projects" class="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium transition-colors">Projects</a>
+                        <a href="#contact" class="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+                <!-- Hamburger Menu for Mobile -->
+                <div class="-mr-2 flex md:hidden">
+                    <button id="hamburger-btn" type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium">About</a>
+                <a href="#projects" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium">Projects</a>
+                <a href="#contact" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative flex items-center justify-center min-h-screen text-center bg-gray-900 overflow-hidden">
+        <div class="relative z-10 p-6 sm:p-10 lg:p-16 space-y-6 hero-text">
+            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight">
+                Engineering the Future <br> with <span class="text-cyan-400">YASHIN ROBOTICS</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
+                Innovating professional robotics and mechanical engineering solutions for a smarter world.
+            </p>
+            <a href="#contact" class="inline-block px-8 py-3 text-lg font-bold text-gray-900 bg-cyan-400 rounded-full hover:bg-cyan-500 transition-all transform hover:scale-105 glow-on-hover">
+                Request a Meeting
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-gray-800 section-animation">
+        <div class="max-w-6xl mx-auto text-center space-y-8">
+            <h2 class="text-3xl sm:text-4xl font-bold section-title">About Us</h2>
+            <p class="text-lg text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                Yashin Robotics specializes in cutting-edge robotic solutions and mechanical engineering design. We provide a full range of services from conceptualization and prototyping to final production and implementation. Our team of experts is dedicated to pushing the boundaries of technology and creating innovative, reliable, and efficient systems that solve complex problems.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
+                <div class="p-6 bg-gray-700 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-cyan-300">Robotics</h3>
+                    <p class="text-gray-400">Designing and building autonomous systems, robotic arms, and intelligent automation solutions for various industries.</p>
+                </div>
+                <div class="p-6 bg-gray-700 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-cyan-300">Software</h3>
+                    <p class="text-gray-400">Developing custom software and AI/ML algorithms to power our robotic solutions and enhance their capabilities.</p>
+                </div>
+                <div class="p-6 bg-gray-700 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-cyan-300">Engineering</h3>
+                    <p class="text-gray-400">Providing expert mechanical and electrical engineering services, from design to simulation and testing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 bg-gray-900 section-animation">
+        <div class="max-w-6xl mx-auto text-center space-y-8">
+            <h2 class="text-3xl sm:text-4xl font-bold section-title">Our Projects</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 glow-on-hover">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/2d3748/e0e0e0?text=Robotic+Arm" alt="Robotic Arm">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Industrial Automation Systems</h3>
+                        <p class="text-gray-400">Advanced robotic systems for manufacturing and assembly line automation.</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 glow-on-hover">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/2d3748/e0e0e0?text=Autonomous+Robot" alt="Autonomous Robot">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Autonomous Navigation Robots</h3>
+                        <p class="text-gray-400">Self-navigating robots equipped with LiDAR, cameras, and advanced path planning algorithms.</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 glow-on-hover">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/2d3748/e0e0e0?text=AI+Computer" alt="AI Computer">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Predictive Maintenance AI</h3>
+                        <p class="text-gray-400">AI-powered systems for equipment monitoring and predictive maintenance scheduling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-gray-800 section-animation">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <h2 class="text-3xl sm:text-4xl font-bold section-title">Contact Us</h2>
+            <div class="bg-gray-900 rounded-xl p-8 shadow-lg">
+                <form id="contact-form" class="space-y-6">
+                    <div>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required class="w-full p-3 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                    </div>
+                    <div>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required class="w-full p-3 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                    </div>
+                    <div>
+                        <textarea id="message" name="message" rows="4" placeholder="Your Message" required class="w-full p-3 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 text-lg font-bold text-gray-900 bg-cyan-400 rounded-full hover:bg-cyan-500 transition-all transform hover:scale-105 glow-on-hover">
+                        Send Message
+                    </button>
+                </form>
+                <div id="form-status" class="mt-4 text-center"></div>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-xl font-semibold mb-4">Our Location</h3>
+                <div class="h-64 rounded-xl overflow-hidden shadow-lg">
+                    <iframe
+                        class="w-full h-full"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.2847118244985!2d-122.08381538468164!3d37.42206597982531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb563cfd29481%3A0x6d9f80a42d9e18b8!2sGoogleplex!5e0!3m2!1sen!2sus!4v1628169600123!5m2!1sen!2sus"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 px-4 text-center text-gray-400">
+        <p>&copy; 2024 Yashin Robotics. All Rights Reserved.</p>
+        <div class="mt-4 space-x-4">
+            <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+            <a href="#" class="hover:text-white transition-colors">GitHub</a>
+            <a href="#" class="hover:text-white transition-colors">Twitter</a>
+        </div>
+    </footer>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('#mobile-menu a');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            const openIcon = hamburgerBtn.querySelector('svg:first-child');
+            const closeIcon = hamburgerBtn.querySelector('svg:last-child');
+            if (openIcon && closeIcon) {
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            }
+        }
+
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        const form = document.getElementById('contact-form');
+        const statusDiv = document.getElementById('form-status');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            statusDiv.innerHTML = '<p class="text-cyan-400">Sending...</p>';
+
+            // Simulate form submission
+            setTimeout(() => {
+                statusDiv.innerHTML = '<p class="text-green-400">Message sent successfully!</p>';
+                form.reset();
+            }, 2000);
+        });
+
+        // Intersection Observer for section animations
+        const sections = document.querySelectorAll('.section-animation');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.2,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
