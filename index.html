@@ -76,6 +76,7 @@
                 <li><a href="#services" class="hover:text-white transition-colors duration-300">Services</a></li>
                 <li><a href="#projects" class="hover:text-white transition-colors duration-300">Projects</a></li>
                 <li><a href="#contact" class="hover:text-white transition-colors duration-300">Contact</a></li>
+                <li><a href="#meeting" class="hover:text-white transition-colors duration-300">Schedule Meeting</a></li>
             </ul>
             <a href="#contact" class="hidden md:block btn-primary">Schedule a Meeting</a>
         </nav>
@@ -156,10 +157,21 @@
         </div>
     </section>
 
-    <!-- Contact Section with Meeting Scheduler -->
+    <!-- Contact and Meeting Sections -->
     <section id="contact" class="py-16 md:py-24 px-4 bg-gray-800">
         <div class="max-w-3xl mx-auto card p-8 md:p-12">
-            <h2 class="text-3xl font-bold text-center mb-8">Schedule a Meeting</h2>
+            <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
+            <div class="space-y-4 text-center">
+                <p class="text-lg">For general inquiries, feel free to reach out:</p>
+                <p class="text-xl font-semibold">Email: Fadelberthe24@gmail.com</p>
+                <p class="text-xl font-semibold">Mobile: +22651881725</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="meeting" class="py-16 md:py-24 px-4">
+        <div class="max-w-3xl mx-auto card p-8 md:p-12">
+            <h2 class="text-3xl font-bold text-center mb-8">Schedule an Online Meeting</h2>
             <form id="meetingForm" class="space-y-6">
                 <div>
                     <label for="name" class="block text-sm font-medium mb-1">Full Name</label>
@@ -208,7 +220,7 @@
             const notes = form.notes.value;
 
             // Define the recipient of the meeting request email
-            const recipientEmail = "Fadelberthe24@gmail.com"; // CHANGE THIS TO YOUR EMAIL ADDRESS
+            const recipientEmail = "fadelberthe24@gmail.com"; // CHANGE THIS TO YOUR EMAIL ADDRESS
 
             // Create the email subject and body
             const subject = encodeURIComponent(`Meeting Request from ${name}`);
