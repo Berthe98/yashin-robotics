@@ -10,218 +10,266 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #121212;
-            color: #E0E0E0;
+            background-color: #F8F9FA;
+            color: #1A237E;
         }
 
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://placehold.co/1920x1080/1a1a1a/cccccc?text=Yashin+Robotics');
-            background-size: cover;
-            background-position: center;
+        .text-gold {
+            color: #DAA520;
         }
 
-        .card {
-            background-color: #1E1E1E;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+        .bg-dark-blue {
+            background-color: #1A237E;
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, #6A0DAD, #9B30FF);
-            color: white;
+        
+        .btn-gold {
+            background: linear-gradient(to right, #DAA520, #FFD700);
+            color: #1A237E;
             padding: 12px 24px;
             border-radius: 9999px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
-        .btn-primary:hover {
-            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+        .btn-gold:hover {
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
             transform: translateY(-2px);
         }
 
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
         .input-field {
-            background-color: #2D2D2D;
-            border: 1px solid #444;
-            color: #E0E0E0;
+            background-color: #F8F9FA;
+            border: 1px solid #E2E8F0;
+            color: #1A237E;
             border-radius: 8px;
             padding: 10px;
             width: 100%;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #DAA520;
+        }
+        
+        .hero-slideshow {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: background-image 1s ease-in-out;
         }
 
-        .grid-container {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        .hero-slideshow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(26, 35, 126, 0.7); /* Dark blue overlay */
+        }
+
+        .media-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+        }
+
+        .media-container img,
+        .media-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
         }
     </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-white text-gray-800">
 
     <!-- Header -->
-    <header class="py-6 px-4 md:px-8">
+    <header class="py-6 px-4 md:px-8 bg-white shadow-sm">
         <nav class="flex justify-between items-center max-w-7xl mx-auto">
             <div class="flex items-center space-x-4">
-                <!-- Update the src attribute with your logo's filename -->
-                <img src="Gemini_Generated_Image_hpytynhpytynhpyt.png" alt="Yashin Robotics Logo" class="w-12 h-12 rounded-full">
-                <span class="text-xl font-bold">Yashin Robotics</span>
+                <img src="./Gemini_Generated_Image_hpytynhpyt.png" alt="Yashin Robotics Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500">
+                <span class="text-xl font-bold text-gray-800">Yashin Robotics</span>
             </div>
-            <ul class="hidden md:flex space-x-6 text-gray-300">
-                <li><a href="#about" class="hover:text-white transition-colors duration-300">About</a></li>
-                <li><a href="#services" class="hover:text-white transition-colors duration-300">Services</a></li>
-                <li><a href="#projects" class="hover:text-white transition-colors duration-300">Projects</a></li>
-                <li><a href="#contact" class="hover:text-white transition-colors duration-300">Contact</a></li>
-                <li><a href="#meeting" class="hover:text-white transition-colors duration-300">Schedule Meeting</a></li>
+            <ul class="hidden md:flex space-x-6 text-gray-600">
+                <li><a href="#about" class="hover:text-gold transition-colors duration-300">About</a></li>
+                <li><a href="#services" class="hover:text-gold transition-colors duration-300">Services</a></li>
+                <li><a href="#projects" class="hover:text-gold transition-colors duration-300">Projects</a></li>
+                <li><a href="#contact" class="hover:text-gold transition-colors duration-300">Contact</a></li>
             </ul>
-            <a href="#meeting" class="hidden md:block btn-primary">Schedule a Meeting</a>
+            <a href="#meeting" class="btn-gold hidden md:block">Schedule a Meeting</a>
+            <a href="#meeting" class="md:hidden text-gold font-semibold hover:underline">Schedule</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero-section text-center py-24 md:py-48 px-4">
-        <div class="max-w-4xl mx-auto">
+    <section id="hero" class="py-24 md:py-48 px-4 text-center hero-slideshow">
+        <div class="relative max-w-4xl mx-auto z-10 text-white">
             <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-fadeIn">Innovating the Future of Robotics</h1>
-            <p class="text-md md:text-xl text-gray-300 mb-8 animate-fadeIn delay-300">Building intelligent machines that solve complex challenges and empower humanity.</p>
-            <a href="#contact" class="btn-primary animate-fadeIn delay-500">Get in Touch</a>
+            <p class="text-md md:text-xl text-gray-200 mb-8 animate-fadeIn delay-300">Building intelligent machines that solve complex challenges and empower humanity.</p>
+            <a href="#contact" class="btn-gold animate-fadeIn delay-500">Get in Touch</a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 md:py-24 px-4">
+    <section id="about" class="py-16 md:py-24 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Who We Are</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Who We Are</h2>
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="order-2 md:order-1">
-                    <p class="text-gray-300 mb-4">
+                    <p class="text-gray-600 mb-4">
                         At Yashin Robotics, we are pioneers in the field of automation and intelligent systems. Our team of expert engineers and researchers is dedicated to creating cutting-edge robotic solutions that enhance efficiency, safety, and productivity across various industries.
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-gray-600">
                         From industrial automation to medical assistance robots, our products are designed with precision and a commitment to excellence. We believe that the future is automated, and we are here to build it.
                     </p>
                 </div>
                 <div class="order-1 md:order-2">
-                    <img src="https://placehold.co/600x400/222222/cccccc?text=About+Image" alt="Robotics team" class="w-full h-auto rounded-xl shadow-lg">
+                    <img src="https://placehold.co/600x400/E5E7EB/DAA520?text=About+Image" alt="Robotics team" class="w-full h-auto rounded-xl shadow-lg">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 md:py-24 px-4 bg-gray-800">
+    <section id="services" class="py-16 md:py-24 px-4 bg-gray-100">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Our Services</h2>
-            <div class="grid-container">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2">Industrial Automation</h3>
-                    <p class="text-gray-400">Custom solutions for manufacturing, logistics, and assembly lines.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Industrial Automation</h3>
+                    <p class="text-gray-600">Custom solutions for manufacturing, logistics, and assembly lines.</p>
                 </div>
                 <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2">Autonomous Robotics</h3>
-                    <p class="text-gray-400">Navigation, mapping, and object recognition for intelligent robots.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Autonomous Robotics</h3>
+                    <p class="text-gray-600">Navigation, mapping, and object recognition for intelligent robots.</p>
                 </div>
                 <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2">Medical Robotics</h3>
-                    <p class="text-gray-400">Advanced robotic systems for surgery, rehabilitation, and patient care.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Medical Robotics</h3>
+                    <p class="text-gray-600">Advanced robotic systems for surgery, rehabilitation, and patient care.</p>
                 </div>
                 <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2">AI & Machine Learning</h3>
-                    <p class="text-gray-400">Integrating smart algorithms to enhance robot functionality.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">AI & Machine Learning</h3>
+                    <p class="text-gray-600">Integrating smart algorithms to enhance robot functionality.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 md:py-24 px-4">
+    <section id="projects" class="py-16 md:py-24 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Our Projects</h2>
-            <div class="grid-container">
-                <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2">Project Gemini</h3>
-                    <p class="text-gray-400">Dual-arm collaborative robot for precision manufacturing.</p>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1: Image Showcase -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Project Gemini</h3>
+                    <p class="text-gray-600 mb-4">A dual-arm collaborative robot designed for precision manufacturing and assembly.</p>
+                    <div id="media-gemini" class="media-container mb-4"></div>
+                    <a href="#" class="btn-gold block text-center mt-auto">Learn More</a>
                 </div>
-                <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2">AeroDrone</h3>
-                    <p class="text-gray-400">Autonomous inspection drone for large-scale infrastructure.</p>
+
+                <!-- Project Card 2: Video Showcase -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">AeroDrone</h3>
+                    <p class="text-gray-600 mb-4">An autonomous inspection drone for large-scale infrastructure monitoring.</p>
+                    <div id="media-aerodrone" class="media-container mb-4"></div>
+                    <a href="#" class="btn-gold block text-center mt-auto">Learn More</a>
                 </div>
-                <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2">HealthBot</h3>
-                    <p class="text-gray-400">Robotic assistant for hospitals and clinics, improving patient care.</p>
+
+                <!-- Project Card 3: Image Showcase -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">HealthBot</h3>
+                    <p class="text-gray-600 mb-4">A robotic assistant for hospitals and clinics, improving patient care and logistics.</p>
+                    <div id="media-healthbot" class="media-container mb-4"></div>
+                    <a href="#" class="btn-gold block text-center mt-auto">Learn More</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 md:py-24 px-4 bg-gray-800">
+    <section id="contact" class="py-16 md:py-24 px-4 bg-gray-100">
         <div class="max-w-3xl mx-auto card p-8 md:p-12">
-            <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
+            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Contact Us</h2>
             <div class="space-y-4 text-center">
-                <p class="text-lg">For general inquiries, feel free to reach out:</p>
-                <p class="text-xl font-semibold">Email: Fadelberthe24@gmail.com</p>
-                <p class="text-xl font-semibold">Mobile: +22651881725</p>
+                <p class="text-lg text-gray-600">For general inquiries, feel free to reach out:</p>
+                <p class="text-xl font-semibold text-gray-800">Email: Fadelberthe24@gmail.com</p>
+                <p class="text-xl font-semibold text-gray-800">Mobile: +22651881725</p>
             </div>
         </div>
     </section>
 
     <!-- Meeting Section -->
-    <section id="meeting" class="py-16 md:py-24 px-4">
+    <section id="meeting" class="py-16 md:py-24 px-4 bg-white">
         <div class="max-w-3xl mx-auto card p-8 md:p-12">
-            <h2 class="text-3xl font-bold text-center mb-8">Schedule an Online Meeting</h2>
+            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Schedule an Online Meeting</h2>
             <form id="meetingForm" class="space-y-6">
                 <div>
-                    <label for="name" class="block text-sm font-medium mb-1">Full Name</label>
+                    <label for="name" class="block text-sm font-medium mb-1 text-gray-600">Full Name</label>
                     <input type="text" id="name" name="name" class="input-field" required>
                 </div>
                 <div>
-                    <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+                    <label for="email" class="block text-sm font-medium mb-1 text-gray-600">Email Address</label>
                     <input type="email" id="email" name="email" class="input-field" required>
                 </div>
                 <div>
-                    <label for="date" class="block text-sm font-medium mb-1">Preferred Date</label>
+                    <label for="date" class="block text-sm font-medium mb-1 text-gray-600">Preferred Date</label>
                     <input type="date" id="date" name="date" class="input-field" required>
                 </div>
                 <div>
-                    <label for="time" class="block text-sm font-medium mb-1">Preferred Time</label>
+                    <label for="time" class="block text-sm font-medium mb-1 text-gray-600">Preferred Time</label>
                     <input type="time" id="time" name="time" class="input-field" required>
                 </div>
                 <div>
-                    <label for="notes" class="block text-sm font-medium mb-1">Meeting Topic</label>
+                    <label for="notes" class="block text-sm font-medium mb-1 text-gray-600">Meeting Topic</label>
                     <textarea id="notes" name="notes" rows="4" class="input-field" placeholder="Briefly describe the purpose of the meeting."></textarea>
                 </div>
-                <button type="submit" class="btn-primary w-full">Request Meeting</button>
+                <button type="submit" class="btn-gold w-full">Request Meeting</button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 px-4 text-center text-gray-400">
+    <footer class="py-8 px-4 text-center text-gray-500 bg-gray-100">
         <p class="mb-2">&copy; 2025 Yashin Robotics. All rights reserved.</p>
         <div class="flex justify-center space-x-4">
-            <a href="#" class="hover:text-white transition-colors duration-300">LinkedIn</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">GitHub</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">Twitter</a>
+            <a href="#" class="hover:text-gold transition-colors duration-300">LinkedIn</a>
+            <a href="#" class="hover:text-gold transition-colors duration-300">GitHub</a>
+            <a href="#" class="hover:text-gold transition-colors duration-300">Twitter</a>
         </div>
     </footer>
 
     <!-- Message Box -->
     <div id="messageBox" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
-        <div class="bg-gray-800 p-8 rounded-lg shadow-xl max-w-sm mx-4 text-center">
-            <h3 class="text-xl font-bold mb-4">Action Required</h3>
-            <p class="text-gray-300 mb-6">A meeting request email has been prepared for you. Please check your email client and send the message to complete the process.</p>
-            <button id="closeMessage" class="btn-primary">Close</button>
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-4 text-center">
+            <h3 class="text-xl font-bold mb-4 text-dark-blue">Action Required</h3>
+            <p class="text-gray-600 mb-6">A meeting request email has been prepared for you. Please check your email client and send the message to complete the process.</p>
+            <button id="closeMessage" class="btn-gold">Close</button>
         </div>
     </div>
 
     <script>
         document.getElementById('meetingForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevents the form from submitting normally
+            event.preventDefault();
 
             const form = event.target;
             const name = form.name.value;
@@ -230,10 +278,8 @@
             const time = form.time.value;
             const notes = form.notes.value;
 
-            // Define the recipient of the meeting request email
             const recipientEmail = "fadelberthe24@gmail.com";
 
-            // Create the email subject and body
             const subject = encodeURIComponent(`Meeting Request from ${name}`);
             const body = encodeURIComponent(
                 `Hello Yashin Robotics Team,\n\nI would like to schedule a meeting.\n\n` +
@@ -245,26 +291,79 @@
                 `Please get in touch to confirm the meeting.`
             );
 
-            // Create the Mailto URL for Gmail
             const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
 
-            // Create the Google Calendar URL
             const calendarTitle = encodeURIComponent(`Meeting with ${name}`);
             const calendarDetails = encodeURIComponent(`Topic: ${notes}\n\n` + `Contact: ${email}`);
             const calendarDates = `${date.replace(/-/g, '')}T${time.replace(/:/g, '')}00/${date.replace(/-/g, '')}T${time.replace(/:/g, '')}00`;
             const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${calendarTitle}&dates=${calendarDates}&details=${calendarDetails}&sf=true&output=xml`;
 
-            // Open the new email and calendar tabs
             window.open(mailtoUrl, '_blank');
             window.open(googleCalendarUrl, '_blank');
 
-            // Show the message box
             document.getElementById('messageBox').classList.remove('hidden');
         });
 
         document.getElementById('closeMessage').addEventListener('click', function() {
             document.getElementById('messageBox').classList.add('hidden');
         });
+
+        const projects = {
+            'gemini': {
+                image: 'https://placehold.co/600x400/E5E7EB/DAA520?text=Project+Gemini',
+                video: '' // No video for this project
+            },
+            'aerodrone': {
+                image: '', // No image for this project
+                video: 'https://www.youtube.com/embed/dQw4w9WgXcQ' // YouTube video URL
+            },
+            'healthbot': {
+                image: 'https://placehold.co/600x400/E5E7EB/DAA520?text=HealthBot',
+                video: '' // No video for this project
+            }
+        };
+
+        function showMedia(projectId, media) {
+            const container = document.getElementById(`media-${projectId}`);
+            if (media.video) {
+                container.innerHTML = `
+                    <iframe src="${media.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                `;
+            } else if (media.image) {
+                container.innerHTML = `
+                    <img src="${media.image}" alt="Project Image" class="w-full h-auto rounded-lg shadow-md">
+                `;
+            }
+        }
+
+        // Display media for each project on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            for (const projectId in projects) {
+                showMedia(projectId, projects[projectId]);
+            }
+        });
+
+
+        // JavaScript for image slideshow
+        const heroSection = document.getElementById('hero');
+        const images = [
+            'uploaded:WhatsApp Image 2025-09-04 at 13.11.32_3ed5b406.jpg-dfe3683d-ced3-4318-ad3d-fa8a389cd2e0',
+            'uploaded:WhatsApp Image 2025-09-04 at 22.01.16_9da58d95.jpg-84fd362d-8624-46ca-bd9e-938cf7f417cf',
+            'uploaded:WhatsApp Image 2025-09-04 at 22.01.15_1c832fdc.jpg-742c4969-d83b-4fe9-af65-90923ca15c4b'
+        ];
+        let currentImageIndex = 0;
+
+        function updateBackgroundImage() {
+            heroSection.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+        }
+
+        // Set the initial background image
+        heroSection.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        
+        // Start the slideshow
+        setInterval(updateBackgroundImage, 5000); // Change image every 5 seconds
     </script>
 </body>
 
