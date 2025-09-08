@@ -105,7 +105,8 @@
     <header class="py-6 px-4 md:px-8 bg-white shadow-sm">
         <nav class="flex justify-between items-center max-w-7xl mx-auto">
             <div class="flex items-center space-x-4">
-                <img src="uploaded:WhatsApp Image 2025-09-08 at 12.05.21_6e1b053f.jpg" alt="KOULÉ INGENIUM Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500">
+                <!-- Using a relative path to the image file -->
+                <img src="WhatsApp Image 2025-09-08 at 12.05.21_6e1b053f.jpg" alt="KOULÉ INGENIUM Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500">
                 <span class="text-xl font-bold text-gray-800">KOULÉ INGENIUM</span>
             </div>
             <ul class="hidden md:flex space-x-6 text-gray-600">
@@ -140,7 +141,8 @@
                     </p>
                 </div>
                 <div class="order-1 md:order-2">
-                    <img src="uploaded:image_2c9fb5.png-495a946f-3834-413c-b645-82c9bbc1cc9d" alt="Koulé Ingenium team working on a project" class="w-full h-auto rounded-xl shadow-lg">
+                    <!-- Using a relative path to the image file -->
+                    <img src="WhatsApp Image 2025-09-08 at 12.05.21_6e1b053f.jpg" alt="Koulé Ingenium team working on a project" class="w-full h-auto rounded-xl shadow-lg">
                 </div>
             </div>
         </div>
@@ -301,16 +303,18 @@
 
         const projects = {
             'gemini': {
-                image: 'https://placehold.co/600x400/E5E7EB/D4AF37?text=Project+Gemini',
-                video: '' // No video for this project
+                // Updated with GitHub URL for "Project Gemini"
+                image: 'image_386dbb.png',
+                video: '' 
             },
             'aerodrone': {
-                image: 'https://placehold.co/600x400/E5E7EB/D4AF37?text=AeroDrone+Image', // Added a fallback image
-                video: 'https://www.youtube.com/embed/zH3q1WlP-Xk' // Updated to a generic placeholder video
+                image: 'image_38d5e0.png',
+                video: 'https://www.youtube.com/embed/zH3q1WlP-Xk' 
             },
             'healthbot': {
-                image: 'https://placehold.co/600x400/E5E7EB/D4AF37?text=HealthBot',
-                video: '' // No video for this project
+                // Updated with GitHub URL for "HealthBot"
+                image: 'image_386a15.png',
+                video: '' 
             }
         };
 
@@ -338,8 +342,8 @@
         // JavaScript for image slideshow
         const heroSection = document.getElementById('hero');
         const images = [
-            'uploaded:Gemini_Generated_Image_1cy9651cy9651cy9.png',
-            'uploaded:Gemini_Generated_Image_edkchqedkchqedkc.png'
+            'image_387486.jpg',
+            'image_385315.png'
         ];
         let currentImageIndex = 0;
 
