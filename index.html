@@ -97,6 +97,14 @@
             height: 100%;
             border-radius: 0.75rem;
         }
+
+        /* Adjustments for desktop view */
+        @media (min-width: 1024px) {
+            .hero-slideshow {
+                height: 50vh; /* Increase hero section height on desktop */
+                background-position: top; /* Ensure the top of the image is visible */
+            }
+        }
     </style>
 </head>
 
@@ -346,7 +354,6 @@
         // JavaScript for image slideshow
         const heroSection = document.getElementById('hero');
         const images = [
-            // Corrected image paths to valid uploaded files
             'Gemini_Generated_Image_1cy9651cy9651cy9.png',
             'Gemini_Generated_Image_edkchqedkchqedkc.png',
         ];
