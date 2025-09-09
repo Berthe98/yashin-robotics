@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,8 +102,10 @@
         /* Adjustments for desktop view */
         @media (min-width: 1024px) {
             .hero-slideshow {
-                height: 50vh; /* Increase hero section height on desktop */
-                background-position: top; /* Ensure the top of the image is visible */
+                height: 50vh;
+                /* Increase hero section height on desktop */
+                background-position: top;
+                /* Ensure the top of the image is visible */
             }
         }
     </style>
@@ -110,11 +113,11 @@
 
 <body class="bg-white text-gray-800">
 
-    <header class="py-6 px-4 md:px-8 bg-white shadow-sm">
+    <header class="py-6 px-4 md:px-8 bg-white shadow-sm sticky top-0 z-50">
         <nav class="flex justify-between items-center max-w-7xl mx-auto">
-            <div class="flex items-center space-x-4">
-                <!-- Corrected image path to a valid uploaded file -->
-                <img src="WhatsApp Image 2025-09-08 at 12.05.21_899ebfab.jpg" alt="KOULÉ INGENIUM Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500">
+            <div class="flex items-center space-x-4 cursor-pointer" onclick="renderPage('home')">
+                <!-- Added onerror to handle broken image links and show a placeholder -->
+                <img src="WhatsApp Image 2025-09-08 at 12.05.21_899ebfab.jpg" onerror="this.src='https://placehold.co/48x48/121223/D4AF37?text=KI'" alt="KOULÉ INGENIUM Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500">
                 <span class="text-xl font-bold text-gray-800">KOULÉ INGENIUM</span>
             </div>
             <ul class="hidden md:flex space-x-6 text-gray-600">
@@ -128,131 +131,9 @@
         </nav>
     </header>
 
-    <section id="hero" class="py-24 md:py-48 px-4 text-center hero-slideshow">
-        <div class="relative max-w-4xl mx-auto z-10 text-white">
-            <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-fadeIn">Innovating the Future of Robotics</h1>
-            <p class="text-md md:text-xl text-gray-200 mb-8 animate-fadeIn delay-300">Building intelligent machines that solve complex challenges and empower humanity.</p>
-            <a href="#contact" class="btn-gold animate-fadeIn delay-500">Get in Touch</a>
-        </div>
-    </section>
-
-    <section id="about" class="py-16 md:py-24 px-4 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Who We Are</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="order-2 md:order-1">
-                    <p class="text-gray-600 mb-4">
-                        Inspired by the <strong>Koulé</strong>, the Senufo bird of knowledge, Koulé Ingenium is a leadership-driven organization dedicated to bridging timeless wisdom with strategic innovation. Our core mission is to empower the next generation with essential skills, building a legacy of educated and capable leaders.
-                    </p>
-                    <p class="text-gray-600">
-                        Our name, Ingenium, is our commitment to action. We use our expertise to create practical, high-impact solutions that directly improve lives. We empower a new generation of problem-solvers in Burkina Faso to meet local challenges with intelligent, homegrown solutions.
-                    </p>
-                </div>
-                <div class="order-1 md:order-2">
-                    <!-- Corrected image path to a valid uploaded file -->
-                    <img src="Gemini_Generated_Image_39d0d539d0d539d0.png" alt="Koulé Ingenium team working on a project" class="w-full h-auto rounded-xl shadow-lg">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="py-16 md:py-24 px-4 bg-gray-100">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">CAD & Product Design</h3>
-                    <p class="text-gray-600">Expert design services using SolidWorks for mechanical and industrial applications.</p>
-                </div>
-                <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">STEM Education</h3>
-                    <p class="text-gray-600">Engaging classes and workshops in science, technology, engineering, and mathematics.</p>
-                </div>
-                <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Robotics Development</h3>
-                    <p class="text-gray-600">We design and build custom robotic solutions and offer training.</p>
-                </div>
-                <div class="card p-6 text-center">
-                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Agricultural Robotics</h3>
-                    <p class="text-gray-600">Innovative solutions for farming, from autonomous planters to crop monitoring drones.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-16 md:py-24 px-4 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1: Project Gemini -->
-                <div class="card p-6">
-                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Project Gemini</h3>
-                    <p class="text-gray-600 mb-4">A dual-arm collaborative robot designed for precision manufacturing and assembly.</p>
-                    <div id="media-gemini" class="media-container mb-4"></div>
-                    <!-- Corrected link to a placeholder URL -->
-                    <a href="https://github.com/kouléingenium/project-gemini" class="btn-gold block text-center mt-auto">Learn More</a>
-                </div>
-
-                <!-- Project Card 2: AeroDrone -->
-                <div class="card p-6">
-                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">AeroDrone</h3>
-                    <p class="text-gray-600 mb-4">An autonomous inspection drone for large-scale infrastructure monitoring.</p>
-                    <div id="media-aerodrone" class="media-container mb-4"></div>
-                    <!-- Corrected link to the YouTube video URL -->
-                    <a href="https://www.youtube.com/watch?v=zH3q1WlP-Xk" class="btn-gold block text-center mt-auto">Learn More</a>
-                </div>
-
-                <!-- Project Card 3: HealthBot -->
-                <div class="card p-6">
-                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">HealthBot</h3>
-                    <p class="text-600 mb-4">A robotic assistant for hospitals and clinics, improving patient care and logistics.</p>
-                    <div id="media-healthbot" class="media-container mb-4"></div>
-                    <!-- Corrected link to a placeholder URL -->
-                    <a href="https://github.com/kouléingenium/healthbot" class="btn-gold block text-center mt-auto">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-16 md:py-24 px-4 bg-gray-100">
-        <div class="max-w-3xl mx-auto card p-8 md:p-12">
-            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Contact Us</h2>
-            <div class="space-y-4 text-center">
-                <p class="text-lg text-gray-600">For general inquiries, feel free to reach out:</p>
-                <p class="text-xl font-semibold text-gray-800">Email: Fadelberthe24@gmail.com</p>
-                <p class="text-xl font-semibold text-gray-800">Mobile: +22651881725</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="meeting" class="py-16 md:py-24 px-4 bg-white">
-        <div class="max-w-3xl mx-auto card p-8 md:p-12">
-            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Schedule an Online Meeting</h2>
-            <form id="meetingForm" class="space-y-6">
-                <div>
-                    <label for="name" class="block text-sm font-medium mb-1 text-gray-600">Full Name</label>
-                    <input type="text" id="name" name="name" class="input-field" required>
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium mb-1 text-gray-600">Email Address</label>
-                    <input type="email" id="email" name="email" class="input-field" required>
-                </div>
-                <div>
-                    <label for="date" class="block text-sm font-medium mb-1 text-gray-600">Preferred Date</label>
-                    <input type="date" id="date" name="date" class="input-field" required>
-                </div>
-                <div>
-                    <label for="time" class="block text-sm font-medium mb-1 text-gray-600">Preferred Time</label>
-                    <input type="time" id="time" name="time" class="input-field" required>
-                </div>
-                <div>
-                    <label for="notes" class="block text-sm font-medium mb-1 text-gray-600">Meeting Topic</label>
-                    <textarea id="notes" name="notes" rows="4" class="input-field" placeholder="Briefly describe the purpose of the meeting."></textarea>
-                </div>
-                <button type="submit" class="btn-gold w-full">Request Meeting</button>
-            </form>
-        </div>
-    </section>
+    <main id="app-container">
+        <!-- Content will be rendered here dynamically -->
+    </main>
 
     <footer class="py-8 px-4 text-center text-gray-500 bg-gray-100">
         <p class="mb-2">&copy; 2025 KOULÉ INGENIUM. All rights reserved.</p>
@@ -272,7 +153,62 @@
     </div>
 
     <script>
-        document.getElementById('meetingForm').addEventListener('submit', function(event) {
+        // Hero slideshow logic
+        const heroImages = [
+            'Gemini_Generated_Image_1cy9651cy9651cy9.jpg',
+            'Gemini_Generated_Image_edkchqedkchqedkc.jpg',
+        ];
+        let currentImageIndex = 0;
+
+        function updateBackgroundImage() {
+            const heroSection = document.getElementById('hero');
+            if (heroSection) {
+                // Check if the image exists. A temporary fix for a broken image path.
+                const img = new Image();
+                img.onload = () => {
+                    heroSection.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+                };
+                img.onerror = () => {
+                    console.error(`Failed to load image: ${heroImages[currentImageIndex]}. Using fallback color.`);
+                };
+                img.src = heroImages[currentImageIndex];
+                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+            }
+        }
+
+        // Project data
+        const projects = {
+            'gemini': {
+                name: 'Project Gemini',
+                description: 'A dual-arm collaborative robot designed for precision manufacturing and assembly.',
+                // The provided image path was not found in the user's repository.
+                // Using a placeholder image for demonstration.
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=Project+Gemini+Image',
+                video: '',
+                fullDescription: 'Project Gemini is a cutting-edge dual-arm collaborative robot system engineered for high-precision tasks in complex manufacturing environments. It features advanced sensor fusion for safe human-robot interaction and a modular design that allows for easy adaptation to various assembly and quality control processes. This project showcases our expertise in intelligent robotics and automation to streamline industrial workflows.'
+            },
+            'aerodrone': {
+                name: 'AeroDrone',
+                description: 'An autonomous inspection drone for large-scale infrastructure monitoring.',
+                // The provided image path was not found in the user's repository.
+                // Using a placeholder image for demonstration.
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=AeroDrone+Image',
+                video: 'https://www.youtube.com/embed/zH3q1WlP-Xk',
+                fullDescription: 'AeroDrone is an autonomous aerial vehicle designed to perform comprehensive inspections of large-scale infrastructure, including power lines, bridges, and agricultural fields. Equipped with high-resolution cameras and thermal sensors, it can identify structural anomalies and crop health issues with incredible accuracy, reducing the need for dangerous and time-consuming manual inspections. The drone’s AI-powered flight control system ensures it can navigate complex environments safely and efficiently.'
+            },
+            'healthbot': {
+                name: 'HealthBot',
+                description: 'A robotic assistant for hospitals and clinics, improving patient care and logistics.',
+                // The provided image path was not found in the user's repository.
+                // Using a placeholder image for demonstration.
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=HealthBot+Image',
+                video: '',
+                fullDescription: 'HealthBot is a robotic assistant developed to support healthcare professionals in hospitals and clinics. Its primary functions include delivering medical supplies and patient records, disinfecting rooms using UV technology, and providing telepresence services for remote consultations. By automating routine and repetitive tasks, HealthBot allows healthcare workers to focus more on direct patient care, improving overall efficiency and safety in medical facilities.'
+            }
+        };
+
+        // Handle the form submission in a separate function
+        function handleMeetingForm(event) {
             event.preventDefault();
 
             const form = event.target;
@@ -306,70 +242,207 @@
             window.open(googleCalendarUrl, '_blank');
 
             document.getElementById('messageBox').classList.remove('hidden');
-        });
+        }
 
-        document.getElementById('closeMessage').addEventListener('click', function() {
+        function handleCloseMessage() {
             document.getElementById('messageBox').classList.add('hidden');
-        });
-
-        const projects = {
-            'gemini': {
-                // Corrected image path to a valid uploaded file
-                image: 'image_386dbb.png',
-                video: '' 
-            },
-            'aerodrone': {
-                // Corrected image path to a valid uploaded file
-                image: 'image_38d5e0.png',
-                video: 'https://www.youtube.com/embed/zH3q1WlP-Xk' 
-            },
-            'healthbot': {
-                // Corrected image path to a valid uploaded file
-                image: 'image_386a15.png',
-                video: '' 
-            }
-        };
-
-        function showMedia(projectId, media) {
-            const container = document.getElementById(`media-${projectId}`);
-            if (media.video) {
-                container.innerHTML = `
-                    <iframe src="${media.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                `;
-            } else if (media.image) {
-                container.innerHTML = `
-                    <img src="${media.image}" alt="Project Image" class="w-full h-auto rounded-lg shadow-md">
-                `;
-            }
         }
 
-        // Display media for each project on page load
+        // Main rendering function
+        function renderPage(page, projectId = null) {
+            const container = document.getElementById('app-container');
+            container.innerHTML = '';
+            let content = '';
+            const aboutImagePlaceholder = 'https://placehold.co/600x400/121223/D4AF37?text=About+Image';
+
+            if (page === 'home') {
+                content = `
+                    <section id="hero" class="py-24 md:py-48 px-4 text-center hero-slideshow bg-dark-blue">
+                        <div class="relative max-w-4xl mx-auto z-10 text-white">
+                            <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-fadeIn">Innovating the Future of Robotics</h1>
+                            <p class="text-md md:text-xl text-gray-200 mb-8 animate-fadeIn delay-300">Building intelligent machines that solve complex challenges and empower humanity.</p>
+                            <a href="#contact" class="btn-gold animate-fadeIn delay-500">Get in Touch</a>
+                        </div>
+                    </section>
+
+                    <section id="about" class="py-16 md:py-24 px-4 bg-white">
+                        <div class="max-w-7xl mx-auto">
+                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Who We Are</h2>
+                            <div class="grid md:grid-cols-2 gap-12 items-center">
+                                <div class="order-2 md:order-1">
+                                    <p class="text-gray-600 mb-4">
+                                    Koulé Ingenium is dedicated to forging a new generation of problem-solvers. We draw our purpose from the Koulé, the Senufo figure symbolizing knowledge and mentorship, and unite it with Ingenium, the principle of actionable ingenuity. Our mission is clear: to create practical, real-world solutions that improve lives. We believe in building a future where local challenges are met with intelligent, homegrown solutions, all while empowering our community through education and innovative leadership.
+                                    </p>
+                                </div>
+                                <div class="order-1 md:order-2">
+                                    <img src="Gemini_Generated_Image_39d0d539d0d539d0.png" onerror="this.src='${aboutImagePlaceholder}'" alt="Koulé Ingenium team working on a project" class="w-full h-auto rounded-xl shadow-lg">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="services" class="py-16 md:py-24 px-4 bg-gray-100">
+                        <div class="max-w-7xl mx-auto">
+                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Services</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                                <div class="card p-6 text-center">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">CAD & Product Design</h3>
+                                    <p class="text-gray-600">Expert design services using SolidWorks for mechanical and industrial applications.</p>
+                                </div>
+                                <div class="card p-6 text-center">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">STEM Education</h3>
+                                    <p class="text-gray-600">Engaging classes and workshops in science, technology, engineering, and mathematics.</p>
+                                </div>
+                                <div class="card p-6 text-center">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Robotics Development</h3>
+                                    <p class="text-gray-600">We design and build custom robotic solutions and offer training.</p>
+                                </div>
+                                <div class="card p-6 text-center">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Agricultural Robotics</h3>
+                                    <p class="text-gray-600">Innovative solutions for farming, from autonomous planters to crop monitoring drones.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="projects" class="py-16 md:py-24 px-4 bg-white">
+                        <div class="max-w-7xl mx-auto">
+                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Projects</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Project Gemini</h3>
+                                    <p class="text-gray-600 mb-4">A dual-arm collaborative robot designed for precision manufacturing and assembly.</p>
+                                    <div id="media-gemini" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'gemini')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">AeroDrone</h3>
+                                    <p class="text-gray-600 mb-4">An autonomous inspection drone for large-scale infrastructure monitoring.</p>
+                                    <div id="media-aerodrone" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'aerodrone')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">HealthBot</h3>
+                                    <p class="text-600 mb-4">A robotic assistant for hospitals and clinics, improving patient care and logistics.</p>
+                                    <div id="media-healthbot" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'healthbot')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="contact" class="py-16 md:py-24 px-4 bg-gray-100">
+                        <div class="max-w-3xl mx-auto card p-8 md:p-12">
+                            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Contact Us</h2>
+                            <div class="space-y-4 text-center">
+                                <p class="text-lg text-gray-600">For general inquiries, feel free to reach out:</p>
+                                <p class="text-xl font-semibold text-gray-800">Email: Fadelberthe24@gmail.com</p>
+                                <p class="text-xl font-semibold text-gray-800">Mobile: +22651881725</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="meeting" class="py-16 md:py-24 px-4 bg-white">
+                        <div class="max-w-3xl mx-auto card p-8 md:p-12">
+                            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Schedule an Online Meeting</h2>
+                            <form id="meetingForm" class="space-y-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium mb-1 text-gray-600">Full Name</label>
+                                    <input type="text" id="name" name="name" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium mb-1 text-gray-600">Email Address</label>
+                                    <input type="email" id="email" name="email" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="date" class="block text-sm font-medium mb-1 text-gray-600">Preferred Date</label>
+                                    <input type="date" id="date" name="date" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="time" class="block text-sm font-medium mb-1 text-gray-600">Preferred Time</label>
+                                    <input type="time" id="time" name="time" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="notes" class="block text-sm font-medium mb-1 text-gray-600">Meeting Topic</label>
+                                    <textarea id="notes" name="notes" rows="4" class="input-field" placeholder="Briefly describe the purpose of the meeting."></textarea>
+                                </div>
+                                <button type="submit" class="btn-gold w-full">Request Meeting</button>
+                            </form>
+                        </div>
+                    </section>
+                `;
+            } else if (page === 'project' && projectId) {
+                const project = projects[projectId];
+                if (!project) {
+                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center">
+                        <h2 class="text-3xl font-bold text-red-500">Project Not Found</h2>
+                        <p class="mt-4 text-gray-600">The project you are looking for does not exist. Please go back to the home page.</p>
+                        <button onclick="renderPage('home')" class="mt-8 btn-gold">Back to Home</button>
+                    </div>`;
+                } else {
+                    const mediaHtml = project.video
+                        ? `<iframe src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+                        : `<img src="${project.image}" alt="${project.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(project.name + ' Image')}';">`;
+
+                    content = `
+                        <section class="py-16 md:py-24 px-4 bg-white">
+                            <div class="max-w-7xl mx-auto">
+                                <button onclick="renderPage('home')" class="text-gold mb-8 flex items-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Back to Projects</span>
+                                </button>
+                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${project.name}</h2>
+                                <div class="flex flex-col md:flex-row gap-8 items-start">
+                                    <div class="flex-1">
+                                        <div class="media-container mb-6">
+                                            ${mediaHtml}
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-xl font-semibold text-dark-blue mb-4">${project.description}</p>
+                                        <p class="text-gray-600 mb-4">${project.fullDescription}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    `;
+                }
+            }
+
+            container.innerHTML = content;
+            
+            // Attach event listeners for dynamic content after it's rendered
+            if (page === 'home') {
+                const meetingForm = document.getElementById('meetingForm');
+                if (meetingForm) {
+                    meetingForm.addEventListener('submit', handleMeetingForm);
+                }
+                const heroSection = document.getElementById('hero');
+                if (heroSection) {
+                    updateBackgroundImage();
+                    setInterval(updateBackgroundImage, 5000);
+                }
+            }
+            
+            // This listener is for the message box, which is part of the main HTML body
+            // and is not dynamically removed.
+            const closeMessageButton = document.getElementById('closeMessage');
+            if (closeMessageButton) {
+                closeMessageButton.addEventListener('click', handleCloseMessage);
+            }
+
+            // Scroll to the top of the page when changing content
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            for (const projectId in projects) {
-                showMedia(projectId, projects[projectId]);
-            }
+            renderPage('home'); // Render the home page on initial load
         });
-
-
-        // JavaScript for image slideshow
-        const heroSection = document.getElementById('hero');
-        const images = [
-            'Gemini_Generated_Image_1cy9651cy9651cy9.png',
-            'Gemini_Generated_Image_edkchqedkchqedkc.png',
-        ];
-        let currentImageIndex = 0;
-
-        function updateBackgroundImage() {
-            heroSection.style.backgroundImage = `url('${images[currentImageIndex]}')`;
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-        }
-
-        // Set the initial background image
-        heroSection.style.backgroundImage = `url('${images[currentImageIndex]}')`;
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-
-        // Start the slideshow
-        setInterval(updateBackgroundImage, 5000); // Change image every 5 seconds
     </script>
 </body>
 </html>
