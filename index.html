@@ -123,6 +123,8 @@
             <ul class="hidden md:flex space-x-6 text-gray-600">
                 <li><a href="#about" class="hover:text-gold transition-colors duration-300">About</a></li>
                 <li><a href="#services" class="hover:text-gold transition-colors duration-300">Services</a></li>
+                <!-- Added new navigation link for courses -->
+                <li><a href="#courses" class="hover:text-gold transition-colors duration-300" onclick="renderPage('courses')">Courses</a></li>
                 <li><a href="#projects" class="hover:text-gold transition-colors duration-300">Projects</a></li>
                 <li><a href="#contact" class="hover:text-gold transition-colors duration-300">Contact</a></li>
             </ul>
@@ -176,13 +178,13 @@
             }
         }
 
-        // Project data
+        // Project data 
         const projects = {
             'gemini': {
                 name: 'Project Gemini',
                 description: 'A dual-arm collaborative robot designed for precision manufacturing and assembly.',
-                // The provided image path was not found in the user's repository.
-                // Using a placeholder image for demonstration.
+                // The provided image path was not found in the user's repository. 
+                // Using a placeholder image for demonstration. 
                 image: 'https://placehold.co/600x400/121223/D4AF37?text=Project+Gemini+Image',
                 video: '',
                 fullDescription: 'Project Gemini is a cutting-edge dual-arm collaborative robot system engineered for high-precision tasks in complex manufacturing environments. It features advanced sensor fusion for safe human-robot interaction and a modular design that allows for easy adaptation to various assembly and quality control processes. This project showcases our expertise in intelligent robotics and automation to streamline industrial workflows.'
@@ -190,8 +192,8 @@
             'aerodrone': {
                 name: 'AeroDrone',
                 description: 'An autonomous inspection drone for large-scale infrastructure monitoring.',
-                // The provided image path was not found in the user's repository.
-                // Using a placeholder image for demonstration.
+                // The provided image path was not found in the user's repository. 
+                // Using a placeholder image for demonstration. 
                 image: 'https://placehold.co/600x400/121223/D4AF37?text=AeroDrone+Image',
                 video: 'https://www.youtube.com/embed/zH3q1WlP-Xk',
                 fullDescription: 'AeroDrone is an autonomous aerial vehicle designed to perform comprehensive inspections of large-scale infrastructure, including power lines, bridges, and agricultural fields. Equipped with high-resolution cameras and thermal sensors, it can identify structural anomalies and crop health issues with incredible accuracy, reducing the need for dangerous and time-consuming manual inspections. The drone’s AI-powered flight control system ensures it can navigate complex environments safely and efficiently.'
@@ -199,15 +201,50 @@
             'healthbot': {
                 name: 'HealthBot',
                 description: 'A robotic assistant for hospitals and clinics, improving patient care and logistics.',
-                // The provided image path was not found in the user's repository.
-                // Using a placeholder image for demonstration.
+                // The provided image path was not found in the user's repository. 
+                // Using a placeholder image for demonstration. 
                 image: 'https://placehold.co/600x400/121223/D4AF37?text=HealthBot+Image',
                 video: '',
                 fullDescription: 'HealthBot is a robotic assistant developed to support healthcare professionals in hospitals and clinics. Its primary functions include delivering medical supplies and patient records, disinfecting rooms using UV technology, and providing telepresence services for remote consultations. By automating routine and repetitive tasks, HealthBot allows healthcare workers to focus more on direct patient care, improving overall efficiency and safety in medical facilities.'
             }
         };
 
-        // Handle the form submission in a separate function
+        // Course data for the new online courses section
+        const courses = {
+            'cad': {
+                name: 'CAD Design & Analysis',
+                description: 'Master SolidWorks for 3D modeling and ANSYS for simulation and analysis.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=CAD+Course',
+                fullDescription: 'This comprehensive course covers everything from fundamental 3D modeling in SolidWorks to advanced finite element analysis (FEA) using ANSYS. You will learn to design, simulate, and optimize complex mechanical components, preparing you for a career in product design, aerospace, or mechanical engineering.'
+            },
+            'stem': {
+                name: 'STEM Education',
+                description: 'Engaging and hands-on modules in Science, Technology, Engineering, and Math.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=STEM+Course',
+                fullDescription: 'Our STEM education program is designed for students of all ages. Through interactive projects and workshops, we introduce key concepts in physics, coding, electronics, and mathematics. The curriculum is built to foster critical thinking and problem-solving skills, making learning both fun and impactful.'
+            },
+            'robotics': {
+                name: 'Robotics Development',
+                description: 'Learn to design, build, and program your own robots from the ground up.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=Robotics+Course',
+                fullDescription: 'This course provides a deep dive into the world of robotics. You will work with microcontrollers like Arduino and Raspberry Pi, learn about different sensors and actuators, and write code in C++ and Python to bring your creations to life. Topics include kinematics, control systems, and robotic manipulation.'
+            },
+            'ml': {
+                name: 'Machine Learning',
+                description: 'Foundational and advanced concepts in machine learning and data science.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=ML+Course',
+                fullDescription: 'Explore the exciting field of machine learning. This course covers supervised and unsupervised learning, neural networks, and deep learning. You will work on real-world datasets using Python libraries like TensorFlow and scikit-learn, and understand how to build intelligent systems for various applications.'
+            },
+            'english': {
+                name: 'English Language',
+                description: 'Improve your English fluency with our tailored programs for non-native speakers.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=English+Course',
+                fullDescription: 'Our English language course is designed to enhance your speaking, listening, reading, and writing skills. We offer different levels, from beginner to advanced, and focus on practical communication for academic, professional, and everyday use.'
+            }
+        };
+
+
+        // Handle the form submission in a separate function 
         function handleMeetingForm(event) {
             event.preventDefault();
 
@@ -248,12 +285,13 @@
             document.getElementById('messageBox').classList.add('hidden');
         }
 
-        // Main rendering function
-        function renderPage(page, projectId = null) {
+        // Main rendering function to handle all dynamic page content
+        function renderPage(page, contentId = null) {
             const container = document.getElementById('app-container');
             container.innerHTML = '';
             let content = '';
             const aboutImagePlaceholder = 'https://placehold.co/600x400/121223/D4AF37?text=About+Image';
+            let mediaHtml = '';
 
             if (page === 'home') {
                 content = `
@@ -264,7 +302,6 @@
                             <a href="#contact" class="btn-gold animate-fadeIn delay-500">Get in Touch</a>
                         </div>
                     </section>
-
                     <section id="about" class="py-16 md:py-24 px-4 bg-white">
                         <div class="max-w-7xl mx-auto">
                             <h2 class="text-3xl font-bold text-center mb-12 text-gold">Who We Are</h2>
@@ -280,7 +317,6 @@
                             </div>
                         </div>
                     </section>
-
                     <section id="services" class="py-16 md:py-24 px-4 bg-gray-100">
                         <div class="max-w-7xl mx-auto">
                             <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Services</h2>
@@ -304,7 +340,6 @@
                             </div>
                         </div>
                     </section>
-
                     <section id="projects" class="py-16 md:py-24 px-4 bg-white">
                         <div class="max-w-7xl mx-auto">
                             <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Projects</h2>
@@ -330,7 +365,6 @@
                             </div>
                         </div>
                     </section>
-
                     <section id="contact" class="py-16 md:py-24 px-4 bg-gray-100">
                         <div class="max-w-3xl mx-auto card p-8 md:p-12">
                             <h2 class="text-3xl font-bold text-center mb-8 text-gold">Contact Us</h2>
@@ -341,7 +375,6 @@
                             </div>
                         </div>
                     </section>
-
                     <section id="meeting" class="py-16 md:py-24 px-4 bg-white">
                         <div class="max-w-3xl mx-auto card p-8 md:p-12">
                             <h2 class="text-3xl font-bold text-center mb-8 text-gold">Schedule an Online Meeting</h2>
@@ -371,48 +404,109 @@
                         </div>
                     </section>
                 `;
-            } else if (page === 'project' && projectId) {
-                const project = projects[projectId];
+            } else if (page === 'courses') {
+                content = `
+                    <section id="courses-list" class="py-16 md:py-24 px-4 bg-gray-100">
+                        <div class="max-w-7xl mx-auto">
+                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Online Courses</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                ${Object.keys(courses).map(key => `
+                                    <div class="card p-6 flex flex-col">
+                                        <h3 class="text-xl font-semibold mb-2 text-dark-blue">${courses[key].name}</h3>
+                                        <p class="text-gray-600 mb-4">${courses[key].description}</p>
+                                        <div class="media-container mb-4">
+                                            <img src="${courses[key].image}" alt="${courses[key].name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(courses[key].name + ' Image')}';">
+                                        </div>
+                                        <button onclick="renderPage('course', '${key}')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>
+                `;
+            } else if (page === 'project' && contentId) {
+                const project = projects[contentId];
                 if (!project) {
-                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center">
-                        <h2 class="text-3xl font-bold text-red-500">Project Not Found</h2>
-                        <p class="mt-4 text-gray-600">The project you are looking for does not exist. Please go back to the home page.</p>
-                        <button onclick="renderPage('home')" class="mt-8 btn-gold">Back to Home</button>
+                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center"> 
+                        <h2 class="text-3xl font-bold text-red-500">Project Not Found</h2> 
+                        <p class="mt-4 text-gray-600">The project you are looking for does not exist. Please go back to the home page.</p> 
+                        <button onclick="renderPage('home')" class="mt-8 btn-gold">Back to Home</button> 
                     </div>`;
                 } else {
-                    const mediaHtml = project.video
+                    mediaHtml = project.video
                         ? `<iframe src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
                         : `<img src="${project.image}" alt="${project.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(project.name + ' Image')}';">`;
 
+                    content = ` 
+                        <section class="py-16 md:py-24 px-4 bg-white"> 
+                            <div class="max-w-7xl mx-auto"> 
+                                <button onclick="renderPage('home')" class="text-gold mb-8 flex items-center space-x-2"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"> 
+                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" /> 
+                                    </svg> 
+                                    <span>Back to Projects</span> 
+                                </button> 
+                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${project.name}</h2> 
+                                <div class="flex flex-col md:flex-row gap-8 items-start"> 
+                                    <div class="flex-1"> 
+                                        <div class="media-container mb-6"> 
+                                            ${mediaHtml} 
+                                        </div> 
+                                    </div> 
+                                    <div class="flex-1"> 
+                                        <p class="text-xl font-semibold text-dark-blue mb-4">${project.description}</p> 
+                                        <p class="text-gray-600 mb-4">${project.fullDescription}</p> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </section> 
+                    `;
+                }
+            } else if (page === 'course' && contentId) {
+                const course = courses[contentId];
+                if (!course) {
+                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center">
+                        <h2 class="text-3xl font-bold text-red-500">Course Not Found</h2>
+                        <p class="mt-4 text-gray-600">The course you are looking for does not exist. Please go back to the courses page.</p>
+                        <button onclick="renderPage('courses')" class="mt-8 btn-gold">Back to Courses</button>
+                    </div>`;
+                } else {
                     content = `
                         <section class="py-16 md:py-24 px-4 bg-white">
                             <div class="max-w-7xl mx-auto">
-                                <button onclick="renderPage('home')" class="text-gold mb-8 flex items-center space-x-2">
+                                <button onclick="renderPage('courses')" class="text-gold mb-8 flex items-center space-x-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                                     </svg>
-                                    <span>Back to Projects</span>
+                                    <span>Back to Courses</span>
                                 </button>
-                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${project.name}</h2>
+                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${course.name}</h2>
                                 <div class="flex flex-col md:flex-row gap-8 items-start">
                                     <div class="flex-1">
                                         <div class="media-container mb-6">
-                                            ${mediaHtml}
+                                            <img src="${course.image}" alt="${course.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(course.name + ' Course')}';">
                                         </div>
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-xl font-semibold text-dark-blue mb-4">${project.description}</p>
-                                        <p class="text-gray-600 mb-4">${project.fullDescription}</p>
+                                        <p class="text-xl font-semibold text-dark-blue mb-4">${course.description}</p>
+                                        <p class="text-gray-600 mb-4">${course.fullDescription}</p>
+                                        <a href="#contact" class="btn-gold">Enroll Now</a>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     `;
                 }
+            } else {
+                content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center"> 
+                    <h2 class="text-3xl font-bold text-red-500">Page Not Found</h2> 
+                    <p class="mt-4 text-gray-600">The page you are looking for does not exist. Please go back to the home page.</p> 
+                    <button onclick="renderPage('home')" class="mt-8 btn-gold">Back to Home</button> 
+                </div>`;
             }
 
             container.innerHTML = content;
-            
+
             // Attach event listeners for dynamic content after it's rendered
             if (page === 'home') {
                 const meetingForm = document.getElementById('meetingForm');
@@ -425,7 +519,6 @@
                     setInterval(updateBackgroundImage, 5000);
                 }
             }
-            
             // This listener is for the message box, which is part of the main HTML body
             // and is not dynamically removed.
             const closeMessageButton = document.getElementById('closeMessage');
