@@ -2,574 +2,515 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOULÉ INGENIUM</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8F9FA;
-            color: #121223;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOULÉ INGENIUM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #121223;
+        }
 
-        .text-gold {
-            color: #D4AF37;
-        }
+        .text-gold {
+            color: #D4AF37;
+        }
 
-        .bg-dark-blue {
-            background-color: #121223;
-        }
+        .bg-dark-blue {
+            background-color: #121223;
+        }
 
-        .btn-gold {
-            background: linear-gradient(to right, #D4AF37, #FFD700);
-            color: #121223;
-            padding: 12px 24px;
-            border-radius: 9999px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+        .btn-gold {
+            background: linear-gradient(to right, #D4AF37, #FFD700);
+            color: #121223;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-        .btn-gold:hover {
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            transform: translateY(-2px);
-        }
+        .btn-gold:hover {
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
 
-        .card {
-            background-color: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
 
-        .input-field {
-            background-color: #F8F9FA;
-            border: 1px solid #E2E8F0;
-            color: #121223;
-            border-radius: 8px;
-            padding: 10px;
-            width: 100%;
-            transition: border-color 0.3s ease;
-        }
+        .input-field {
+            background-color: #F8F9FA;
+            border: 1px solid #E2E8F0;
+            color: #121223;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
 
-        .input-field:focus {
-            outline: none;
-            border-color: #D4AF37;
-        }
+        .input-field:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
 
-        .hero-slideshow {
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            transition: background-image 1s ease-in-out;
-        }
+        .hero-slideshow {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: background-image 1s ease-in-out;
+        }
 
-        .hero-slideshow::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(18, 18, 35, 0.7);
-            /* Dark blue overlay */
-        }
+        .hero-slideshow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 35, 0.7);
+            /* Dark blue overlay */
+        }
 
-        .media-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            /* 16:9 aspect ratio */
-            height: 0;
-        }
+        .media-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+        }
 
-        .media-container img,
-        .media-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 0.75rem;
-        }
+        .media-container img,
+        .media-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
+        }
 
-        /* Adjustments for desktop view */
-        @media (min-width: 1024px) {
-            .hero-slideshow {
-                height: 50vh;
-                /* Increase hero section height on desktop */
-                background-position: top;
-                /* Ensure the top of the image is visible */
-            }
-        }
-
-        /* Slideshow-specific styles */
-        .slideshow-container {
-            position: relative;
-            max-width: 100%;
-            margin: auto;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            padding-bottom: 56.25%; /* To maintain aspect ratio */
-        }
-
-        .slideshow-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            animation: fadeEffect 1.5s;
-        }
-
-        @keyframes fadeEffect {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
+        /* Adjustments for desktop view */
+        @media (min-width: 1024px) {
+            .hero-slideshow {
+                height: 50vh;
+                /* Increase hero section height on desktop */
+                background-position: top;
+                /* Ensure the top of the image is visible */
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-white text-gray-800">
 
-    <header class="py-6 px-4 md:px-8 bg-white shadow-sm sticky top-0 z-50">
-        <nav class="flex justify-between items-center max-w-7xl mx-auto">
-            <div class="flex items-center space-x-4 cursor-pointer" onclick="renderPage('home')">
-                                <img src="WhatsApp Image 2025-09-08 at 12.05.21_899ebfab.jpg" onerror="this.src='https://placehold.co/48x48/121223/D4AF37?text=KI'" alt="KOULÉ INGENIUM Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500">
-                <span class="text-xl font-bold text-gray-800">KOULÉ INGENIUM</span>
-            </div>
-            <ul class="hidden md:flex space-x-6 text-gray-600">
-                <li><a href="#about" class="hover:text-gold transition-colors duration-300">About</a></li>
-                <li><a href="#services" class="hover:text-gold transition-colors duration-300">Services</a></li>
-                                <li><a href="#courses" class="hover:text-gold transition-colors duration-300" onclick="renderPage('courses')">Courses</a></li>
-                <li><a href="#projects" class="hover:text-gold transition-colors duration-300">Projects</a></li>
-                <li><a href="#contact" class="hover:text-gold transition-colors duration-300">Contact</a></li>
-            </ul>
-            <a href="#meeting" class="btn-gold hidden md:block">Schedule a Meeting</a>
-            <a href="#meeting" class="md:hidden text-gold font-semibold hover:underline">Schedule</a>
-        </nav>
-    </header>
+    <header class="py-6 px-4 md:px-8 bg-white shadow-sm sticky top-0 z-50">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto">
+            <div class="flex items-center space-x-4 cursor-pointer" onclick="renderPage('home')">
+                <img src="WhatsApp Image 2025-09-08 at 12.05.21_899ebfab.jpg" onerror="this.src='https://placehold.co/48x48/121223/D4AF37?text=KI'" alt="KOULÉ INGENIUM Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500">
+                <span class="text-xl font-bold text-gray-800">KOULÉ INGENIUM</span>
+            </div>
+            <ul class="hidden md:flex space-x-6 text-gray-600">
+                <li><a href="#about" class="hover:text-gold transition-colors duration-300">About</a></li>
+                <li><a href="#services" class="hover:text-gold transition-colors duration-300">Services</a></li>
+                <li><a href="#courses" class="hover:text-gold transition-colors duration-300" onclick="renderPage('courses')">Courses</a></li>
+                <li><a href="#projects" class="hover:text-gold transition-colors duration-300">Projects</a></li>
+                <li><a href="#contact" class="hover:text-gold transition-colors duration-300">Contact</a></li>
+            </ul>
+            <a href="#meeting" class="btn-gold hidden md:block">Schedule a Meeting</a>
+            <a href="#meeting" class="md:hidden text-gold font-semibold hover:underline">Schedule</a>
+        </nav>
+    </header>
 
-    <main id="app-container">
-            </main>
+    <main id="app-container">
+        </main>
 
-    <footer class="py-8 px-4 text-center text-gray-500 bg-gray-100">
-        <p class="mb-2">&copy; 2025 KOULÉ INGENIUM. All rights reserved.</p>
-        <div class="flex justify-center space-x-4">
-            <a href="#" class="hover:text-gold transition-colors duration-300">LinkedIn</a>
-            <a href="#" class="hover:text-gold transition-colors duration-300">GitHub</a>
-            <a href="#" class="hover:text-gold transition-colors duration-300">Twitter</a>
-        </div>
-    </footer>
+    <footer class="py-8 px-4 text-center text-gray-500 bg-gray-100">
+        <p class="mb-2">&copy; 2025 KOULÉ INGENIUM. All rights reserved.</p>
+        <div class="flex justify-center space-x-4">
+            <a href="#" class="hover:text-gold transition-colors duration-300">LinkedIn</a>
+            <a href="#" class="hover:text-gold transition-colors duration-300">GitHub</a>
+            <a href="#" class="hover:text-gold transition-colors duration-300">Twitter</a>
+        </div>
+    </footer>
 
-    <div id="messageBox" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
-        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-4 text-center">
-            <h3 class="text-xl font-bold mb-4 text-dark-blue">Action Required</h3>
-            <p class="text-gray-600 mb-6">A meeting request email has been prepared for you. Please check your email client and send the message to complete the process.</p>
-            <button id="closeMessage" class="btn-gold">Close</button>
-        </div>
-    </div>
+    <div id="messageBox" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-4 text-center">
+            <h3 class="text-xl font-bold mb-4 text-dark-blue">Action Required</h3>
+            <p class="text-gray-600 mb-6">A meeting request email has been prepared for you. Please check your email client and send the message to complete the process.</p>
+            <button id="closeMessage" class="btn-gold">Close</button>
+        </div>
+    </div>
 
-    <script>
-        // Hero slideshow logic
-        const heroImages = [
-            'Gemini_Generated_Image_1cy9651cy9651cy9.png',
-            'Gemini_Generated_Image_edkchqedkchqedkc.png',
-        ];
-        let currentImageIndex = 0;
+    <script>
+        // Hero slideshow logic
+        const heroImages = [
+            'Gemini_Generated_Image_1cy9651cy9651cy9.png',
+            'Gemini_Generated_Image_edkchqedkchqedkc.png',
+        ];
+        let currentImageIndex = 0;
 
-        function updateBackgroundImage() {
-            const heroSection = document.getElementById('hero');
-            if (heroSection) {
-                // Check if the image exists. A temporary fix for a broken image path.
-                const img = new Image();
-                img.onload = () => {
-                    heroSection.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
-                };
-                img.onerror = () => {
-                    console.error(`Failed to load image: ${heroImages[currentImageIndex]}. Using fallback color.`);
-                };
-                img.src = heroImages[currentImageIndex];
-                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
-            }
-        }
+        function updateBackgroundImage() {
+            const heroSection = document.getElementById('hero');
+            if (heroSection) {
+                // Check if the image exists. A temporary fix for a broken image path.
+                const img = new Image();
+                img.onload = () => {
+                    heroSection.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+                };
+                img.onerror = () => {
+                    console.error(`Failed to load image: ${heroImages[currentImageIndex]}. Using fallback color.`);
+                };
+                img.src = heroImages[currentImageIndex];
+                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+            }
+        }
 
-        // Project data 
-        const projects = {
-            'Automotive Suspension': {
-                name: 'Advanced Automotive Suspension System Design',
-                description: 'Complete design of a car suspension system in solidworks',
-                // The provided image path was not found in the user's repository. 
-                // Using a placeholder image for demonstration. 
-                image: ['https://placehold.co/600x400/121223/D4AF37?text=Project+Gemini+Image', 'CR-01.png', 'CR-02.png', 'CR-03.png', 'CR-04.png', 'CR-05.png', 'CR-06.png', 'CR-07.png'],
-                video: '',
-                fullDescription: 'This project involves the comprehensive design and analysis of a double-wishbone suspension system for an automotive application. . The design was executed using SolidWorks, a professional 3D computer-aided design (CAD) software, ensuring precise geometric modeling and component integration. The system\'s architecture includes key components such as upper and lower control arms, uprights, coilover shocks, and anti-roll bars, all meticulously engineered to meet performance specifications.The project goes beyond basic modeling, incorporating a full motion study and kinematic analysis to simulate the suspension\'s behavior under dynamic loads and various driving conditions. This analysis ensures the design\'s effectiveness in managing wheel alignment, ride comfort, and handling stability. The final design is a robust and performance-oriented solution, demonstrating a high level of expertise in mechanical engineering principles, CAD software proficiency, and automotive system design.'
-            },
-            'aerodrone': {
-                name: 'AeroDrone',
-                description: 'An autonomous inspection drone for large-scale infrastructure monitoring.',
-                // The provided image path was not found in the user's repository. 
-                // Using a placeholder image for demonstration. 
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=AeroDrone+Image',
-                video: 'https://www.youtube.com/embed/zH3q1WlP-Xk',
-                fullDescription: 'AeroDrone is an autonomous aerial vehicle designed to perform comprehensive inspections of large-scale infrastructure, including power lines, bridges, and agricultural fields. Equipped with high-resolution cameras and thermal sensors, it can identify structural anomalies and crop health issues with incredible accuracy, reducing the need for dangerous and time-consuming manual inspections. The drone’s AI-powered flight control system ensures it can navigate complex environments safely and efficiently.'
-            },
-            'healthbot': {
-                name: 'HealthBot',
-                description: 'A robotic assistant for hospitals and clinics, improving patient care and logistics.',
-                // The provided image path was not found in the user's repository. 
-                // Using a placeholder image for demonstration. 
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=HealthBot+Image',
-                video: '',
-                fullDescription: 'HealthBot is a robotic assistant developed to support healthcare professionals in hospitals and clinics. Its primary functions include delivering medical supplies and patient records, disinfecting rooms using UV technology, and providing telepresence services for remote consultations. By automating routine and repetitive tasks, HealthBot allows healthcare workers to focus more on direct patient care, improving overall efficiency and safety in medical facilities.'
-            }
-        };
+        // Project data 
+        const projects = {
+            'Automotive Suspension': {
+                name: 'Advanced Automotive Suspension System Design',
+                description: 'Complete design of a car suspension system in solidworks',
+                // The provided image path was not found in the user's repository. 
+                // Using a placeholder image for demonstration. 
+                image: ['https://placehold.co/600x400/121223/D4AF37?text=Project+Gemini+Image', 'CR-01.png', 'CR-02.png', 'CR-03.png', 'CR-04.png', 'CR-05.png', 'CR-06.png', 'CR-07.png'],
+                video: '',
+                fullDescription: 'This project involves the comprehensive design and analysis of a double-wishbone suspension system for an automotive application. . The design was executed using SolidWorks, a professional 3D computer-aided design (CAD) software, ensuring precise geometric modeling and component integration. The system\'s architecture includes key components such as upper and lower control arms, uprights, coilover shocks, and anti-roll bars, all meticulously engineered to meet performance specifications.The project goes beyond basic modeling, incorporating a full motion study and kinematic analysis to simulate the suspension\'s behavior under dynamic loads and various driving conditions. This analysis ensures the design\'s effectiveness in managing wheel alignment, ride comfort, and handling stability. The final design is a robust and performance-oriented solution, demonstrating a high level of expertise in mechanical engineering principles, CAD software proficiency, and automotive system design.'
+            },
+            'aerodrone': {
+                name: 'AeroDrone',
+                description: 'An autonomous inspection drone for large-scale infrastructure monitoring.',
+                // The provided image path was not found in the user's repository. 
+                // Using a placeholder image for demonstration. 
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=AeroDrone+Image',
+                video: 'https://www.youtube.com/embed/zH3q1WlP-Xk',
+                fullDescription: 'AeroDrone is an autonomous aerial vehicle designed to perform comprehensive inspections of large-scale infrastructure, including power lines, bridges, and agricultural fields. Equipped with high-resolution cameras and thermal sensors, it can identify structural anomalies and crop health issues with incredible accuracy, reducing the need for dangerous and time-consuming manual inspections. The drone’s AI-powered flight control system ensures it can navigate complex environments safely and efficiently.'
+            },
+            'healthbot': {
+                name: 'HealthBot',
+                description: 'A robotic assistant for hospitals and clinics, improving patient care and logistics.',
+                // The provided image path was not found in the user's repository. 
+                // Using a placeholder image for demonstration. 
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=HealthBot+Image',
+                video: '',
+                fullDescription: 'HealthBot is a robotic assistant developed to support healthcare professionals in hospitals and clinics. Its primary functions include delivering medical supplies and patient records, disinfecting rooms using UV technology, and providing telepresence services for remote consultations. By automating routine and repetitive tasks, HealthBot allows healthcare workers to focus more on direct patient care, improving overall efficiency and safety in medical facilities.'
+            }
+        };
 
-        // Course data for the new online courses section
-        const courses = {
-            'cad': {
-                name: 'CAD Design & Analysis',
-                description: 'Master SolidWorks for 3D modeling and ANSYS for simulation and analysis.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=CAD+Course',
-                fullDescription: 'This comprehensive course covers everything from fundamental 3D modeling in SolidWorks to advanced finite element analysis (FEA) using ANSYS. You will learn to design, simulate, and optimize complex mechanical components, preparing you for a career in product design, aerospace, or mechanical engineering.'
-            },
-            'stem': {
-                name: 'STEM Education',
-                description: 'Engaging and hands-on modules in Science, Technology, Engineering, and Math.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=STEM+Course',
-                fullDescription: 'Our STEM education program is designed for students of all ages. Through interactive projects and workshops, we introduce key concepts in physics, coding, electronics, and mathematics. The curriculum is built to foster critical thinking and problem-solving skills, making learning both fun and impactful.'
-            },
-            'robotics': {
-                name: 'Robotics Development',
-                description: 'Learn to design, build, and program your own robots from the ground up.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=Robotics+Course',
-                fullDescription: 'This course provides a deep dive into the world of robotics. You will work with microcontrollers like Arduino and Raspberry Pi, learn about different sensors and actuators, and write code in C++ and Python to bring your creations to life. Topics include kinematics, control systems, and robotic manipulation.'
-            },
-            'ml': {
-                name: 'Machine Learning',
-                description: 'Foundational and advanced concepts in machine learning and data science.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=ML+Course',
-                fullDescription: 'Explore the exciting field of machine learning. This course covers supervised and unsupervised learning, neural networks, and deep learning. You will work on real-world datasets using Python libraries like TensorFlow and scikit-learn, and understand how to build intelligent systems for various applications.'
-            },
-            'english': {
-                name: 'English Language',
-                description: 'Improve your English fluency with our tailored programs for non-native speakers.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=English+Course',
-                fullDescription: 'Our English language course is designed to enhance your speaking, listening, reading, and writing skills. We offer different levels, from beginner to advanced, and focus on practical communication for academic, professional, and everyday use.'
-            }
-        };
+        // Course data for the new online courses section
+        const courses = {
+            'cad': {
+                name: 'CAD Design & Analysis',
+                description: 'Master SolidWorks for 3D modeling and ANSYS for simulation and analysis.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=CAD+Course',
+                fullDescription: 'This comprehensive course covers everything from fundamental 3D modeling in SolidWorks to advanced finite element analysis (FEA) using ANSYS. You will learn to design, simulate, and optimize complex mechanical components, preparing you for a career in product design, aerospace, or mechanical engineering.'
+            },
+            'stem': {
+                name: 'STEM Education',
+                description: 'Engaging and hands-on modules in Science, Technology, Engineering, and Math.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=STEM+Course',
+                fullDescription: 'Our STEM education program is designed for students of all ages. Through interactive projects and workshops, we introduce key concepts in physics, coding, electronics, and mathematics. The curriculum is built to foster critical thinking and problem-solving skills, making learning both fun and impactful.'
+            },
+            'robotics': {
+                name: 'Robotics Development',
+                description: 'Learn to design, build, and program your own robots from the ground up.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=Robotics+Course',
+                fullDescription: 'This course provides a deep dive into the world of robotics. You will work with microcontrollers like Arduino and Raspberry Pi, learn about different sensors and actuators, and write code in C++ and Python to bring your creations to life. Topics include kinematics, control systems, and robotic manipulation.'
+            },
+            'ml': {
+                name: 'Machine Learning',
+                description: 'Foundational and advanced concepts in machine learning and data science.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=ML+Course',
+                fullDescription: 'Explore the exciting field of machine learning. This course covers supervised and unsupervised learning, neural networks, and deep learning. You will work on real-world datasets using Python libraries like TensorFlow and scikit-learn, and understand how to build intelligent systems for various applications.'
+            },
+            'english': {
+                name: 'English Language',
+                description: 'Improve your English fluency with our tailored programs for non-native speakers.',
+                image: 'https://placehold.co/600x400/121223/D4AF37?text=English+Course',
+                fullDescription: 'Our English language course is designed to enhance your speaking, listening, reading, and writing skills. We offer different levels, from beginner to advanced, and focus on practical communication for academic, professional, and everyday use.'
+            }
+        };
 
 
-        // Handle the form submission in a separate function 
-        function handleMeetingForm(event) {
-            event.preventDefault();
+        // Handle the form submission in a separate function 
+        function handleMeetingForm(event) {
+            event.preventDefault();
 
-            const form = event.target;
-            const name = form.name.value;
-            const email = form.email.value;
-            const date = form.date.value;
-            const time = form.time.value;
-            const notes = form.notes.value;
+            const form = event.target;
+            const name = form.name.value;
+            const email = form.email.value;
+            const date = form.date.value;
+            const time = form.time.value;
+            const notes = form.notes.value;
 
-            const recipientEmail = "fadelberthe24@gmail.com";
+            const recipientEmail = "fadelberthe24@gmail.com";
 
-            const subject = encodeURIComponent(`Meeting Request from ${name}`);
-            const body = encodeURIComponent(
-                `Hello KOULÉ INGENIUM Team,\n\nI would like to schedule a meeting.\n\n` +
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Preferred Date: ${date}\n` +
-                `Preferred Time: ${time}\n\n` +
-                `Meeting Topic: ${notes}\n\n` +
-                `Please get in touch to confirm the meeting.`
-            );
+            const subject = encodeURIComponent(`Meeting Request from ${name}`);
+            const body = encodeURIComponent(
+                `Hello KOULÉ INGENIUM Team,\n\nI would like to schedule a meeting.\n\n` +
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                `Preferred Date: ${date}\n` +
+                `Preferred Time: ${time}\n\n` +
+                `Meeting Topic: ${notes}\n\n` +
+                `Please get in touch to confirm the meeting.`
+            );
 
-            const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+            const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
 
-            const calendarTitle = encodeURIComponent(`Meeting with ${name}`);
-            const calendarDetails = encodeURIComponent(`Topic: ${notes}\n\n` + `Contact: ${email}`);
-            const calendarDates = `${date.replace(/-/g, '')}T${time.replace(/:/g, '')}00/${date.replace(/-/g, '')}T${time.replace(/:/g, '')}00`;
-            const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${calendarTitle}&dates=${calendarDates}&details=${calendarDetails}&sf=true&output=xml`;
+            const calendarTitle = encodeURIComponent(`Meeting with ${name}`);
+            const calendarDetails = encodeURIComponent(`Topic: ${notes}\n\n` + `Contact: ${email}`);
+            const calendarDates = `${date.replace(/-/g, '')}T${time.replace(/:/g, '')}00/${date.replace(/-/g, '')}T${time.replace(/:/g, '')}00`;
+            const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${calendarTitle}&dates=${calendarDates}&details=${calendarDetails}&sf=true&output=xml`;
 
-            window.open(mailtoUrl, '_blank');
-            window.open(googleCalendarUrl, '_blank');
+            window.open(mailtoUrl, '_blank');
+            window.open(googleCalendarUrl, '_blank');
 
-            document.getElementById('messageBox').classList.remove('hidden');
-        }
+            document.getElementById('messageBox').classList.remove('hidden');
+        }
 
-        function handleCloseMessage() {
-            document.getElementById('messageBox').classList.add('hidden');
-        }
+        function handleCloseMessage() {
+            document.getElementById('messageBox').classList.add('hidden');
+        }
 
-        // Main rendering function to handle all dynamic page content
-        function renderPage(page, contentId = null) {
-            const container = document.getElementById('app-container');
-            container.innerHTML = '';
-            let content = '';
-            const aboutImagePlaceholder = 'https://placehold.co/600x400/121223/D4AF37?text=About+Image';
-            let mediaHtml = '';
+        // Main rendering function to handle all dynamic page content
+        function renderPage(page, contentId = null) {
+            const container = document.getElementById('app-container');
+            container.innerHTML = '';
+            let content = '';
+            const aboutImagePlaceholder = 'https://placehold.co/600x400/121223/D4AF37?text=About+Image';
+            let mediaHtml = '';
 
-            if (page === 'home') {
-                content = `
-                    <section id="hero" class="py-24 md:py-48 px-4 text-center hero-slideshow bg-dark-blue">
-                        <div class="relative max-w-4xl mx-auto z-10 text-white">
-                            <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-fadeIn">Innovating the Future of Robotics</h1>
-                            <p class="text-md md:text-xl text-gray-200 mb-8 animate-fadeIn delay-300">Building intelligent machines that solve complex challenges and empower humanity.</p>
-                            <a href="#contact" class="btn-gold animate-fadeIn delay-500">Get in Touch</a>
-                        </div>
-                    </section>
-                    <section id="about" class="py-16 md:py-24 px-4 bg-white">
-                        <div class="max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Who We Are</h2>
-                            <div class="grid md:grid-cols-2 gap-12 items-center">
-                                <div class="order-2 md:order-1">
-                                    <p class="text-gray-600 mb-4">
-                                    Koulé Ingenium is dedicated to forging a new generation of problem-solvers. We draw our purpose from the Koulé, the Senufo figure symbolizing knowledge and mentorship, and unite it with Ingenium, the principle of actionable ingenuity. Our mission is clear: to create practical, real-world solutions that improve lives. We believe in building a future where local challenges are met with intelligent, homegrown solutions, all while empowering our community through education and innovative leadership.
-                                    </p>
-                                </div>
-                                <div class="order-1 md:order-2">
-                                    <img src="Gemini_Generated_Image_39d0d539d0d539d0.png" onerror="this.src='${aboutImagePlaceholder}'" alt="Koulé Ingenium team working on a project" class="w-full h-auto rounded-xl shadow-lg">
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section id="services" class="py-16 md:py-24 px-4 bg-gray-100">
-                        <div class="max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Services</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                                <div class="card p-6 text-center">
-                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">CAD & Product Design</h3>
-                                    <p class="text-gray-600">Expert design services using SolidWorks for mechanical and industrial applications.</p>
-                                </div>
-                                <div class="card p-6 text-center">
-                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">STEM Education</h3>
-                                    <p class="text-gray-600">Engaging classes and workshops in science, technology, engineering, and mathematics.</p>
-                                </div>
-                                <div class="card p-6 text-center">
-                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Robotics Development</h3>
-                                    <p class="text-gray-600">We design and build custom robotic solutions and offer training.</p>
-                                </div>
-                                <div class="card p-6 text-center">
-                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Agricultural Robotics</h3>
-                                    <p class="text-gray-600">Innovative solutions for farming, from autonomous planters to crop monitoring drones.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section id="projects" class="py-16 md:py-24 px-4 bg-white">
-                        <div class="max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Projects</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                <div class="card p-6 flex flex-col">
-                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Project Gemini</h3>
-                                    <p class="text-gray-600 mb-4">A dual-arm collaborative robot designed for precision manufacturing and assembly.</p>
-                                    <div id="media-gemini" class="media-container mb-4"></div>
-                                    <button onclick="renderPage('project', 'gemini')" class="btn-gold block text-center mt-auto">Learn More</button>
-                                </div>
-                                <div class="card p-6 flex flex-col">
-                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">AeroDrone</h3>
-                                    <p class="text-gray-600 mb-4">An autonomous inspection drone for large-scale infrastructure monitoring.</p>
-                                    <div id="media-aerodrone" class="media-container mb-4"></div>
-                                    <button onclick="renderPage('project', 'aerodrone')" class="btn-gold block text-center mt-auto">Learn More</button>
-                                </div>
-                                <div class="card p-6 flex flex-col">
-                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">HealthBot</h3>
-                                    <p class="text-600 mb-4">A robotic assistant for hospitals and clinics, improving patient care and logistics.</p>
-                                    <div id="media-healthbot" class="media-container mb-4"></div>
-                                    <button onclick="renderPage('project', 'healthbot')" class="btn-gold block text-center mt-auto">Learn More</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section id="contact" class="py-16 md:py-24 px-4 bg-gray-100">
-                        <div class="max-w-3xl mx-auto card p-8 md:p-12">
-                            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Contact Us</h2>
-                            <div class="space-y-4 text-center">
-                                <p class="text-lg text-gray-600">For general inquiries, feel free to reach out:</p>
-                                <p class="text-xl font-semibold text-gray-800">Email: Fadelberthe24@gmail.com</p>
-                                <p class="text-xl font-semibold text-gray-800">Mobile: +22651881725</p>
-                            </div>
-                        </div>
-                    </section>
-                    <section id="meeting" class="py-16 md:py-24 px-4 bg-white">
-                        <div class="max-w-3xl mx-auto card p-8 md:p-12">
-                            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Schedule an Online Meeting</h2>
-                            <form id="meetingForm" class="space-y-6">
-                                <div>
-                                    <label for="name" class="block text-sm font-medium mb-1 text-gray-600">Full Name</label>
-                                    <input type="text" id="name" name="name" class="input-field" required>
-                                </div>
-                                <div>
-                                    <label for="email" class="block text-sm font-medium mb-1 text-gray-600">Email Address</label>
-                                    <input type="email" id="email" name="email" class="input-field" required>
-                                </div>
-                                <div>
-                                    <label for="date" class="block text-sm font-medium mb-1 text-gray-600">Preferred Date</label>
-                                    <input type="date" id="date" name="date" class="input-field" required>
-                                </div>
-                                <div>
-                                    <label for="time" class="block text-sm font-medium mb-1 text-gray-600">Preferred Time</label>
-                                    <input type="time" id="time" name="time" class="input-field" required>
-                                </div>
-                                <div>
-                                    <label for="notes" class="block text-sm font-medium mb-1 text-gray-600">Meeting Topic</label>
-                                    <textarea id="notes" name="notes" rows="4" class="input-field" placeholder="Briefly describe the purpose of the meeting."></textarea>
-                                </div>
-                                <button type="submit" class="btn-gold w-full">Request Meeting</button>
-                            </form>
-                        </div>
-                    </section>
-                `;
-            } else if (page === 'courses') {
-                content = `
-                    <section id="courses-list" class="py-16 md:py-24 px-4 bg-gray-100">
-                        <div class="max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Online Courses</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                ${Object.keys(courses).map(key => `
-                                    <div class="card p-6 flex flex-col">
-                                        <h3 class="text-xl font-semibold mb-2 text-dark-blue">${courses[key].name}</h3>
-                                        <p class="text-gray-600 mb-4">${courses[key].description}</p>
-                                        <div class="media-container mb-4">
-                                            <img src="${courses[key].image}" alt="${courses[key].name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(courses[key].name + ' Image')}';">
-                                        </div>
-                                        <button onclick="renderPage('course', '${key}')" class="btn-gold block text-center mt-auto">Learn More</button>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </section>
-                `;
-            } else if (page === 'project' && contentId) {
-                const project = projects[contentId];
-                if (!project) {
-                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center"> 
-                        <h2 class="text-3xl font-bold text-red-500">Project Not Found</h2> 
-                        <p class="mt-4 text-gray-600">The project you are looking for does not exist. Please go back to the home page.</p> 
-                        <button onclick="renderPage('home')" class="mt-8 btn-gold">Back to Home</button> 
-                    </div>`;
-                } else {
-                    mediaHtml = project.video
-                        ? `<iframe src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
-                        : `<img src="${project.image}" alt="${project.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(project.name + ' Image')}';">`;
+            if (page === 'home') {
+                content = `
+                    <section id="hero" class="py-24 md:py-48 px-4 text-center hero-slideshow bg-dark-blue">
+                        <div class="relative max-w-4xl mx-auto z-10 text-white">
+                            <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-fadeIn">Innovating the Future of Robotics</h1>
+                            <p class="text-md md:text-xl text-gray-200 mb-8 animate-fadeIn delay-300">Building intelligent machines that solve complex challenges and empower humanity.</p>
+                            <a href="#contact" class="btn-gold animate-fadeIn delay-500">Get in Touch</a>
+                        </div>
+                    </section>
+                    <section id="about" class="py-16 md:py-24 px-4 bg-white">
+                        <div class="max-w-7xl mx-auto">
+                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Who We Are</h2>
+                            <div class="grid md:grid-cols-2 gap-12 items-center">
+                                <div class="order-2 md:order-1">
+                                    <p class="text-gray-600 mb-4">
+                                    Koulé Ingenium is dedicated to forging a new generation of problem-solvers. We draw our purpose from the Koulé, the Senufo figure symbolizing knowledge and mentorship, and unite it with Ingenium, the principle of actionable ingenuity. Our mission is clear: to create practical, real-world solutions that improve lives. We believe in building a future where local challenges are met with intelligent, homegrown solutions, all while empowering our community through education and innovative leadership.
+                                    </p>
+                                </div>
+                                <div class="order-1 md:order-2">
+                                    <img src="Gemini_Generated_Image_39d0d539d0d539d0.png" onerror="this.src='${aboutImagePlaceholder}'" alt="Koulé Ingenium team working on a project" class="w-full h-auto rounded-xl shadow-lg">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="services" class="py-16 md:py-24 px-4 bg-gray-100">
+                        <div class="max-w-7xl mx-auto">
+                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Services</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                                <div class="card p-6 text-center">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">CAD & Product Design</h3>
+                                    <p class="text-gray-600">Expert design services using SolidWorks for mechanical and industrial applications.</p>
+                                </div>
+                                <div class="card p-6 text-center">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">STEM Education</h3>
+                                    <p class="text-gray-600">Engaging classes and workshops in science, technology, engineering, and mathematics.</p>
+                                </div>
+                                <div class="card p-6 text-center">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Robotics Development</h3>
+                                    <p class="text-gray-600">We design and build custom robotic solutions and offer training.</p>
+                                </div>
+                                <div class="card p-6 text-center">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Agricultural Robotics</h3>
+                                    <p class="text-gray-600">Innovative solutions for farming, from autonomous planters to crop monitoring drones.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="projects" class="py-16 md:py-24 px-4 bg-white">
+                        <div class="max-w-7xl mx-auto">
+                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Projects</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Advanced Automotive Suspension System Design</h3>
+                                    <p class="text-gray-600 mb-4">Complete design of a car suspension system in solidworks</p>
+                                    <div id="media-Automotive Suspension" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'Automotive Suspension')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">AeroDrone</h3>
+                                    <p class="text-gray-600 mb-4">An autonomous inspection drone for large-scale infrastructure monitoring.</p>
+                                    <div id="media-aerodrone" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'aerodrone')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">HealthBot</h3>
+                                    <p class="text-600 mb-4">A robotic assistant for hospitals and clinics, improving patient care and logistics.</p>
+                                    <div id="media-healthbot" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'healthbot')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="contact" class="py-16 md:py-24 px-4 bg-gray-100">
+                        <div class="max-w-3xl mx-auto card p-8 md:p-12">
+                            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Contact Us</h2>
+                            <div class="space-y-4 text-center">
+                                <p class="text-lg text-gray-600">For general inquiries, feel free to reach out:</p>
+                                <p class="text-xl font-semibold text-gray-800">Email: Fadelberthe24@gmail.com</p>
+                                <p class="text-xl font-semibold text-gray-800">Mobile: +22651881725</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="meeting" class="py-16 md:py-24 px-4 bg-white">
+                        <div class="max-w-3xl mx-auto card p-8 md:p-12">
+                            <h2 class="text-3xl font-bold text-center mb-8 text-gold">Schedule an Online Meeting</h2>
+                            <form id="meetingForm" class="space-y-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium mb-1 text-gray-600">Full Name</label>
+                                    <input type="text" id="name" name="name" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium mb-1 text-gray-600">Email Address</label>
+                                    <input type="email" id="email" name="email" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="date" class="block text-sm font-medium mb-1 text-gray-600">Preferred Date</label>
+                                    <input type="date" id="date" name="date" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="time" class="block text-sm font-medium mb-1 text-gray-600">Preferred Time</label>
+                                    <input type="time" id="time" name="time" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="notes" class="block text-sm font-medium mb-1 text-gray-600">Meeting Topic</label>
+                                    <textarea id="notes" name="notes" rows="4" class="input-field" placeholder="Briefly describe the purpose of the meeting."></textarea>
+                                </div>
+                                <button type="submit" class="btn-gold w-full">Request Meeting</button>
+                            </form>
+                        </div>
+                    </section>
+                `;
+            } else if (page === 'courses') {
+                content = `
+                    <section id="courses-list" class="py-16 md:py-24 px-4 bg-gray-100">
+                        <div class="max-w-7xl mx-auto">
+                            <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Online Courses</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                ${Object.keys(courses).map(key => `
+                                    <div class="card p-6 flex flex-col">
+                                        <h3 class="text-xl font-semibold mb-2 text-dark-blue">${courses[key].name}</h3>
+                                        <p class="text-gray-600 mb-4">${courses[key].description}</p>
+                                        <div class="media-container mb-4">
+                                            <img src="${courses[key].image}" alt="${courses[key].name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(courses[key].name + ' Image')}';">
+                                        </div>
+                                        <button onclick="renderPage('course', '${key}')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>
+                `;
+            } else if (page === 'project' && contentId) {
+                const project = projects[contentId];
+                if (!project) {
+                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center"> 
+                        <h2 class="text-3xl font-bold text-red-500">Project Not Found</h2> 
+                        <p class="mt-4 text-gray-600">The project you are looking for does not exist. Please go back to the home page.</p> 
+                        <button onclick="renderPage('home')" class="mt-8 btn-gold">Back to Home</button> 
+                    </div>`;
+                } else {
+                    mediaHtml = project.video
+                        ? `<iframe src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-o
+rigin" allowfullscreen></iframe>`
+                        : `<img src="${project.image}" alt="${project.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(project.name + ' Image')}';">`;
 
-                    content = ` 
-                        <section class="py-16 md:py-24 px-4 bg-white"> 
-                            <div class="max-w-7xl mx-auto"> 
-                                <button onclick="renderPage('home')" class="text-gold mb-8 flex items-center space-x-2"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"> 
-                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" /> 
-                                    </svg> 
-                                    <span>Back to Projects</span> 
-                                </button> 
-                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${project.name}</h2> 
-                                <div class="flex flex-col md:flex-row gap-8 items-start"> 
-                                    <div class="flex-1"> 
-                                        <div class="media-container mb-6"> 
-                                            ${mediaHtml} 
-                                        </div> 
-                                    </div> 
-                                    <div class="flex-1"> 
-                                        <p class="text-xl font-semibold text-dark-blue mb-4">${project.description}</p> 
-                                        <p class="text-gray-600 mb-4">${project.fullDescription}</p> 
-                                    </div> 
-                                </div> 
-                            </div> 
-                        </section> 
-                    `;
-                }
-            } else if (page === 'course' && contentId) {
-                const course = courses[contentId];
-                if (!course) {
-                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center">
-                        <h2 class="text-3xl font-bold text-red-500">Course Not Found</h2>
-                        <p class="mt-4 text-gray-600">The course you are looking for does not exist. Please go back to the courses page.</p>
-                        <button onclick="renderPage('courses')" class="mt-8 btn-gold">Back to Courses</button>
-                    </div>`;
-                } else {
-                    content = `
-                        <section class="py-16 md:py-24 px-4 bg-white">
-                            <div class="max-w-7xl mx-auto">
-                                <button onclick="renderPage('courses')" class="text-gold mb-8 flex items-center space-x-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                    <span>Back to Courses</span>
-                                </button>
-                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${course.name}</h2>
-                                <div class="flex flex-col md:flex-row gap-8 items-start">
-                                    <div class="flex-1">
-                                        <div class="media-container mb-6">
-                                            <img src="${course.image}" alt="${course.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(course.name + ' Course')}';">
-                                        </div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-xl font-semibold text-dark-blue mb-4">${course.description}</p>
-                                        <p class="text-gray-600 mb-4">${course.fullDescription}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    `;
-                }
-            }
+                    content = ` 
+                        <section class="py-16 md:py-24 px-4 bg-white"> 
+                            <div class="max-w-7xl mx-auto"> 
+                                <button onclick="renderPage('home')" class="text-gold mb-8 flex items-center space-x-2"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"> 
+                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" /> 
+                                    </svg> 
+                                    <span>Back to Projects</span> 
+                                </button> 
+                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${project.name}</h2> 
+                                <div class="flex flex-col md:flex-row gap-8 items-start"> 
+                                    <div class="flex-1"> 
+                                        <div class="media-container mb-6"> 
+                                            ${mediaHtml} 
+                                        </div> 
+                                    </div> 
+                                    <div class="flex-1"> 
+                                        <p class="text-xl font-semibold text-dark-blue mb-4">${project.description}</p> 
+                                        <p class="text-gray-600 mb-4">${project.fullDescription}</p> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </section> 
+                    `;
+                }
+            } else if (page === 'course' && contentId) {
+                const course = courses[contentId];
+                if (!course) {
+                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center">
+                        <h2 class="text-3xl font-bold text-red-500">Course Not Found</h2>
+                        <p class="mt-4 text-gray-600">The course you are looking for does not exist. Please go back to the courses page.</p>
+                        <button onclick="renderPage('courses')" class="mt-8 btn-gold">Back to Courses</button>
+                    </div>`;
+                } else {
+                    content = `
+                        <section class="py-16 md:py-24 px-4 bg-white">
+                            <div class="max-w-7xl mx-auto">
+                                <button onclick="renderPage('courses')" class="text-gold mb-8 flex items-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Back to Courses</span>
+                                </button>
+                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${course.name}</h2>
+                                <div class="flex flex-col md:flex-row gap-8 items-start">
+                                    <div class="flex-1">
+                                        <div class="media-container mb-6">
+                                            <img src="${course.image}" alt="${course.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(course.name + ' Course')}';">
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-xl font-semibold text-dark-blue mb-4">${course.description}</p>
+                                        <p class="text-gray-600 mb-4">${course.fullDescription}</p>
+                                        <a href="#meeting" class="btn-gold block text-center mt-auto">Sign Up Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    `;
+                }
+            }
 
-            container.innerHTML = content;
+            container.innerHTML = content;
+            if (page === 'home') {
+                document.getElementById('meetingForm').addEventListener('submit', handleMeetingForm);
+                document.getElementById('closeMessage').addEventListener('click', handleCloseMessage);
+                setInterval(updateBackgroundImage, 5000); // Change image every 5 seconds
+                updateBackgroundImage();
+            }
+        }
 
-            // Update the media container for specific projects to include the slideshow logic
-            const automotiveContainer = document.getElementById('media-Automotive Suspension');
-            if (automotiveContainer) {
-                const project = projects['Automotive Suspension'];
-                if (Array.isArray(project.image)) {
-                    automotiveContainer.innerHTML = `
-                        <div class="slideshow-container">
-                            ${project.image.map((src, index) => `
-                                <img src="${src}" class="mySlides w-full h-auto" style="${index === 0 ? 'display:block' : 'display:none'}">
-                            `).join('')}
-                        </div>
-                    `;
-
-                    let slideIndex = 0;
-                    const slides = automotiveContainer.querySelectorAll('.mySlides');
-
-                    function showSlides() {
-                        for (let i = 0; i < slides.length; i++) {
-                            slides[i].style.display = 'none';
-                        }
-                        slideIndex++;
-                        if (slideIndex > slides.length) {
-                            slideIndex = 1;
-                        }
-                        slides[slideIndex - 1].style.display = 'block';
-                        setTimeout(showSlides, 3000); // Change image every 3 seconds
-                    }
-                    showSlides();
-                } else if (project.video) {
-                    automotiveContainer.innerHTML = `<iframe src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
-                } else {
-                    automotiveContainer.innerHTML = `<img src="${project.image}" alt="${project.name} Image" class="w-full h-auto rounded-lg shadow-md">`;
-                }
-            }
-        }
-
-        // Initial page load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderPage('home');
-            document.getElementById('meetingForm').addEventListener('submit', handleMeetingForm);
-            document.getElementById('closeMessage').addEventListener('click', handleCloseMessage);
-        });
-    </script>
-
+        // Initial render of the home page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPage('home');
+        });
+    </script>
 </body>
 
 </html>
