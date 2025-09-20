@@ -1,285 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOULÉ INGENIUM</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Koulé Ingenium</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8F9FA;
-            color: #121223;
+        .hero-slideshow {
+            background-image: url('Gemini_Generated_Image_08b31a39f607.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out;
         }
-
+        .card {
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
         .text-gold {
             color: #D4AF37;
         }
-
+        .text-dark-blue {
+            color: #121223;
+        }
+        .btn-gold {
+            display: inline-block;
+            background-color: #D4AF37;
+            color: #121223;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .btn-gold:hover {
+            background-color: #a68b2a;
+            transform: scale(1.05);
+        }
         .bg-dark-blue {
             background-color: #121223;
         }
-
-        .btn-gold {
-            background: linear-gradient(to right, #D4AF37, #FFD700);
-            color: #121223;
-            padding: 12px 24px;
-            border-radius: 9999px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-gold:hover {
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .card {
-            background-color: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
         .input-field {
-            background-color: #F8F9FA;
-            border: 1px solid #E2E8F0;
-            color: #121223;
-            border-radius: 8px;
-            padding: 10px;
             width: 100%;
-            transition: border-color 0.3s ease;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease-in-out;
         }
-
         .input-field:focus {
             outline: none;
             border-color: #D4AF37;
         }
-
-        .hero-slideshow {
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            transition: background-image 1s ease-in-out;
-        }
-
-        .hero-slideshow::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(18, 18, 35, 0.7);
-            /* Dark blue overlay */
-        }
-
         .media-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%;
-            /* 16:9 aspect ratio */
-            height: 0;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            border-radius: 0.75rem;
         }
-
-        .media-container img,
-        .media-container iframe {
+        .media-container iframe, .media-container video, .media-container img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 0.75rem;
+            border: none;
         }
-
-        /* Adjustments for desktop view */
-        @media (min-width: 1024px) {
-            .hero-slideshow {
-                height: 50vh;
-                /* Increase hero section height on desktop */
-                background-position: top;
-                /* Ensure the top of the image is visible */
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        .delay-500 {
+            animation-delay: 0.5s;
         }
     </style>
 </head>
-
-<body class="bg-white text-gray-800">
-
-    <header class="py-6 px-4 md:px-8 bg-white shadow-sm sticky top-0 z-50">
-        <nav class="flex justify-between items-center max-w-7xl mx-auto">
-            <div class="flex items-center space-x-4 cursor-pointer" onclick="renderPage('home')">
-                <img src="WhatsApp Image 2025-09-08 at 12.05.21_899ebfab.jpg" onerror="this.src='https://placehold.co/48x48/121223/D4AF37?text=KI'" alt="KOULÉ INGENIUM Logo" class="w-12 h-12 rounded-full border-2 border-yellow-500">
-                <span class="text-xl font-bold text-gray-800">KOULÉ INGENIUM</span>
+<body class="bg-gray-50 text-dark-blue">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" onclick="renderPage('home')" class="text-2xl font-bold text-dark-blue">Koulé Ingenium</a>
+                <div class="space-x-4 flex items-center">
+                    <a href="#about" class="text-gray-600 hover:text-gold transition-colors duration-200">About</a>
+                    <a href="#projects" class="text-gray-600 hover:text-gold transition-colors duration-200">Projects</a>
+                    <a href="#" onclick="renderPage('courses')" class="text-gray-600 hover:text-gold transition-colors duration-200">Courses</a>
+                    <a href="#contact" class="btn-gold hidden md:block">Contact</a>
+                </div>
             </div>
-            <ul class="hidden md:flex space-x-6 text-gray-600">
-                <li><a href="#about" class="hover:text-gold transition-colors duration-300">About</a></li>
-                <li><a href="#services" class="hover:text-gold transition-colors duration-300">Services</a></li>
-                <li><a href="#courses" class="hover:text-gold transition-colors duration-300" onclick="renderPage('courses')">Courses</a></li>
-                <li><a href="#projects" class="hover:text-gold transition-colors duration-300">Projects</a></li>
-                <li><a href="#contact" class="hover:text-gold transition-colors duration-300">Contact</a></li>
-            </ul>
-            <a href="#meeting" class="btn-gold hidden md:block">Schedule a Meeting</a>
-            <a href="#meeting" class="md:hidden text-gold font-semibold hover:underline">Schedule</a>
         </nav>
     </header>
 
     <main id="app-container">
         </main>
 
-    <footer class="py-8 px-4 text-center text-gray-500 bg-gray-100">
-        <p class="mb-2">&copy; 2025 KOULÉ INGENIUM. All rights reserved.</p>
-        <div class="flex justify-center space-x-4">
-            <a href="#" class="hover:text-gold transition-colors duration-300">LinkedIn</a>
-            <a href="#" class="hover:text-gold transition-colors duration-300">GitHub</a>
-            <a href="#" class="hover:text-gold transition-colors duration-300">Twitter</a>
+    <footer class="bg-dark-blue text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 Koulé Ingenium. All rights reserved.</p>
         </div>
     </footer>
 
-    <div id="messageBox" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
-        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm mx-4 text-center">
-            <h3 class="text-xl font-bold mb-4 text-dark-blue">Action Required</h3>
-            <p class="text-gray-600 mb-6">A meeting request email has been prepared for you. Please check your email client and send the message to complete the process.</p>
-            <button id="closeMessage" class="btn-gold">Close</button>
-        </div>
-    </div>
-
     <script>
-        // Hero slideshow logic
-        const heroImages = [
-            'Gemini_Generated_Image_1cy9651cy9651cy9.png',
-            'Gemini_Generated_Image_edkchqedkchqedkc.png',
-        ];
-        let currentImageIndex = 0;
-
-        function updateBackgroundImage() {
-            const heroSection = document.getElementById('hero');
-            if (heroSection) {
-                // Check if the image exists. A temporary fix for a broken image path.
-                const img = new Image();
-                img.onload = () => {
-                    heroSection.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
-                };
-                img.onerror = () => {
-                    console.error(`Failed to load image: ${heroImages[currentImageIndex]}. Using fallback color.`);
-                };
-                img.src = heroImages[currentImageIndex];
-                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
-            }
-        }
-
-        // Project data 
         const projects = {
             'Automotive Suspension': {
                 name: 'Advanced Automotive Suspension System Design',
-                description: 'Complete design of a car suspension system in solidworks',
-                // The provided image path was not found in the user's repository. 
-                // Using a placeholder image for demonstration. 
-                image: ['https://placehold.co/600x400/121223/D4AF37?text=Project+Gemini+Image', 'CR-01.png', 'CR-02.png', 'CR-03.png', 'CR-04.png', 'CR-05.png', 'CR-06.png', 'CR-07.png'],
-                video: '',
-                fullDescription: 'This project involves the comprehensive design and analysis of a double-wishbone suspension system for an automotive application. . The design was executed using SolidWorks, a professional 3D computer-aided design (CAD) software, ensuring precise geometric modeling and component integration. The system\'s architecture includes key components such as upper and lower control arms, uprights, coilover shocks, and anti-roll bars, all meticulously engineered to meet performance specifications.The project goes beyond basic modeling, incorporating a full motion study and kinematic analysis to simulate the suspension\'s behavior under dynamic loads and various driving conditions. This analysis ensures the design\'s effectiveness in managing wheel alignment, ride comfort, and handling stability. The final design is a robust and performance-oriented solution, demonstrating a high level of expertise in mechanical engineering principles, CAD software proficiency, and automotive system design.'
+                description: 'Complete design of a car suspension system in SolidWorks.',
+                fullDescription: 'This project involves the comprehensive design and analysis of a double-wishbone suspension system for an automotive application. The design was executed using SolidWorks, a professional 3D computer-aided design (CAD) software, ensuring precise geometric modeling and component integration. The system\'s architecture includes key components such as upper and lower control arms, uprights, coilover shocks, and anti-roll bars, all meticulously engineered to meet performance specifications. The project goes beyond basic modeling, incorporating a full motion study and kinematic analysis to simulate the suspension\'s behavior under dynamic loads and various driving conditions. This analysis ensures the design\'s effectiveness in managing wheel alignment, ride comfort, and handling stability. The final design is a robust and performance-oriented solution, demonstrating a high level of expertise in mechanical engineering principles, CAD software proficiency, and automotive system design.',
+                image: [
+                    'CR-01.png',
+                    'CR-02.png',
+                    'CR-03.png',
+                    'CR-04.png',
+                    'CR-05.png',
+                    'CR-06.png',
+                    'CR-07.png'
+                ]
             },
             'aerodrone': {
                 name: 'AeroDrone',
                 description: 'An autonomous inspection drone for large-scale infrastructure monitoring.',
-                // The provided image path was not found in the user's repository. 
-                // Using a placeholder image for demonstration. 
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=AeroDrone+Image',
-                video: 'https://www.youtube.com/embed/zH3q1WlP-Xk',
-                fullDescription: 'AeroDrone is an autonomous aerial vehicle designed to perform comprehensive inspections of large-scale infrastructure, including power lines, bridges, and agricultural fields. Equipped with high-resolution cameras and thermal sensors, it can identify structural anomalies and crop health issues with incredible accuracy, reducing the need for dangerous and time-consuming manual inspections. The drone’s AI-powered flight control system ensures it can navigate complex environments safely and efficiently.'
+                fullDescription: 'AeroDrone is a sophisticated unmanned aerial vehicle (UAV) designed for autonomous inspection of critical infrastructure such as pipelines, power lines, and bridges. Equipped with high-resolution cameras and thermal sensors, it can detect subtle defects and structural anomalies that are difficult to spot with the naked eye. The drone\'s flight path is pre-programmed, allowing it to navigate complex environments with precision while a real-time data feed provides inspectors with a live view of the asset\'s condition. AeroDrone is built with a robust, weather-resistant frame and an advanced battery system for extended flight times. This project highlights our expertise in mechatronics, embedded systems programming, and computer vision, offering a solution that significantly reduces inspection time, cost, and human risk.',
+                video: 'https://www.youtube.com/embed/S2b-n1nK1-c?si=XzW5Lz-hVfI36J3y'
             },
             'healthbot': {
                 name: 'HealthBot',
                 description: 'A robotic assistant for hospitals and clinics, improving patient care and logistics.',
-                // The provided image path was not found in the user's repository. 
-                // Using a placeholder image for demonstration. 
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=HealthBot+Image',
-                video: '',
-                fullDescription: 'HealthBot is a robotic assistant developed to support healthcare professionals in hospitals and clinics. Its primary functions include delivering medical supplies and patient records, disinfecting rooms using UV technology, and providing telepresence services for remote consultations. By automating routine and repetitive tasks, HealthBot allows healthcare workers to focus more on direct patient care, improving overall efficiency and safety in medical facilities.'
+                fullDescription: 'HealthBot is a state-of-the-art robotic assistant designed to support medical staff in hospitals and clinics. It can autonomously navigate hospital corridors to deliver medications, lab samples, and other supplies, reducing the workload on nurses and orderlies. The robot is equipped with a secure, lockable compartment to ensure the safe transport of sensitive materials. Its intuitive interface allows staff to easily schedule delivery tasks and track its location in real-time. HealthBot also features an integrated video-call system, enabling remote consultations between doctors and patients, which is especially useful for check-ins or quick questions. This project showcases our capability in developing complex, multi-functional autonomous systems with a focus on safety, reliability, and human-robot interaction. It represents a significant step forward in leveraging robotics to enhance efficiency and patient care in the healthcare industry.',
+                video: 'https://www.youtube.com/embed/n4yBw0G9y4c?si=hC7l88V281EaG5tG'
             }
         };
 
-        // Course data for the new online courses section
         const courses = {
-            'cad': {
-                name: 'CAD Design & Analysis',
-                description: 'Master SolidWorks for 3D modeling and ANSYS for simulation and analysis.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=CAD+Course',
-                fullDescription: 'This comprehensive course covers everything from fundamental 3D modeling in SolidWorks to advanced finite element analysis (FEA) using ANSYS. You will learn to design, simulate, and optimize complex mechanical components, preparing you for a career in product design, aerospace, or mechanical engineering.'
+            'robotics-fundamentals': {
+                name: 'Robotics Fundamentals: From Motors to Microcontrollers',
+                description: 'An introductory course to the world of robotics, covering electronics, programming, and mechanical design.',
+                fullDescription: 'This comprehensive course provides a hands-on introduction to the core principles of robotics. Students will learn about the different types of motors and sensors used in robots, how to select the right components for a project, and the basics of microcontroller programming using platforms like Arduino. The curriculum includes practical exercises and a final project where students will build and program their own simple robot from scratch. No prior experience is required, making this the perfect starting point for anyone interested in a career in robotics or just looking to explore a new hobby.',
+                image: 'robotics-course.png'
             },
-            'stem': {
-                name: 'STEM Education',
-                description: 'Engaging and hands-on modules in Science, Technology, Engineering, and Math.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=STEM+Course',
-                fullDescription: 'Our STEM education program is designed for students of all ages. Through interactive projects and workshops, we introduce key concepts in physics, coding, electronics, and mathematics. The curriculum is built to foster critical thinking and problem-solving skills, making learning both fun and impactful.'
+            'cad-solidworks': {
+                name: 'CAD with SolidWorks: Product Design & Simulation',
+                description: 'Master the industry-standard software for mechanical design, simulation, and analysis.',
+                fullDescription: 'This course is a deep dive into SolidWorks, the premier CAD software used by engineers worldwide. You will learn to create complex 3D models, assemble multi-component systems, and use simulation tools to test your designs under real-world conditions. The course covers everything from basic sketching and part modeling to advanced topics like surface design and motion studies. By the end of this course, you will be proficient in SolidWorks and have a strong portfolio of projects to showcase to potential employers, including designs for intricate mechanical parts and full product assemblies.',
+                image: 'cad-course.png'
             },
-            'robotics': {
-                name: 'Robotics Development',
-                description: 'Learn to design, build, and program your own robots from the ground up.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=Robotics+Course',
-                fullDescription: 'This course provides a deep dive into the world of robotics. You will work with microcontrollers like Arduino and Raspberry Pi, learn about different sensors and actuators, and write code in C++ and Python to bring your creations to life. Topics include kinematics, control systems, and robotic manipulation.'
-            },
-            'ml': {
-                name: 'Machine Learning',
-                description: 'Foundational and advanced concepts in machine learning and data science.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=ML+Course',
-                fullDescription: 'Explore the exciting field of machine learning. This course covers supervised and unsupervised learning, neural networks, and deep learning. You will work on real-world datasets using Python libraries like TensorFlow and scikit-learn, and understand how to build intelligent systems for various applications.'
-            },
-            'english': {
-                name: 'English Language',
-                description: 'Improve your English fluency with our tailored programs for non-native speakers.',
-                image: 'https://placehold.co/600x400/121223/D4AF37?text=English+Course',
-                fullDescription: 'Our English language course is designed to enhance your speaking, listening, reading, and writing skills. We offer different levels, from beginner to advanced, and focus on practical communication for academic, professional, and everyday use.'
+            'agri-robotics': {
+                name: 'Introduction to Agricultural Robotics',
+                description: 'Explore how robotics and automation are revolutionizing modern agriculture, from planting to harvesting.',
+                fullDescription: 'This course examines the growing field of agricultural robotics, where technology is used to increase efficiency and sustainability in farming. You will learn about autonomous tractors, crop-monitoring drones, and robotic harvesters. The curriculum covers the unique challenges of designing robots for outdoor environments, including navigation, power management, and sensor integration. We will also discuss the future of food production and how robotics can help address global food security issues. This course is ideal for students and professionals in engineering, agriculture, or anyone with an interest in sustainable technology.',
+                image: 'agri-robotics-course.png'
             }
         };
 
+        let heroImages = [
+            'Gemini_Generated_Image_08b31a39f607.jpeg',
+            'Gemini_Generated_Image_a2b3c4d5e6f7.jpeg',
+            'Gemini_Generated_Image_g8h9i0j1k2l3.jpeg'
+        ];
+        let currentImageIndex = 0;
 
-        // Handle the form submission in a separate function 
-        function handleMeetingForm(event) {
-            event.preventDefault();
-
-            const form = event.target;
-            const name = form.name.value;
-            const email = form.email.value;
-            const date = form.date.value;
-            const time = form.time.value;
-            const notes = form.notes.value;
-
-            const recipientEmail = "fadelberthe24@gmail.com";
-
-            const subject = encodeURIComponent(`Meeting Request from ${name}`);
-            const body = encodeURIComponent(
-                `Hello KOULÉ INGENIUM Team,\n\nI would like to schedule a meeting.\n\n` +
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Preferred Date: ${date}\n` +
-                `Preferred Time: ${time}\n\n` +
-                `Meeting Topic: ${notes}\n\n` +
-                `Please get in touch to confirm the meeting.`
-            );
-
-            const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
-
-            const calendarTitle = encodeURIComponent(`Meeting with ${name}`);
-            const calendarDetails = encodeURIComponent(`Topic: ${notes}\n\n` + `Contact: ${email}`);
-            const calendarDates = `${date.replace(/-/g, '')}T${time.replace(/:/g, '')}00/${date.replace(/-/g, '')}T${time.replace(/:/g, '')}00`;
-            const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${calendarTitle}&dates=${calendarDates}&details=${calendarDetails}&sf=true&output=xml`;
-
-            window.open(mailtoUrl, '_blank');
-            window.open(googleCalendarUrl, '_blank');
-
-            document.getElementById('messageBox').classList.remove('hidden');
+        function updateBackgroundImage() {
+            const hero = document.getElementById('hero');
+            if (hero) {
+                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+                hero.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+            }
         }
 
+        // Function to handle the meeting form submission
+        function handleMeetingForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            console.log('Meeting Request Data:', data);
+
+            // Here you would typically send this data to a backend server.
+            // For this example, we'll just display a success message.
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'success-message';
+            messageDiv.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white p-8 rounded-lg shadow-xl z-[100] transition-all duration-300 transform scale-100 opacity-100';
+            messageDiv.innerHTML = `
+                <div class="text-center">
+                    <p class="text-2xl font-bold mb-4">Meeting Request Sent!</p>
+                    <p>Thank you, ${data.name}! We will contact you shortly at ${data.email} to confirm the details.</p>
+                    <button id="closeMessage" class="mt-6 btn-gold bg-white text-dark-blue">Close</button>
+                </div>
+            `;
+            document.body.appendChild(messageDiv);
+            document.getElementById('closeMessage').addEventListener('click', handleCloseMessage);
+
+            form.reset();
+        }
+
+        // Function to close the success message
         function handleCloseMessage() {
-            document.getElementById('messageBox').classList.add('hidden');
+            const messageDiv = document.getElementById('success-message');
+            if (messageDiv) {
+                messageDiv.style.transform = 'scale(0.8)';
+                messageDiv.style.opacity = '0';
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 300);
+            }
+        }
+        
+        // New function to handle the image gallery/slideshow
+        function displayProjectGallery(imageArray) {
+            let currentImageIndex = 0;
+            const container = document.getElementById('project-image-gallery');
+            
+            // Add the initial image element to the container
+            container.innerHTML = `<img src="${imageArray[currentImageIndex]}" class="w-full h-auto rounded-lg shadow-md" alt="Project Image">`;
+            
+            // Function to change the image every 5 seconds
+            setInterval(() => {
+                currentImageIndex = (currentImageIndex + 1) % imageArray.length;
+                container.querySelector('img').src = imageArray[currentImageIndex];
+            }, 5000); // Change image every 5 seconds
         }
 
         // Main rendering function to handle all dynamic page content
@@ -343,7 +291,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 <div class="card p-6 flex flex-col">
                                     <h3 class="text-xl font-semibold mb-2 text-dark-blue">Advanced Automotive Suspension System Design</h3>
-                                    <p class="text-gray-600 mb-4">Complete design of a car suspension system in solidworks</p>
+                                    <p class="text-gray-600 mb-4">Complete design of a car suspension system in SolidWorks</p>
                                     <div id="media-Automotive Suspension" class="media-container mb-4"></div>
                                     <button onclick="renderPage('project', 'Automotive Suspension')" class="btn-gold block text-center mt-auto">Learn More</button>
                                 </div>
@@ -355,7 +303,7 @@
                                 </div>
                                 <div class="card p-6 flex flex-col">
                                     <h3 class="text-xl font-semibold mb-2 text-dark-blue">HealthBot</h3>
-                                    <p class="text-600 mb-4">A robotic assistant for hospitals and clinics, improving patient care and logistics.</p>
+                                    <p class="text-gray-600 mb-4">A robotic assistant for hospitals and clinics, improving patient care and logistics.</p>
                                     <div id="media-healthbot" class="media-container mb-4"></div>
                                     <button onclick="renderPage('project', 'healthbot')" class="btn-gold block text-center mt-auto">Learn More</button>
                                 </div>
@@ -430,10 +378,13 @@
                         <button onclick="renderPage('home')" class="mt-8 btn-gold">Back to Home</button> 
                     </div>`;
                 } else {
-                    mediaHtml = project.video
-                        ? `<iframe src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-o
-rigin" allowfullscreen></iframe>`
-                        : `<img src="${project.image}" alt="${project.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(project.name + ' Image')}';">`;
+                    if (project.video) {
+                        mediaHtml = `<iframe src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+                    } else if (Array.isArray(project.image)) {
+                        mediaHtml = `<div id="project-image-gallery" class="media-container mb-6"></div>`;
+                    } else {
+                        mediaHtml = `<img src="${project.image}" alt="${project.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(project.name + ' Image')}';">`;
+                    }
 
                     content = ` 
                         <section class="py-16 md:py-24 px-4 bg-white"> 
@@ -447,9 +398,7 @@ rigin" allowfullscreen></iframe>`
                                 <h2 class="text-3xl font-bold text-center mb-12 text-gold">${project.name}</h2> 
                                 <div class="flex flex-col md:flex-row gap-8 items-start"> 
                                     <div class="flex-1"> 
-                                        <div class="media-container mb-6"> 
-                                            ${mediaHtml} 
-                                        </div> 
+                                        ${mediaHtml} 
                                     </div> 
                                     <div class="flex-1"> 
                                         <p class="text-xl font-semibold text-dark-blue mb-4">${project.description}</p> 
@@ -500,17 +449,18 @@ rigin" allowfullscreen></iframe>`
             container.innerHTML = content;
             if (page === 'home') {
                 document.getElementById('meetingForm').addEventListener('submit', handleMeetingForm);
-                document.getElementById('closeMessage').addEventListener('click', handleCloseMessage);
-                setInterval(updateBackgroundImage, 5000); // Change image every 5 seconds
+                setInterval(updateBackgroundImage, 5000);
                 updateBackgroundImage();
+            }
+            
+            if (page === 'project' && contentId === 'Automotive Suspension' && Array.isArray(projects[contentId].image)) {
+                displayProjectGallery(projects[contentId].image);
             }
         }
 
-        // Initial render of the home page
         document.addEventListener('DOMContentLoaded', () => {
             renderPage('home');
         });
     </script>
 </body>
-
 </html>
