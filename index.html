@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .hero-slideshow {
-            background-image: url('WhatsApp Image 2025-09-08 at 12.05.21_899ebfab.jpg');
+            background-image: url('Gemini_Generated_Image_08b31a39f607.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -91,12 +91,33 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
-                <a href="#" onclick="renderPage('home')" class="text-2xl font-bold text-dark-blue">Koulé Ingenium</a>
-                <div class="space-x-4 flex items-center">
+                <a href="#" onclick="renderPage('home')" class="flex items-center space-x-2">
+                    <img src="WhatsApp Image 2025-09-08 at 12.05.21_899ebfab.jpg" alt="Koulé Ingenium Logo" class="h-10 md:h-12">
+                    <span class="text-2xl font-bold text-dark-blue">Koulé Ingenium</span>
+                </a>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gold focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+                
+                <div class="hidden md:flex space-x-4 items-center" id="desktop-menu">
                     <a href="#about" class="text-gray-600 hover:text-gold transition-colors duration-200">About</a>
+                    <a href="#services" class="text-gray-600 hover:text-gold transition-colors duration-200">Services</a>
                     <a href="#projects" class="text-gray-600 hover:text-gold transition-colors duration-200">Projects</a>
                     <a href="#" onclick="renderPage('courses')" class="text-gray-600 hover:text-gold transition-colors duration-200">Courses</a>
-                    <a href="#contact" class="btn-gold hidden md:block">Contact</a>
+                    <a href="#meeting" class="btn-gold hidden md:block">Request a Meeting</a>
+                </div>
+            </div>
+            
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="#about" class="text-gray-600 hover:text-gold transition-colors duration-200">About</a>
+                    <a href="#services" class="text-gray-600 hover:text-gold transition-colors duration-200">Services</a>
+                    <a href="#projects" class="text-gray-600 hover:text-gold transition-colors duration-200">Projects</a>
+                    <a href="#" onclick="renderPage('courses')" class="text-gray-600 hover:text-gold transition-colors duration-200">Courses</a>
+                    <a href="#meeting" class="btn-gold block text-center mt-2">Request a Meeting</a>
                 </div>
             </div>
         </nav>
@@ -163,8 +184,9 @@
         };
 
         let heroImages = [
-            'Gemini_Generated_Image_1cy9651cy9651cy9.png',
-            'Gemini_Generated_Image_edkchqedkchqedkc.png',
+            'Gemini_Generated_Image_08b31a39f607.jpeg',
+            'Gemini_Generated_Image_a2b3c4d5e6f7.jpeg',
+            'Gemini_Generated_Image_g8h9i0j1k2l3.jpeg'
         ];
         let currentImageIndex = 0;
 
@@ -243,7 +265,7 @@
                         <div class="relative max-w-4xl mx-auto z-10 text-white">
                             <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-fadeIn">Innovating the Future of Robotics</h1>
                             <p class="text-md md:text-xl text-gray-200 mb-8 animate-fadeIn delay-300">Building intelligent machines that solve complex challenges and empower humanity.</p>
-                            <a href="#contact" class="btn-gold animate-fadeIn delay-500">Get in Touch</a>
+                            <a href="#meeting" class="btn-gold animate-fadeIn delay-500">Request a Meeting</a>
                         </div>
                     </section>
                     <section id="about" class="py-16 md:py-24 px-4 bg-white">
@@ -459,6 +481,9 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderPage('home');
+            document.getElementById('mobile-menu-button').addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
         });
     </script>
 </body>
