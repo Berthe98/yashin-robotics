@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koulé Ingenium - Innovating the Future of Robotics</title> 
+    <title>Koulé Ingenium</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Base styles */
         .hero-slideshow {
             background-image: url('Gemini_Generated_Image_39d0d539d0d539d0.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             transition: background-image 1s ease-in-out;
-            min-height: 50vh; /* Added to ensure visibility */
         }
         .card {
             background-color: #f9fafb;
@@ -24,8 +22,12 @@
         .card:hover {
             transform: translateY(-5px);
         }
-        .text-gold { color: #D4AF37; }
-        .text-dark-blue { color: #121223; }
+        .text-gold {
+            color: #D4AF37;
+        }
+        .text-dark-blue {
+            color: #121223;
+        }
         .btn-gold {
             display: inline-block;
             background-color: #D4AF37;
@@ -40,7 +42,9 @@
             background-color: #a68b2a;
             transform: scale(1.05);
         }
-        .bg-dark-blue { background-color: #121223; }
+        .bg-dark-blue {
+            background-color: #121223;
+        }
         .input-field {
             width: 100%;
             padding: 0.75rem;
@@ -53,7 +57,6 @@
             outline: none;
             border-color: #D4AF37;
         }
-        /* ENHANCEMENT: Responsive Media Container */
         .media-container {
             position: relative;
             width: 100%;
@@ -68,9 +71,7 @@
             width: 100%;
             height: 100%;
             border: none;
-            object-fit: cover; /* Ensures images/videos fill the space */
         }
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -78,8 +79,12 @@
         .animate-fadeIn {
             animation: fadeIn 1s ease-out forwards;
         }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-500 { animation-delay: 0.5s; }
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
     </style>
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JY5YGKHF0V"></script>
@@ -95,13 +100,13 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
-                <a href="/" onclick="handleNavigation(event, 'home')" class="flex items-center space-x-2">
+                <a href="#" onclick="renderPage('home')" class="flex items-center space-x-2">
                     <img src="WhatsApp Image 2025-09-08 at 12.05.21_899ebfab.jpg" alt="Koulé Ingenium Logo" class="h-10 md:h-12 rounded-full">
                     <span class="text-2xl font-bold text-dark-blue">Koulé <span class="text-gold">Ingenium</span></span>
                 </a>
                 
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gold focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gold focus:outline-none">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                     </button>
                 </div>
@@ -110,7 +115,7 @@
                     <a href="#about" class="text-gray-600 hover:text-gold transition-colors duration-200">About</a>
                     <a href="#services" class="text-gray-600 hover:text-gold transition-colors duration-200">Services</a>
                     <a href="#projects" class="text-gray-600 hover:text-gold transition-colors duration-200">Projects</a>
-                    <a href="/courses" onclick="handleNavigation(event, 'courses')" class="text-gray-600 hover:text-gold transition-colors duration-200">Courses</a>
+                    <a href="#" onclick="renderPage('courses')" class="text-gray-600 hover:text-gold transition-colors duration-200">Courses</a>
                     <a href="#meeting" class="btn-gold hidden md:block">Contact</a>
                 </div>
             </div>
@@ -120,7 +125,7 @@
                     <a href="#about" class="text-gray-600 hover:text-gold transition-colors duration-200">About</a>
                     <a href="#services" class="text-gray-600 hover:text-gold transition-colors duration-200">Services</a>
                     <a href="#projects" class="text-gray-600 hover:text-gold transition-colors duration-200">Projects</a>
-                    <a href="/courses" onclick="handleNavigation(event, 'courses')" class="text-gray-600 hover:text-gold transition-colors duration-200">Courses</a>
+                    <a href="#" onclick="renderPage('courses')" class="text-gray-600 hover:text-gold transition-colors duration-200">Courses</a>
                     <a href="#meeting" class="btn-gold block text-center mt-2">Contact</a>
                 </div>
             </div>
@@ -134,17 +139,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; 2024 Koulé Ingenium. All rights reserved.</p>
             <div class="flex justify-center space-x-6 mt-4">
-                <a href="https://www.linkedin.com/in/berthe-fadel-a21390234/" target="_blank" class="text-white hover:text-gold transition-colors duration-200" aria-label="LinkedIn Profile">
+                <a href="https://www.linkedin.com/in/berthe-fadel-a21390234/" target="_blank" class="text-white hover:text-gold transition-colors duration-200">
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.761 0-.971.784-1.76 1.75-1.76s1.75.789 1.75 1.76c0 .971-.784 1.761-1.75 1.761zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.784 7 2.404v6.831z"/>
                     </svg>
                 </a>
-                <a href="https://github.com/Berthe98" target="_blank" class="text-white hover:text-gold transition-colors duration-200" aria-label="GitHub Profile">
+                <a href="https://github.com/Berthe98" target="_blank" class="text-white hover:text-gold transition-colors duration-200">
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.727-4.043-1.612-4.043-1.612-.547-1.387-1.332-1.758-1.332-1.758-1.087-.745.083-.73.083-.73 1.205.085 1.838 1.238 1.838 1.238 1.07 1.83 2.806 1.302 3.493.996.109-.775.419-1.303.762-1.604-2.665-.304-5.466-1.334-5.466-5.932 0-1.31.465-2.383 1.235-3.22-.124-.303-.537-1.52.117-3.175 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.4 3.003-.404 1.02.004 2.046.138 3.004.404 2.29-1.552 3.298-1.23 3.298-1.23.655 1.655.242 2.872.118 3.175.77.837 1.233 1.91 1.233 3.22 0 4.61-2.805 5.624-5.475 5.922.43.37.823 1.102.823 2.222 0 1.606-.015 2.894-.015 3.28 0 .322.218.692.829.575C20.565 21.797 24 17.306 24 12c0-6.627-5.373-12-12-12z"/>
                     </svg>
                 </a>
-                <a href="https://x.com/fadelberthe24" target="_blank" class="text-white hover:text-gold transition-colors duration-200" aria-label="X (Twitter) Profile">
+                <a href="https://x.com/fadelberthe24" target="_blank" class="text-white hover:text-gold transition-colors duration-200">
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M18.901 1.144h3.668l-8.625 9.947 10.42 12.01h-3.668l-7.792-8.989-5.185 8.989h-3.669l9.31-10.746-9.61-11.21h3.669l6.985 8.058 4.673-8.058zm-2.029 18.043h-1.074l-9.697-17.701h1.075l9.696 17.701z"/>
                     </svg>
@@ -154,38 +159,32 @@
     </footer>
 
     <script>
-        // Utility function to convert YouTube URLs to embed URLs
-        function getYouTubeEmbedUrl(url) {
-            if (!url) return '';
-            const regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/;
-            const match = url.match(regExp);
-            const videoId = match ? match[1] : null;
-            if (videoId) {
-                return `https://www.youtube.com/embed/${videoId}?rel=0`; // rel=0 prevents related videos from showing
-            }
-            return '';
-        }
-
         const projects = {
-            'automotive-suspension': {
+            'Automotive Suspension': {
                 name: 'Advanced Automotive Suspension System Design',
                 description: 'Complete design of a car suspension system in SolidWorks.',
                 fullDescription: 'This project involves the comprehensive design and analysis of a double-wishbone suspension system for an automotive application. The design was executed using SolidWorks, a professional 3D computer-aided design (CAD) software, ensuring precise geometric modeling and component integration. The system\'s architecture includes key components such as upper and lower control arms, uprights, coilover shocks, and anti-roll bars, all meticulously engineered to meet performance specifications. The project goes beyond basic modeling, incorporating a full motion study and kinematic analysis to simulate the suspension\'s behavior under dynamic loads and various driving conditions. This analysis ensures the design\'s effectiveness in managing wheel alignment, ride comfort, and handling stability. The final design is a robust and performance-oriented solution, demonstrating a high level of expertise in mechanical engineering principles, CAD software proficiency, and automotive system design.',
                 image: [
-                    'CR-01.png', 'CR-02.png', 'CR-03.png', 'CR-04.png', 'CR-05.png', 'CR-06.png', 'CR-07.png'
+                    'CR-01.png',
+                    'CR-02.png',
+                    'CR-03.png',
+                    'CR-04.png',
+                    'CR-05.png',
+                    'CR-06.png',
+                    'CR-07.png'
                 ]
             },
             'aerodrone': {
                 name: 'AeroDrone',
                 description: 'An autonomous inspection drone for large-scale infrastructure monitoring.',
                 fullDescription: 'AeroDrone is a sophisticated unmanned aerial vehicle (UAV) designed for autonomous inspection of critical infrastructure such as pipelines, power lines, and bridges. Equipped with high-resolution cameras and thermal sensors, it can detect subtle defects and structural anomalies that are difficult to spot with the naked eye. The drone\'s flight path is pre-programmed, allowing it to navigate complex environments with precision while a real-time data feed provides inspectors with a live view of the asset\'s condition. AeroDrone is built with a robust, weather-resistant frame and an advanced battery system for extended flight times. This project highlights our expertise in mechatronics, embedded systems programming, and computer vision, offering a solution that significantly reduces inspection time, cost, and human risk.',
-                video: getYouTubeEmbedUrl('https://youtu.be/lT8vN98qXh4?si=Dq3bovK_QH4fvLCy')
+                video: 'https://youtu.be/lT8vN98qXh4?si=Dq3bovK_QH4fvLCy'
             },
             'healthbot': {
                 name: 'HealthBot',
                 description: 'A robotic assistant for hospitals and clinics, improving patient care and logistics.',
                 fullDescription: 'HealthBot is a state-of-the-art robotic assistant designed to support medical staff in hospitals and clinics. It can autonomously navigate hospital corridors to deliver medications, lab samples, and other supplies, reducing the workload on nurses and orderlies. The robot is equipped with a secure, lockable compartment to ensure the safe transport of sensitive materials. Its intuitive interface allows staff to easily schedule delivery tasks and track its location in real-time. HealthBot also features an integrated video-call system, enabling remote consultations between doctors and patients, which is especially useful for check-ins or quick questions. This project showcases our capability in developing complex, multi-functional autonomous systems with a focus on safety, reliability, and human-robot interaction. It represents a significant step forward in leveraging robotics to enhance efficiency and patient care in the healthcare industry.',
-                video: getYouTubeEmbedUrl('https://youtube.com/shorts/XombyZaDHh8?si=f3mI2RIENvNfmyms')
+                video: 'https://youtube.com/shorts/XombyZaDHh8?si=f3mI2RIENvNfmyms'
             }
         };
 
@@ -209,73 +208,83 @@
                 image: 'WhatsApp Image 2025-09-20 at 21.47.34_cb298b7e.jpg'
             }
         };
-        
-        // --- ENHANCEMENT: Project Gallery with Controls ---
+
+        let heroImages = [
+            'Gemini_Generated_Image_1cy9651cy9651cy9.png',
+            'Gemini_Generated_Image_edkchqedkchqedkc.png',
+        ];
         let currentImageIndex = 0;
-        let activeProjectImages = [];
-        
-        // Make navigation functions global for inline onclick
-        window.changeProjectImage = function(index) {
-            currentImageIndex = index;
-            renderProjectGallery();
-        };
 
-        window.navigateProjectImage = function(direction) {
-            currentImageIndex = (currentImageIndex + direction + activeProjectImages.length) % activeProjectImages.length;
-            renderProjectGallery();
-        };
+        function updateBackgroundImage() {
+            const hero = document.getElementById('hero');
+            if (hero) {
+                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+                hero.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+            }
+        }
 
-        function renderProjectGallery() {
-            const container = document.getElementById('project-image-gallery');
-            if (!container) return;
+        // Function to handle the meeting form submission
+        function handleMeetingForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            console.log('Meeting Request Data:', data);
 
-            // Main Image Display
-            const mainImage = `<img id="main-project-image" src="${activeProjectImages[currentImageIndex]}" loading="lazy" class="w-full h-auto rounded-lg shadow-xl transition-opacity duration-300" alt="Project Image ${currentImageIndex + 1}">`;
-            
-            // Thumbnails
-            const thumbnails = activeProjectImages.map((src, index) => `
-                <img 
-                    src="${src}" 
-                    alt="Thumbnail ${index + 1}" 
-                    loading="lazy"
-                    class="w-20 h-14 object-cover rounded-md cursor-pointer transition-all duration-300 ${index === currentImageIndex ? 'border-4 border-gold opacity-100' : 'border-4 border-transparent opacity-70 hover:opacity-100'}"
-                    onclick="window.changeProjectImage(${index})"
-                >
-            `).join('');
-
-            // Full Gallery structure
-            container.innerHTML = `
-                <div class="relative media-container mb-4">
-                    ${mainImage}
-                    <button aria-label="Previous Image" onclick="window.navigateProjectImage(-1)" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-dark-blue/70 text-white p-2 rounded-full hover:bg-gold hover:text-dark-blue transition z-20">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    </button>
-                    <button aria-label="Next Image" onclick="window.navigateProjectImage(1)" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-dark-blue/70 text-white p-2 rounded-full hover:bg-gold hover:text-dark-blue transition z-20">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                </div>
-                <div class="flex space-x-3 overflow-x-auto justify-center p-2 bg-gray-100 rounded-lg">
-                    ${thumbnails}
+            // Here you would typically send this data to a backend server.
+            // For this example, we'll just display a success message.
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'success-message';
+            messageDiv.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white p-8 rounded-lg shadow-xl z-[100] transition-all duration-300 transform scale-100 opacity-100';
+            messageDiv.innerHTML = `
+                <div class="text-center">
+                    <p class="text-2xl font-bold mb-4">Meeting Request Sent!</p>
+                    <p>Thank you, ${data.name}! We will contact you shortly at ${data.email} to confirm the details.</p>
+                    <button id="closeMessage" class="mt-6 btn-gold bg-white text-dark-blue">Close</button>
                 </div>
             `;
+            document.body.appendChild(messageDiv);
+            document.getElementById('closeMessage').addEventListener('click', handleCloseMessage);
+
+            form.reset();
+        }
+
+        // Function to close the success message
+        function handleCloseMessage() {
+            const messageDiv = document.getElementById('success-message');
+            if (messageDiv) {
+                messageDiv.style.transform = 'scale(0.8)';
+                messageDiv.style.opacity = '0';
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 300);
+            }
         }
         
-        // --- Core Routing and Rendering Function ---
-        function renderPage(page, contentId = null, shouldPushState = true) {
-            const container = document.getElementById('app-container');
-            if (!container) return; // Safety check
+        // New function to handle the image gallery/slideshow
+        function displayProjectGallery(imageArray) {
+            let currentImageIndex = 0;
+            const container = document.getElementById('project-image-gallery');
             
+            // Add the initial image element to the container
+            container.innerHTML = `<img src="${imageArray[currentImageIndex]}" class="w-full h-auto rounded-lg shadow-md" alt="Project Image">`;
+            
+            // Function to change the image every 5 seconds
+            setInterval(() => {
+                currentImageIndex = (currentImageIndex + 1) % imageArray.length;
+                container.querySelector('img').src = imageArray[currentImageIndex];
+            }, 5000); // Change image every 5 seconds
+        }
+
+        // Main rendering function to handle all dynamic page content
+        function renderPage(page, contentId = null) {
+            const container = document.getElementById('app-container');
             container.innerHTML = '';
             let content = '';
-            let newPath = '/';
-            let pageTitle = 'Koulé Ingenium - Innovating the Future of Robotics';
             const aboutImagePlaceholder = 'https://placehold.co/600x400/121223/D4AF37?text=About+Image';
             let mediaHtml = '';
 
-            // 1. Determine Content and Set Metadata/Path
             if (page === 'home') {
-                newPath = '/';
-                pageTitle = 'Koulé Ingenium - Engineering, Robotics & STEM Education';
                 content = `
                     <section id="hero" class="py-24 md:py-48 px-4 text-center hero-slideshow bg-dark-blue">
                         <div class="relative max-w-4xl mx-auto z-10 text-white">
@@ -294,7 +303,7 @@
                                     </p>
                                 </div>
                                 <div class="order-1 md:order-2">
-                                    <img src="Gemini_Generated_Image_39d0d539d0d539d0.png" loading="lazy" onerror="this.src='${aboutImagePlaceholder}'" alt="Koulé Ingenium team working on a project" class="w-full h-auto rounded-xl shadow-lg">
+                                    <img src="Gemini_Generated_Image_39d0d539d0d539d0.png" onerror="this.src='${aboutImagePlaceholder}'" alt="Koulé Ingenium team working on a project" class="w-full h-auto rounded-xl shadow-lg">
                                 </div>
                             </div>
                         </div>
@@ -326,19 +335,24 @@
                         <div class="max-w-7xl mx-auto">
                             <h2 class="text-3xl font-bold text-center mb-12 text-gold">Our Projects</h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                ${Object.keys(projects).map(key => {
-                                    const proj = projects[key];
-                                    const media = proj.video ? `<div class="media-container mb-4"><img src="https://img.youtube.com/vi/${proj.video.match(/embed\/([\w-]{11})/)[1]}/hqdefault.jpg" alt="${proj.name} Thumbnail" class="w-full h-full object-cover"></div>` : 
-                                                            `<div class="media-container mb-4"><img src="${proj.image[0]}" loading="lazy" alt="${proj.name} Image" class="w-full h-full object-cover"></div>`;
-                                    return `
-                                        <div class="card p-6 flex flex-col">
-                                            <h3 class="text-xl font-semibold mb-2 text-dark-blue">${proj.name}</h3>
-                                            <p class="text-gray-600 mb-4">${proj.description}</p>
-                                            ${media}
-                                            <a href="/project/${key}" onclick="handleNavigation(event, 'project', '${key}')" class="btn-gold block text-center mt-auto">Learn More</a>
-                                        </div>
-                                    `;
-                                }).join('')}
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">Advanced Automotive Suspension System Design</h3>
+                                    <p class="text-gray-600 mb-4">Complete design of a car suspension system in SolidWorks</p>
+                                    <div id="media-Automotive Suspension" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'Automotive Suspension')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">AeroDrone</h3>
+                                    <p class="text-gray-600 mb-4">An autonomous inspection drone for large-scale infrastructure monitoring.</p>
+                                    <div id="media-aerodrone" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'aerodrone')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
+                                <div class="card p-6 flex flex-col">
+                                    <h3 class="text-xl font-semibold mb-2 text-dark-blue">HealthBot</h3>
+                                    <p class="text-gray-600 mb-4">A robotic assistant for hospitals and clinics, improving patient care and logistics.</p>
+                                    <div id="media-healthbot" class="media-container mb-4"></div>
+                                    <button onclick="renderPage('project', 'healthbot')" class="btn-gold block text-center mt-auto">Learn More</button>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -356,19 +370,32 @@
                         <div class="max-w-3xl mx-auto card p-8 md:p-12">
                             <h2 class="text-3xl font-bold text-center mb-8 text-gold">Schedule an Online Meeting</h2>
                             <form id="meetingForm" class="space-y-6">
-                                <div><label for="name" class="block text-sm font-medium mb-1 text-gray-600">Full Name</label><input type="text" id="name" name="name" class="input-field" required></div>
-                                <div><label for="email" class="block text-sm font-medium mb-1 text-gray-600">Email Address</label><input type="email" id="email" name="email" class="input-field" required></div>
-                                <div><label for="date" class="block text-sm font-medium mb-1 text-gray-600">Preferred Date</label><input type="date" id="date" name="date" class="input-field" required></div>
-                                <div><label for="time" class="block text-sm font-medium mb-1 text-gray-600">Preferred Time</label><input type="time" id="time" name="time" class="input-field" required></div>
-                                <div><label for="notes" class="block text-sm font-medium mb-1 text-gray-600">Meeting Topic</label><textarea id="notes" name="notes" rows="4" class="input-field" placeholder="Briefly describe the purpose of the meeting."></textarea></div>
+                                <div>
+                                    <label for="name" class="block text-sm font-medium mb-1 text-gray-600">Full Name</label>
+                                    <input type="text" id="name" name="name" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium mb-1 text-gray-600">Email Address</label>
+                                    <input type="email" id="email" name="email" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="date" class="block text-sm font-medium mb-1 text-gray-600">Preferred Date</label>
+                                    <input type="date" id="date" name="date" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="time" class="block text-sm font-medium mb-1 text-gray-600">Preferred Time</label>
+                                    <input type="time" id="time" name="time" class="input-field" required>
+                                </div>
+                                <div>
+                                    <label for="notes" class="block text-sm font-medium mb-1 text-gray-600">Meeting Topic</label>
+                                    <textarea id="notes" name="notes" rows="4" class="input-field" placeholder="Briefly describe the purpose of the meeting."></textarea>
+                                </div>
                                 <button type="submit" class="btn-gold w-full">Request Meeting</button>
                             </form>
                         </div>
                     </section>
                 `;
             } else if (page === 'courses') {
-                newPath = '/courses';
-                pageTitle = 'Online Courses in Robotics and CAD | Koulé Ingenium';
                 content = `
                     <section id="courses-list" class="py-16 md:py-24 px-4 bg-gray-100">
                         <div class="max-w-7xl mx-auto">
@@ -379,9 +406,9 @@
                                         <h3 class="text-xl font-semibold mb-2 text-dark-blue">${courses[key].name}</h3>
                                         <p class="text-gray-600 mb-4">${courses[key].description}</p>
                                         <div class="media-container mb-4">
-                                            <img src="${courses[key].image}" loading="lazy" alt="${courses[key].name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(courses[key].name + ' Image')}';">
+                                            <img src="${courses[key].image}" alt="${courses[key].name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(courses[key].name + ' Image')}';">
                                         </div>
-                                        <a href="/course/${key}" onclick="handleNavigation(event, 'course', '${key}')" class="btn-gold block text-center mt-auto">Learn More</a>
+                                        <button onclick="renderPage('course', '${key}')" class="btn-gold block text-center mt-auto">Learn More</button>
                                     </div>
                                 `).join('')}
                             </div>
@@ -390,169 +417,114 @@
                 `;
             } else if (page === 'project' && contentId) {
                 const project = projects[contentId];
-                if (project) {
-                    newPath = `/project/${contentId}`;
-                    pageTitle = `${project.name} | Koulé Ingenium`;
-
+                if (!project) {
+                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center"> 
+                        <h2 class="text-3xl font-bold text-red-500">Project Not Found</h2> 
+                        <p class="mt-4 text-gray-600">The project you are looking for does not exist. Please go back to the home page.</p> 
+                        <button onclick="renderPage('home')" class="mt-8 btn-gold">Back to Home</button> 
+                    </div>`;
+                } else {
                     if (project.video) {
-                        // ENHANCEMENT: Use modern, responsive iframe embed
-                        mediaHtml = `<iframe src="${project.video}" title="YouTube video player - ${project.name}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                        mediaHtml = `<iframe src="${project.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
                     } else if (Array.isArray(project.image)) {
-                        // ENHANCEMENT: Setup the gallery container
-                        mediaHtml = `<div id="project-image-gallery" class="mb-6"></div>`;
-                        activeProjectImages = project.image;
-                        currentImageIndex = 0;
+                        mediaHtml = `<div id="project-image-gallery" class="media-container mb-6"></div>`;
+                    } else {
+                        mediaHtml = `<img src="${project.image}" alt="${project.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(project.name + ' Image')}';">`;
                     }
-                    
+
                     content = ` 
-                        <section class="py-16 md:py-24 px-4 bg-white min-h-[80vh]"> 
+                        <section class="py-16 md:py-24 px-4 bg-white"> 
                             <div class="max-w-7xl mx-auto"> 
-                                <a href="/" onclick="handleNavigation(event, 'home')" class="text-gold mb-8 flex items-center space-x-2 hover:underline"> 
+                                <button onclick="renderPage('home')" class="text-gold mb-8 flex items-center space-x-2"> 
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"> 
                                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" /> 
                                     </svg> 
-                                    <span>Back to Home</span> 
-                                </a> 
-                                <h2 class="text-4xl font-bold text-dark-blue mb-4">${project.name}</h2>
-                                <p class="text-lg text-gray-600 mb-8">${project.description}</p>
-                                
-                                <div class="w-full lg:w-3/4 mx-auto mb-12">
-                                    ${project.video ? `<div class="media-container">${mediaHtml}</div>` : mediaHtml}
-                                </div>
-
-                                <div class="prose max-w-none text-gray-700">
-                                    <h3 class="text-2xl font-semibold text-gold mt-8">Full Description</h3>
-                                    <p>${project.fullDescription}</p>
-                                </div>
-
-                            </div>
-                        </section>`;
+                                    <span>Back to Projects</span> 
+                                </button> 
+                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${project.name}</h2> 
+                                <div class="flex flex-col md:flex-row gap-8 items-start"> 
+                                    <div class="flex-1"> 
+                                        ${mediaHtml} 
+                                    </div> 
+                                    <div class="flex-1"> 
+                                        <p class="text-xl font-semibold text-dark-blue mb-4">${project.description}</p> 
+                                        <p class="text-gray-600 mb-4">${project.fullDescription}</p> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </section> 
+                    `;
                 }
-            }
-            // Add similar logic for 'course' detail view
-            else {
-                // Default 404-like view
-                content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center min-h-[80vh]"> 
-                    <h2 class="text-3xl font-bold text-red-500">Content Not Found</h2> 
-                    <p class="mt-4 text-gray-600">The page you are looking for does not exist. Please go back to the home page.</p> 
-                    <a href="/" onclick="handleNavigation(event, 'home')" class="mt-8 btn-gold">Back to Home</a> 
-                </div>`;
-            }
-
-            // 2. Render Content and Update State
-            container.innerHTML = content;
-            document.title = pageTitle;
-
-            // Update URL only if requested (prevents history on 'popstate')
-            if (shouldPushState) {
-                history.pushState({ page: page, id: contentId }, pageTitle, newPath);
-            }
-            
-            // Scroll to the top on page change
-            window.scrollTo(0, 0); 
-
-            // 3. Post-Render Setup
-            if (document.getElementById('meetingForm')) {
-                document.getElementById('meetingForm').addEventListener('submit', handleMeetingForm, { once: true });
-            }
-            if (contentId === 'automotive-suspension') {
-                renderProjectGallery(); // Initialize the custom gallery
-            }
-        }
-
-        // --- ENHANCEMENT: Routing Logic ---
-
-        // Function to handle all internal link clicks
-        function handleNavigation(event, page, contentId = null) {
-            // Prevent default link action (full page reload)
-            event.preventDefault(); 
-            // Render the new page content and update browser history
-            renderPage(page, contentId, true);
-            // Close mobile menu if open
-            document.getElementById('mobile-menu').classList.add('hidden');
-            document.getElementById('mobile-menu-button').setAttribute('aria-expanded', 'false');
-        }
-
-        // Function to handle back/forward button clicks
-        window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.page) {
-                renderPage(event.state.page, event.state.id, false); // Do not push new state
-            } else {
-                renderPage('home', null, false);
-            }
-        });
-
-        // Function to parse the current URL path on initial load or reload
-        function initializeRouter() {
-            const path = window.location.pathname.toLowerCase();
-            const segments = path.split('/').filter(s => s.length > 0);
-
-            if (segments.length === 0 || segments[0] === 'home') {
-                renderPage('home', null, false);
-            } else if (segments[0] === 'courses') {
-                if (segments.length === 1) {
-                    renderPage('courses', null, false);
-                } else if (segments.length === 2 && courses[segments[1]]) {
-                    renderPage('course', segments[1], false);
+            } else if (page === 'course' && contentId) {
+                const course = courses[contentId];
+                if (!course) {
+                    content = `<div class="max-w-4xl mx-auto py-16 px-4 text-center">
+                        <h2 class="text-3xl font-bold text-red-500">Course Not Found</h2>
+                        <p class="mt-4 text-gray-600">The course you are looking for does not exist. Please go back to the courses page.</p>
+                        <button onclick="renderPage('courses')" class="mt-8 btn-gold">Back to Courses</button>
+                    </div>`;
                 } else {
-                    renderPage('404', null, false); // Simple error page
+                    content = `
+                        <section class="py-16 md:py-24 px-4 bg-white">
+                            <div class="max-w-7xl mx-auto">
+                                <button onclick="renderPage('courses')" class="text-gold mb-8 flex items-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Back to Courses</span>
+                                </button>
+                                <h2 class="text-3xl font-bold text-center mb-12 text-gold">${course.name}</h2>
+                                <div class="flex flex-col md:flex-row gap-8 items-start">
+                                    <div class="flex-1">
+                                        <div class="media-container mb-6">
+                                            <img src="${course.image}" alt="${course.name} Image" class="w-full h-auto rounded-lg shadow-md" onerror="this.src='https://placehold.co/600x400/121223/D4AF37?text=${encodeURIComponent(course.name + ' Image')}';">
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-xl font-semibold text-dark-blue mb-4">${course.description}</p> 
+                                        <p class="text-gray-600 mb-4">${course.fullDescription}</p> 
+                                        <a href="#meeting" class="btn-gold block text-center mt-8">Enroll Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    `;
                 }
-            } else if (segments[0] === 'project' && segments.length === 2 && projects[segments[1]]) {
-                renderPage('project', segments[1], false);
-            } else {
-                renderPage('home', null, false); // Fallback to home
+            }
+            container.innerHTML = content;
+
+            // Re-attach event listener for the meeting form after content is rendered
+            if (document.getElementById('meetingForm')) {
+                document.getElementById('meetingForm').addEventListener('submit', handleMeetingForm);
+            }
+            // If the project has an image gallery, initialize it
+            if (page === 'project' && contentId && projects[contentId] && Array.isArray(projects[contentId].image)) {
+                displayProjectGallery(projects[contentId].image);
+            }
+
+            // Scroll to the relevant section if a hash is present in the URL
+            if (location.hash) {
+                const targetElement = document.querySelector(location.hash);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         }
-        
-        // --- Remaining Utility Functions ---
 
-        // Function to handle the meeting form submission
-        function handleMeetingForm(event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-            console.log('Meeting Request Data:', data);
-
-            // Display a success message.
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'success-message';
-            messageDiv.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white p-8 rounded-lg shadow-xl z-[100] transition-all duration-300 transform scale-100 opacity-100';
-            messageDiv.innerHTML = `
-                <div class="text-center">
-                    <p class="text-2xl font-bold mb-4">Meeting Request Sent! 🎉</p>
-                    <p>Thank you, ${data.name}! We will contact you shortly at ${data.email} to confirm the details.</p>
-                    <button id="closeMessage" class="mt-6 btn-gold bg-white text-dark-blue">Close</button>
-                </div>
-            `;
-            document.body.appendChild(messageDiv);
-            document.getElementById('closeMessage').addEventListener('click', handleCloseMessage);
-            form.reset();
-        }
-
-        // Function to close the success message
-        function handleCloseMessage() {
-            const messageDiv = document.getElementById('success-message');
-            if (messageDiv) {
-                messageDiv.style.transform = 'scale(0.8)';
-                messageDiv.style.opacity = '0';
-                setTimeout(() => { messageDiv.remove(); }, 300);
-            }
-        }
-        
-        // --- Mobile Menu Toggle ---
         document.addEventListener('DOMContentLoaded', () => {
+            renderPage('home'); // Initial render of the home page
+
+            setInterval(updateBackgroundImage, 5000); // Change hero background every 5 seconds
+
+            // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
-            mobileMenuButton.addEventListener('click', () => {
-                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
-                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // Start the router on page load
-            initializeRouter();
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
         });
     </script>
 </body>
