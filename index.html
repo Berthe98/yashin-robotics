@@ -1306,7 +1306,7 @@
 
     /* ══════════ ADMIN / LOGIN ══════════ */
     .ki-admin-fab {
-      position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%;
+      position: fixed; bottom: 5.5rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%;
       background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-secondary);
       cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
       z-index: 998; transition: all 0.3s; opacity: 0.35;
@@ -1395,7 +1395,7 @@
       .ki-featured-hero { height: 240px; }
       .ki-admin-panel { width: 100%; right: -100%; }
       .ki-whatsapp-float { bottom: 1.2rem; left: 1.2rem; width: 50px; height: 50px; }
-      .ki-admin-fab { bottom: 1.2rem; right: 1.2rem; }
+      .ki-admin-fab { bottom: 4.6rem; right: 1.2rem; }
     }
   </style>
 </head>
@@ -1942,27 +1942,65 @@
     ];
 
     /* ═══════════════════════════════════════════════════════════
-       STATE — load from localStorage or fall back to defaults
+       STATE — the DEFAULT_* arrays (declared above) contain large
+       embedded base64 photos and are NEVER written back to
+       localStorage — only *admin-added* items and the ids of any
+       deleted built-in items are persisted. This avoids exceeding
+       the browser's ~5-10MB localStorage quota, which previously
+       caused every save (including comments) to fail silently.
     ═══════════════════════════════════════════════════════════ */
-    function loadData(key, fallback) {
+    function loadJSON(key, fallback) {
       try {
         const raw = localStorage.getItem(key);
-        if (!raw) return JSON.parse(JSON.stringify(fallback));
+        if (!raw) return fallback;
         return JSON.parse(raw);
-      } catch (e) { return JSON.parse(JSON.stringify(fallback)); }
+      } catch (e) { return fallback; }
     }
-    let services = loadData('ki_services', DEFAULT_SERVICES);
-    let courses = loadData('ki_courses', DEFAULT_COURSES);
-    let portfolio = loadData('ki_portfolio', DEFAULT_PORTFOLIO);
-    let newsItems = loadData('ki_news', DEFAULT_NEWS);
-    let comments = loadData('ki_comments', []);
+    function saveJSON(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+      } catch (e) {
+        console.error('Storage save failed for', key, e);
+        return false;
+      }
+    }
 
-    function persist() {
-      localStorage.setItem('ki_services', JSON.stringify(services));
-      localStorage.setItem('ki_courses', JSON.stringify(courses));
-      localStorage.setItem('ki_portfolio', JSON.stringify(portfolio));
-      localStorage.setItem('ki_news', JSON.stringify(newsItems));
-      localStorage.setItem('ki_comments', JSON.stringify(comments));
+    let customServices = loadJSON('ki_custom_services', []);
+    let customCourses = loadJSON('ki_custom_courses', []);
+    let customPortfolio = loadJSON('ki_custom_portfolio', []);
+    let customNews = loadJSON('ki_custom_news', []);
+    let deletedServiceIds = loadJSON('ki_deleted_services', []);
+    let deletedCourseIds = loadJSON('ki_deleted_courses', []);
+    let deletedPortfolioIds = loadJSON('ki_deleted_portfolio', []);
+    let deletedNewsIds = loadJSON('ki_deleted_news', []);
+    let comments = loadJSON('ki_comments', []);
+
+    function combine(defaults, custom, deletedIds) {
+      return defaults.filter(d => deletedIds.indexOf(d.id) === -1).concat(custom);
+    }
+
+    let services = combine(DEFAULT_SERVICES, customServices, deletedServiceIds);
+    let courses = combine(DEFAULT_COURSES, customCourses, deletedCourseIds);
+    let portfolio = combine(DEFAULT_PORTFOLIO, customPortfolio, deletedPortfolioIds);
+    let newsItems = combine(DEFAULT_NEWS, customNews, deletedNewsIds);
+
+    function persistServices() {
+      return saveJSON('ki_custom_services', customServices) & saveJSON('ki_deleted_services', deletedServiceIds);
+    }
+    function persistCourses() {
+      return saveJSON('ki_custom_courses', customCourses) & saveJSON('ki_deleted_courses', deletedCourseIds);
+    }
+    function persistPortfolio() {
+      return saveJSON('ki_custom_portfolio', customPortfolio) & saveJSON('ki_deleted_portfolio', deletedPortfolioIds);
+    }
+    function persistNews() {
+      return saveJSON('ki_custom_news', customNews) & saveJSON('ki_deleted_news', deletedNewsIds);
+    }
+    function persistComments() {
+      const ok = saveJSON('ki_comments', comments);
+      if (!ok) showToast("Comment couldn't be saved permanently on this device (storage full), but it's shown for this visit.");
+      return ok;
     }
 
     function nextId(arr) { return arr.length ? Math.max.apply(null, arr.map(a => a.id)) + 1 : 1; }
@@ -2191,7 +2229,7 @@
     function deleteComment(id) {
       if (!confirm('Delete this comment?')) return;
       comments = comments.filter(c => c.id !== id);
-      persist(); renderComments();
+      persistComments(); renderComments();
       showToast('Comment deleted');
     }
 
@@ -2201,7 +2239,7 @@
       const text = document.getElementById('commentText').value.trim();
       if (!name || !text) return;
       comments.push({ id: nextId(comments), name: name, text: text, date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) });
-      persist(); renderComments();
+      persistComments(); renderComments();
       e.target.reset();
       showToast('Thanks — your comment was posted!');
     });
@@ -2392,39 +2430,45 @@
 
     document.getElementById('addServiceForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      services.push({ id: nextId(services), icon: document.getElementById('svcIcon').value, title: document.getElementById('svcTitle').value, desc: document.getElementById('svcDesc').value });
-      persist(); renderServices(); renderAdminLists(); e.target.reset();
+      const item = { id: nextId(services), icon: document.getElementById('svcIcon').value, title: document.getElementById('svcTitle').value, desc: document.getElementById('svcDesc').value };
+      services.push(item); customServices.push(item);
+      persistServices(); renderServices(); renderAdminLists(); e.target.reset();
       showToast('Service added.');
     });
     function deleteService(id) {
       if (!confirm('Delete this service?')) return;
       services = services.filter(s => s.id !== id);
-      persist(); renderServices(); renderAdminLists();
+      if (customServices.some(s => s.id === id)) customServices = customServices.filter(s => s.id !== id);
+      else deletedServiceIds.push(id);
+      persistServices(); renderServices(); renderAdminLists();
     }
 
     document.getElementById('addCourseForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const featuresRaw = document.getElementById('crsFeatures').value;
-      courses.push({
+      const item = {
         id: nextId(courses),
         age: document.getElementById('crsAge').value,
         name: document.getElementById('crsName').value,
         duration: document.getElementById('crsDuration').value,
         desc: document.getElementById('crsDesc').value,
         features: featuresRaw.split('\n').map(f => f.trim()).filter(Boolean)
-      });
-      persist(); renderCourses(); renderAdminLists(); e.target.reset();
+      };
+      courses.push(item); customCourses.push(item);
+      persistCourses(); renderCourses(); renderAdminLists(); e.target.reset();
       showToast('Course added.');
     });
     function deleteCourse(id) {
       if (!confirm('Delete this course?')) return;
       courses = courses.filter(c => c.id !== id);
-      persist(); renderCourses(); renderAdminLists();
+      if (customCourses.some(c => c.id === id)) customCourses = customCourses.filter(c => c.id !== id);
+      else deletedCourseIds.push(id);
+      persistCourses(); renderCourses(); renderAdminLists();
     }
 
     document.getElementById('addPortfolioForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      portfolio.push({
+      const item = {
         id: nextId(portfolio),
         cat: document.getElementById('pfCat').value,
         title: document.getElementById('pfTitle').value,
@@ -2432,19 +2476,22 @@
         img: document.getElementById('pfImage').value || 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
         desc: document.getElementById('pfDesc').value,
         tools: document.getElementById('pfTools').value
-      });
-      persist(); renderPortfolio(); renderAdminLists(); e.target.reset();
+      };
+      portfolio.push(item); customPortfolio.push(item);
+      persistPortfolio(); renderPortfolio(); renderAdminLists(); e.target.reset();
       showToast('Project added.');
     });
     function deletePortfolio(id) {
       if (!confirm('Delete this project?')) return;
       portfolio = portfolio.filter(p => p.id !== id);
-      persist(); renderPortfolio(); renderAdminLists();
+      if (customPortfolio.some(p => p.id === id)) customPortfolio = customPortfolio.filter(p => p.id !== id);
+      else deletedPortfolioIds.push(id);
+      persistPortfolio(); renderPortfolio(); renderAdminLists();
     }
 
     document.getElementById('addNewsForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      newsItems.push({
+      const item = {
         id: nextId(newsItems),
         title: document.getElementById('newsTitle').value,
         date: document.getElementById('newsDate').value,
@@ -2453,14 +2500,17 @@
         status: document.getElementById('newsStatus').value,
         progress: parseInt(document.getElementById('newsProgress').value) || 0,
         gallery: [], tags: []
-      });
-      persist(); renderNews(); renderAdminLists(); e.target.reset();
+      };
+      newsItems.push(item); customNews.push(item);
+      persistNews(); renderNews(); renderAdminLists(); e.target.reset();
       showToast('News item added.');
     });
     function deleteNews(id) {
       if (!confirm('Delete this news item?')) return;
       newsItems = newsItems.filter(n => n.id !== id);
-      persist(); renderNews(); renderAdminLists();
+      if (customNews.some(n => n.id === id)) customNews = customNews.filter(n => n.id !== id);
+      else deletedNewsIds.push(id);
+      persistNews(); renderNews(); renderAdminLists();
     }
 
     /* ═══════════════════════════════════════════════════════════
