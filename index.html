@@ -1805,7 +1805,38 @@
     <button class="ki-btn-logout" id="logoutBtn">Logout</button>
   </div>
 
+  <!-- Firebase (shared comments + admin auth for moderation) -->
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-auth-compat.js"></script>
+
   <script>
+    /* ═══════════════════════════════════════════════════════════
+       FIREBASE — shared, real-time comments across all visitors.
+       Comment create/read is public; delete requires the admin to
+       be signed in (see ADMIN SECURITY section below), enforced
+       server-side by Firestore security rules — not just the UI.
+    ═══════════════════════════════════════════════════════════ */
+    const firebaseConfig = {
+      apiKey: "AIzaSyBoibopho7CBHBr4ih8OmkmMcGSm-CjIDs",
+      authDomain: "koule-ingenium.firebaseapp.com",
+      projectId: "koule-ingenium",
+      storageBucket: "koule-ingenium.firebasestorage.app",
+      messagingSenderId: "1011011131882",
+      appId: "1:1011011131882:web:ce29edfa0383f2388a3a93"
+    };
+    let fbReady = false;
+    let fbDb = null;
+    let fbAuth = null;
+    try {
+      firebase.initializeApp(firebaseConfig);
+      fbDb = firebase.firestore();
+      fbAuth = firebase.auth();
+      fbReady = true;
+    } catch (e) {
+      console.error('Firebase failed to initialize', e);
+    }
+
     /* ═══════════════════════════════════════════════════════════
        TINY SHA-256 (public-domain style implementation)
        Used so the admin password is never stored in plain text.
@@ -1974,7 +2005,7 @@
     let deletedCourseIds = loadJSON('ki_deleted_courses', []);
     let deletedPortfolioIds = loadJSON('ki_deleted_portfolio', []);
     let deletedNewsIds = loadJSON('ki_deleted_news', []);
-    let comments = loadJSON('ki_comments', []);
+    let comments = []; // populated live from Firestore — see FIREBASE section
 
     function combine(defaults, custom, deletedIds) {
       return defaults.filter(d => deletedIds.indexOf(d.id) === -1).concat(custom);
@@ -1996,11 +2027,6 @@
     }
     function persistNews() {
       return saveJSON('ki_custom_news', customNews) & saveJSON('ki_deleted_news', deletedNewsIds);
-    }
-    function persistComments() {
-      const ok = saveJSON('ki_comments', comments);
-      if (!ok) showToast("Comment couldn't be saved permanently on this device (storage full), but it's shown for this visit.");
-      return ok;
     }
 
     function nextId(arr) { return arr.length ? Math.max.apply(null, arr.map(a => a.id)) + 1 : 1; }
@@ -2202,35 +2228,55 @@
     ═══════════════════════════════════════════════════════════ */
     function renderComments() {
       const list = document.getElementById('commentsList');
-      const sorted = [...comments].sort((a, b) => b.id - a.id);
-      list.innerHTML = sorted.map(cm => `
+      // comments is already ordered newest-first by the Firestore query
+      list.innerHTML = comments.map(cm => `
         <div class="ki-comment-item">
           <div class="ki-comment-head">
             <span class="ki-comment-name">${esc(cm.name)}</span>
-            <span class="ki-comment-date">${esc(cm.date)}</span>
+            <span class="ki-comment-date">${esc(cm.dateLabel || '')}</span>
           </div>
           <div class="ki-comment-text">${esc(cm.text)}</div>
         </div>
-      `).join('') || '<p style="color:var(--text-secondary);font-size:0.85rem;">Be the first to leave a comment.</p>';
+      `).join('') || (fbReady
+        ? '<p style="color:var(--text-secondary);font-size:0.85rem;">Be the first to leave a comment.</p>'
+        : '<p style="color:var(--text-secondary);font-size:0.85rem;">Comments are temporarily unavailable — please try again shortly.</p>');
 
       const adminList = document.getElementById('adminCommentsList');
       if (adminList) {
-        adminList.innerHTML = sorted.map(cm => `
+        adminList.innerHTML = comments.map(cm => `
           <div class="ki-admin-item">
-            <span><strong>${esc(cm.name)}</strong> (${esc(cm.date)})<br>${esc(cm.text)}</span>
+            <span><strong>${esc(cm.name)}</strong> (${esc(cm.dateLabel || '')})<br>${esc(cm.text)}</span>
             <div class="ki-admin-item-actions">
-              <button class="danger" onclick="deleteComment(${cm.id})" title="Delete">✕</button>
+              <button class="danger" onclick="deleteComment('${cm.id}')" title="Delete">✕</button>
             </div>
           </div>
         `).join('') || '<p style="color:var(--text-secondary);font-size:0.85rem;">No comments yet.</p>';
       }
     }
 
+    // Live, shared listener — every visitor (including admin) sees the same feed in real time
+    if (fbReady) {
+      fbDb.collection('comments').orderBy('createdAt', 'desc').onSnapshot(function(snapshot) {
+        comments = snapshot.docs.map(doc => Object.assign({ id: doc.id }, doc.data()));
+        renderComments();
+      }, function(err) {
+        console.error('Comments listener error', err);
+        showToast('Could not load comments — check your connection.');
+      });
+    } else {
+      renderComments();
+    }
+
     function deleteComment(id) {
       if (!confirm('Delete this comment?')) return;
-      comments = comments.filter(c => c.id !== id);
-      persistComments(); renderComments();
-      showToast('Comment deleted');
+      if (!fbReady) { showToast('Comments service unavailable right now.'); return; }
+      if (!fbAuth.currentUser) { showToast('Please log in again to delete comments.'); return; }
+      fbDb.collection('comments').doc(id).delete().then(function() {
+        showToast('Comment deleted');
+      }).catch(function(err) {
+        console.error('Delete failed', err);
+        showToast('Could not delete comment — please try again.');
+      });
     }
 
     document.getElementById('commentForm').addEventListener('submit', function(e) {
@@ -2238,10 +2284,21 @@
       const name = document.getElementById('commentName').value.trim();
       const text = document.getElementById('commentText').value.trim();
       if (!name || !text) return;
-      comments.push({ id: nextId(comments), name: name, text: text, date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) });
-      persistComments(); renderComments();
-      e.target.reset();
-      showToast('Thanks — your comment was posted!');
+      if (!fbReady) { showToast('Comments are temporarily unavailable — please try again shortly.'); return; }
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.disabled = true;
+      fbDb.collection('comments').add({
+        name: name.slice(0, 80),
+        text: text.slice(0, 500),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        dateLabel: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+      }).then(function() {
+        e.target.reset();
+        showToast('Thanks — your comment was posted!');
+      }).catch(function(err) {
+        console.error('Post comment failed', err);
+        showToast("Couldn't post your comment — please check your connection and try again.");
+      }).finally(function() { btn.disabled = false; });
     });
 
     /* ═══════════════════════════════════════════════════════════
@@ -2357,6 +2414,12 @@
         closeLogin();
         openAdminPanel();
         showToast('Welcome back, Berthe.');
+        if (fbReady) {
+          fbAuth.signInWithEmailAndPassword(user, pass).catch(function(err) {
+            console.error('Firebase auth sign-in failed', err);
+            showToast('Signed in, but comment moderation needs a matching Firebase account.');
+          });
+        }
       } else {
         state.attempts = (state.attempts || 0) + 1;
         if (state.attempts >= MAX_ATTEMPTS) {
@@ -2384,6 +2447,7 @@
     }
     document.getElementById('logoutBtn').addEventListener('click', function() {
       sessionStorage.removeItem(SESSION_KEY);
+      if (fbReady) fbAuth.signOut().catch(function() {});
       closeAdminPanel();
       showToast('Logged out.');
     });
