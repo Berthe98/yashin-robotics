@@ -1732,12 +1732,13 @@
 
     <!-- Services tab -->
     <div class="ki-admin-section active" id="tabServices">
-      <h4>Add Service</h4>
+      <h4 id="svcFormTitle">Add Service</h4>
       <form id="addServiceForm">
         <div class="ki-admin-form-group"><label>Icon (symbol)</label><input type="text" id="svcIcon" placeholder="◆" maxlength="3" required></div>
         <div class="ki-admin-form-group"><label>Title</label><input type="text" id="svcTitle" required></div>
         <div class="ki-admin-form-group"><label>Description</label><textarea id="svcDesc" required></textarea></div>
-        <button type="submit" class="ki-btn ki-btn-primary ki-btn-block">Add Service</button>
+        <button type="submit" class="ki-btn ki-btn-primary ki-btn-block" id="svcSubmitBtn">Add Service</button>
+        <button type="button" class="ki-btn ki-btn-outline ki-btn-block" id="svcCancelBtn" style="margin-top:0.5rem;display:none;" onclick="cancelEditService()">Cancel Edit</button>
       </form>
       <h4>Existing Services</h4>
       <div id="svcList"></div>
@@ -1745,14 +1746,15 @@
 
     <!-- Courses tab -->
     <div class="ki-admin-section" id="tabCourses">
-      <h4>Add Course</h4>
+      <h4 id="crsFormTitle">Add Course</h4>
       <form id="addCourseForm">
         <div class="ki-admin-form-group"><label>Age / Level</label><input type="text" id="crsAge" placeholder="Ages 10–16 · Beginner" required></div>
         <div class="ki-admin-form-group"><label>Course Name</label><input type="text" id="crsName" required></div>
         <div class="ki-admin-form-group"><label>Duration</label><input type="text" id="crsDuration" placeholder="12 Weeks" required></div>
         <div class="ki-admin-form-group"><label>Description</label><textarea id="crsDesc" required></textarea></div>
         <div class="ki-admin-form-group"><label>Features (one per line)</label><textarea id="crsFeatures" placeholder="Build 3 robotic projects&#10;Learn Arduino basics"></textarea></div>
-        <button type="submit" class="ki-btn ki-btn-primary ki-btn-block">Add Course</button>
+        <button type="submit" class="ki-btn ki-btn-primary ki-btn-block" id="crsSubmitBtn">Add Course</button>
+        <button type="button" class="ki-btn ki-btn-outline ki-btn-block" id="crsCancelBtn" style="margin-top:0.5rem;display:none;" onclick="cancelEditCourse()">Cancel Edit</button>
       </form>
       <h4>Existing Courses</h4>
       <div id="crsList"></div>
@@ -1760,15 +1762,16 @@
 
     <!-- Portfolio tab -->
     <div class="ki-admin-section" id="tabPortfolio">
-      <h4>Add Portfolio Project</h4>
+      <h4 id="pfFormTitle">Add Portfolio Project</h4>
       <form id="addPortfolioForm">
         <div class="ki-admin-form-group"><label>Category</label><input type="text" id="pfCat" placeholder="Robotics" required></div>
         <div class="ki-admin-form-group"><label>Title</label><input type="text" id="pfTitle" required></div>
         <div class="ki-admin-form-group"><label>Year</label><input type="text" id="pfYear" placeholder="2026" required></div>
-        <div class="ki-admin-form-group"><label>Image URL</label><input type="url" id="pfImage" placeholder="https://..."></div>
+        <div class="ki-admin-form-group"><label>Image URL <span style="opacity:0.6;">(leave blank to keep current photo)</span></label><input type="url" id="pfImage" placeholder="https://..."></div>
         <div class="ki-admin-form-group"><label>Description</label><textarea id="pfDesc" required></textarea></div>
         <div class="ki-admin-form-group"><label>Tools / Tags</label><input type="text" id="pfTools" placeholder="Arduino, Python"></div>
-        <button type="submit" class="ki-btn ki-btn-primary ki-btn-block">Add Project</button>
+        <button type="submit" class="ki-btn ki-btn-primary ki-btn-block" id="pfSubmitBtn">Add Project</button>
+        <button type="button" class="ki-btn ki-btn-outline ki-btn-block" id="pfCancelBtn" style="margin-top:0.5rem;display:none;" onclick="cancelEditPortfolio()">Cancel Edit</button>
       </form>
       <h4>Existing Projects</h4>
       <div id="pfList"></div>
@@ -1776,12 +1779,12 @@
 
     <!-- News tab -->
     <div class="ki-admin-section" id="tabNews">
-      <h4>Add News / Project</h4>
+      <h4 id="newsFormTitle">Add News / Project</h4>
       <form id="addNewsForm">
         <div class="ki-admin-form-group"><label>Title</label><input type="text" id="newsTitle" required></div>
         <div class="ki-admin-form-group"><label>Date</label><input type="date" id="newsDate" required></div>
         <div class="ki-admin-form-group"><label>Content</label><textarea id="newsContent" required></textarea></div>
-        <div class="ki-admin-form-group"><label>Image URL</label><input type="url" id="newsImage" placeholder="https://..."></div>
+        <div class="ki-admin-form-group"><label>Image URL <span style="opacity:0.6;">(leave blank to keep current photo)</span></label><input type="url" id="newsImage" placeholder="https://..."></div>
         <div class="ki-admin-form-group"><label>Status</label>
           <select id="newsStatus">
             <option value="in-progress">In Progress</option>
@@ -1790,7 +1793,8 @@
           </select>
         </div>
         <div class="ki-admin-form-group"><label>Progress % (if In Progress)</label><input type="number" id="newsProgress" min="0" max="100" placeholder="0–100"></div>
-        <button type="submit" class="ki-btn ki-btn-primary ki-btn-block">Add News Item</button>
+        <button type="submit" class="ki-btn ki-btn-primary ki-btn-block" id="newsSubmitBtn">Add News Item</button>
+        <button type="button" class="ki-btn ki-btn-outline ki-btn-block" id="newsCancelBtn" style="margin-top:0.5rem;display:none;" onclick="cancelEditNews()">Cancel Edit</button>
       </form>
       <h4>Existing News</h4>
       <div id="newsList"></div>
@@ -1997,37 +2001,94 @@
       }
     }
 
-    let customServices = loadJSON('ki_custom_services', []);
-    let customCourses = loadJSON('ki_custom_courses', []);
-    let customPortfolio = loadJSON('ki_custom_portfolio', []);
-    let customNews = loadJSON('ki_custom_news', []);
-    let deletedServiceIds = loadJSON('ki_deleted_services', []);
-    let deletedCourseIds = loadJSON('ki_deleted_courses', []);
-    let deletedPortfolioIds = loadJSON('ki_deleted_portfolio', []);
-    let deletedNewsIds = loadJSON('ki_deleted_news', []);
+    let customServices = [], deletedServiceIds = [], serviceOverrides = {};
+    let customCourses = [], deletedCourseIds = [], courseOverrides = {};
+    let customPortfolio = [], deletedPortfolioIds = [], portfolioOverrides = {};
+    let customNews = [], deletedNewsIds = [], newsOverrides = {};
     let comments = []; // populated live from Firestore — see FIREBASE section
 
-    function combine(defaults, custom, deletedIds) {
-      return defaults.filter(d => deletedIds.indexOf(d.id) === -1).concat(custom);
+    // editingXId tracks which item (if any) is currently loaded into the
+    // "Add" form for editing. null = form is in "add new" mode.
+    let editingServiceId = null, editingCourseId = null, editingPortfolioId = null, editingNewsId = null;
+
+    function combine(defaults, custom, deletedIds, overrides) {
+      const kept = defaults
+        .filter(d => deletedIds.indexOf(d.id) === -1)
+        .map(d => (overrides && overrides[d.id]) ? Object.assign({}, d, overrides[d.id]) : d);
+      return kept.concat(custom);
     }
 
-    let services = combine(DEFAULT_SERVICES, customServices, deletedServiceIds);
-    let courses = combine(DEFAULT_COURSES, customCourses, deletedCourseIds);
-    let portfolio = combine(DEFAULT_PORTFOLIO, customPortfolio, deletedPortfolioIds);
-    let newsItems = combine(DEFAULT_NEWS, customNews, deletedNewsIds);
+    // Start with built-in defaults only; Firestore listeners below fill in
+    // any admin-added items / edits / deletions and keep every visitor in sync.
+    let services = combine(DEFAULT_SERVICES, customServices, deletedServiceIds, serviceOverrides);
+    let courses = combine(DEFAULT_COURSES, customCourses, deletedCourseIds, courseOverrides);
+    let portfolio = combine(DEFAULT_PORTFOLIO, customPortfolio, deletedPortfolioIds, portfolioOverrides);
+    let newsItems = combine(DEFAULT_NEWS, customNews, deletedNewsIds, newsOverrides);
 
-    function persistServices() {
-      return saveJSON('ki_custom_services', customServices) & saveJSON('ki_deleted_services', deletedServiceIds);
+    /* ═══════════════════════════════════════════════════════════
+       SHARED SITE CONTENT (Firestore)
+       Built-in seed content (DEFAULT_SERVICES etc., including all
+       embedded photos) ships inside this file, so it's already
+       identical for every visitor. What needs to be shared live is:
+         - custom: fully new items added via the panel
+         - deletedIds: ids of built-in items that were removed
+         - overrides: { [builtInId]: {changed fields} } for built-in
+           items that were *edited* rather than removed — this lets
+           you edit existing news/services/projects without having
+           to re-upload the whole file, and without needing to store
+           the (large) built-in photos in Firestore.
+       Reads are public; writes require the admin to be signed in.
+    ═══════════════════════════════════════════════════════════ */
+    function bindSiteContent(docName, onData) {
+      if (!fbReady) { onData([], [], {}); return; }
+      fbDb.collection('site_content').doc(docName).onSnapshot(function(doc) {
+        const data = doc.exists ? doc.data() : {};
+        onData(data.custom || [], data.deletedIds || [], data.overrides || {});
+      }, function(err) {
+        console.error('site_content listener error:', docName, err);
+        showToast('Could not load latest site content — check your connection.');
+      });
     }
-    function persistCourses() {
-      return saveJSON('ki_custom_courses', customCourses) & saveJSON('ki_deleted_courses', deletedCourseIds);
+
+    function persistSiteContent(docName, custom, deletedIds, overrides) {
+      if (!fbReady) { showToast('Not connected — this change is only visible on this device.'); return Promise.resolve(false); }
+      if (!fbAuth.currentUser) { showToast('Please log in again to save changes.'); return Promise.resolve(false); }
+      return fbDb.collection('site_content').doc(docName).set({ custom: custom, deletedIds: deletedIds, overrides: overrides })
+        .then(function() { return true; })
+        .catch(function(err) {
+          console.error('Save failed for', docName, err);
+          showToast('Could not save — please check your connection and try again.');
+          return false;
+        });
     }
-    function persistPortfolio() {
-      return saveJSON('ki_custom_portfolio', customPortfolio) & saveJSON('ki_deleted_portfolio', deletedPortfolioIds);
-    }
-    function persistNews() {
-      return saveJSON('ki_custom_news', customNews) & saveJSON('ki_deleted_news', deletedNewsIds);
-    }
+
+    bindSiteContent('services', function(custom, deletedIds, overrides) {
+      customServices = custom; deletedServiceIds = deletedIds; serviceOverrides = overrides;
+      services = combine(DEFAULT_SERVICES, customServices, deletedServiceIds, serviceOverrides);
+      renderServices(); renderAdminLists();
+    });
+    bindSiteContent('courses', function(custom, deletedIds, overrides) {
+      customCourses = custom; deletedCourseIds = deletedIds; courseOverrides = overrides;
+      courses = combine(DEFAULT_COURSES, customCourses, deletedCourseIds, courseOverrides);
+      renderCourses(); renderAdminLists();
+    });
+    bindSiteContent('portfolio', function(custom, deletedIds, overrides) {
+      customPortfolio = custom; deletedPortfolioIds = deletedIds; portfolioOverrides = overrides;
+      portfolio = combine(DEFAULT_PORTFOLIO, customPortfolio, deletedPortfolioIds, portfolioOverrides);
+      renderPortfolio(); renderAdminLists();
+    });
+    bindSiteContent('news', function(custom, deletedIds, overrides) {
+      customNews = custom; deletedNewsIds = deletedIds; newsOverrides = overrides;
+      newsItems = combine(DEFAULT_NEWS, customNews, deletedNewsIds, newsOverrides);
+      renderNews(); renderAdminLists();
+    });
+
+    function persistServices() { return persistSiteContent('services', customServices, deletedServiceIds, serviceOverrides); }
+    function persistCourses() { return persistSiteContent('courses', customCourses, deletedCourseIds, courseOverrides); }
+    function persistPortfolio() { return persistSiteContent('portfolio', customPortfolio, deletedPortfolioIds, portfolioOverrides); }
+    function persistNews() { return persistSiteContent('news', customNews, deletedNewsIds, newsOverrides); }
+
+    function isBuiltIn(id, defaults) { return defaults.some(d => d.id === id); }
 
     function nextId(arr) { return arr.length ? Math.max.apply(null, arr.map(a => a.id)) + 1 : 1; }
 
@@ -2465,115 +2526,277 @@
       document.getElementById('svcList').innerHTML = services.map(s => `
         <div class="ki-admin-item">
           <span>${esc(s.icon)} ${esc(s.title)}</span>
-          <div class="ki-admin-item-actions"><button class="danger" onclick="deleteService(${s.id})">✕</button></div>
+          <div class="ki-admin-item-actions">
+            <button onclick="editService(${s.id})" title="Edit">✎</button>
+            <button class="danger" onclick="deleteService(${s.id})" title="Delete">✕</button>
+          </div>
         </div>
       `).join('');
       // Courses
       document.getElementById('crsList').innerHTML = courses.map(c => `
         <div class="ki-admin-item">
           <span>${esc(c.name)} — ${esc(c.duration)}</span>
-          <div class="ki-admin-item-actions"><button class="danger" onclick="deleteCourse(${c.id})">✕</button></div>
+          <div class="ki-admin-item-actions">
+            <button onclick="editCourse(${c.id})" title="Edit">✎</button>
+            <button class="danger" onclick="deleteCourse(${c.id})" title="Delete">✕</button>
+          </div>
         </div>
       `).join('');
       // Portfolio
       document.getElementById('pfList').innerHTML = portfolio.map(p => `
         <div class="ki-admin-item">
           <span>${esc(p.title)} (${esc(p.year)})</span>
-          <div class="ki-admin-item-actions"><button class="danger" onclick="deletePortfolio(${p.id})">✕</button></div>
+          <div class="ki-admin-item-actions">
+            <button onclick="editPortfolio(${p.id})" title="Edit">✎</button>
+            <button class="danger" onclick="deletePortfolio(${p.id})" title="Delete">✕</button>
+          </div>
         </div>
       `).join('');
       // News
       document.getElementById('newsList').innerHTML = newsItems.map(n => `
         <div class="ki-admin-item">
           <span>${esc(n.title)} — ${esc(n.date)}</span>
-          <div class="ki-admin-item-actions"><button class="danger" onclick="deleteNews(${n.id})">✕</button></div>
+          <div class="ki-admin-item-actions">
+            <button onclick="editNews(${n.id})" title="Edit">✎</button>
+            <button class="danger" onclick="deleteNews(${n.id})" title="Delete">✕</button>
+          </div>
         </div>
       `).join('');
       renderComments();
     }
 
+    /* ───────── SERVICES ───────── */
+    function editService(id) {
+      const s = services.find(x => x.id === id);
+      if (!s) return;
+      editingServiceId = id;
+      document.getElementById('svcIcon').value = s.icon;
+      document.getElementById('svcTitle').value = s.title;
+      document.getElementById('svcDesc').value = s.desc;
+      document.getElementById('svcFormTitle').textContent = 'Edit Service';
+      document.getElementById('svcSubmitBtn').textContent = 'Save Changes';
+      document.getElementById('svcCancelBtn').style.display = 'flex';
+      document.getElementById('svcFormTitle').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function cancelEditService() {
+      editingServiceId = null;
+      document.getElementById('addServiceForm').reset();
+      document.getElementById('svcFormTitle').textContent = 'Add Service';
+      document.getElementById('svcSubmitBtn').textContent = 'Add Service';
+      document.getElementById('svcCancelBtn').style.display = 'none';
+    }
     document.getElementById('addServiceForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const item = { id: nextId(services), icon: document.getElementById('svcIcon').value, title: document.getElementById('svcTitle').value, desc: document.getElementById('svcDesc').value };
-      services.push(item); customServices.push(item);
-      persistServices(); renderServices(); renderAdminLists(); e.target.reset();
-      showToast('Service added.');
+      const fields = { icon: document.getElementById('svcIcon').value, title: document.getElementById('svcTitle').value, desc: document.getElementById('svcDesc').value };
+      if (editingServiceId !== null) {
+        const id = editingServiceId;
+        if (isBuiltIn(id, DEFAULT_SERVICES)) {
+          serviceOverrides = Object.assign({}, serviceOverrides, { [id]: fields });
+        } else {
+          customServices = customServices.map(s => s.id === id ? Object.assign({}, s, fields) : s);
+        }
+        services = combine(DEFAULT_SERVICES, customServices, deletedServiceIds, serviceOverrides);
+        persistServices(); renderServices(); renderAdminLists();
+        cancelEditService();
+        showToast('Service updated.');
+      } else {
+        const item = Object.assign({ id: nextId(services) }, fields);
+        services.push(item); customServices.push(item);
+        persistServices(); renderServices(); renderAdminLists(); e.target.reset();
+        showToast('Service added.');
+      }
     });
     function deleteService(id) {
       if (!confirm('Delete this service?')) return;
       services = services.filter(s => s.id !== id);
       if (customServices.some(s => s.id === id)) customServices = customServices.filter(s => s.id !== id);
       else deletedServiceIds.push(id);
+      if (editingServiceId === id) cancelEditService();
       persistServices(); renderServices(); renderAdminLists();
     }
 
+    /* ───────── COURSES ───────── */
+    function editCourse(id) {
+      const c = courses.find(x => x.id === id);
+      if (!c) return;
+      editingCourseId = id;
+      document.getElementById('crsAge').value = c.age;
+      document.getElementById('crsName').value = c.name;
+      document.getElementById('crsDuration').value = c.duration;
+      document.getElementById('crsDesc').value = c.desc;
+      document.getElementById('crsFeatures').value = (c.features || []).join('\n');
+      document.getElementById('crsFormTitle').textContent = 'Edit Course';
+      document.getElementById('crsSubmitBtn').textContent = 'Save Changes';
+      document.getElementById('crsCancelBtn').style.display = 'flex';
+      document.getElementById('crsFormTitle').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function cancelEditCourse() {
+      editingCourseId = null;
+      document.getElementById('addCourseForm').reset();
+      document.getElementById('crsFormTitle').textContent = 'Add Course';
+      document.getElementById('crsSubmitBtn').textContent = 'Add Course';
+      document.getElementById('crsCancelBtn').style.display = 'none';
+    }
     document.getElementById('addCourseForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const featuresRaw = document.getElementById('crsFeatures').value;
-      const item = {
-        id: nextId(courses),
+      const fields = {
         age: document.getElementById('crsAge').value,
         name: document.getElementById('crsName').value,
         duration: document.getElementById('crsDuration').value,
         desc: document.getElementById('crsDesc').value,
         features: featuresRaw.split('\n').map(f => f.trim()).filter(Boolean)
       };
-      courses.push(item); customCourses.push(item);
-      persistCourses(); renderCourses(); renderAdminLists(); e.target.reset();
-      showToast('Course added.');
+      if (editingCourseId !== null) {
+        const id = editingCourseId;
+        if (isBuiltIn(id, DEFAULT_COURSES)) {
+          courseOverrides = Object.assign({}, courseOverrides, { [id]: fields });
+        } else {
+          customCourses = customCourses.map(c => c.id === id ? Object.assign({}, c, fields) : c);
+        }
+        courses = combine(DEFAULT_COURSES, customCourses, deletedCourseIds, courseOverrides);
+        persistCourses(); renderCourses(); renderAdminLists();
+        cancelEditCourse();
+        showToast('Course updated.');
+      } else {
+        const item = Object.assign({ id: nextId(courses) }, fields);
+        courses.push(item); customCourses.push(item);
+        persistCourses(); renderCourses(); renderAdminLists(); e.target.reset();
+        showToast('Course added.');
+      }
     });
     function deleteCourse(id) {
       if (!confirm('Delete this course?')) return;
       courses = courses.filter(c => c.id !== id);
       if (customCourses.some(c => c.id === id)) customCourses = customCourses.filter(c => c.id !== id);
       else deletedCourseIds.push(id);
+      if (editingCourseId === id) cancelEditCourse();
       persistCourses(); renderCourses(); renderAdminLists();
     }
 
+    /* ───────── PORTFOLIO ───────── */
+    function editPortfolio(id) {
+      const p = portfolio.find(x => x.id === id);
+      if (!p) return;
+      editingPortfolioId = id;
+      document.getElementById('pfCat').value = p.cat;
+      document.getElementById('pfTitle').value = p.title;
+      document.getElementById('pfYear').value = p.year;
+      document.getElementById('pfImage').value = '';
+      document.getElementById('pfDesc').value = p.desc;
+      document.getElementById('pfTools').value = p.tools || '';
+      document.getElementById('pfFormTitle').textContent = 'Edit Project';
+      document.getElementById('pfSubmitBtn').textContent = 'Save Changes';
+      document.getElementById('pfCancelBtn').style.display = 'flex';
+      document.getElementById('pfFormTitle').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function cancelEditPortfolio() {
+      editingPortfolioId = null;
+      document.getElementById('addPortfolioForm').reset();
+      document.getElementById('pfFormTitle').textContent = 'Add Portfolio Project';
+      document.getElementById('pfSubmitBtn').textContent = 'Add Project';
+      document.getElementById('pfCancelBtn').style.display = 'none';
+    }
     document.getElementById('addPortfolioForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const item = {
-        id: nextId(portfolio),
+      const imgVal = document.getElementById('pfImage').value;
+      const fields = {
         cat: document.getElementById('pfCat').value,
         title: document.getElementById('pfTitle').value,
         year: document.getElementById('pfYear').value,
-        img: document.getElementById('pfImage').value || 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
         desc: document.getElementById('pfDesc').value,
         tools: document.getElementById('pfTools').value
       };
-      portfolio.push(item); customPortfolio.push(item);
-      persistPortfolio(); renderPortfolio(); renderAdminLists(); e.target.reset();
-      showToast('Project added.');
+      if (editingPortfolioId !== null) {
+        const id = editingPortfolioId;
+        if (imgVal) fields.img = imgVal; // blank = keep current photo
+        if (isBuiltIn(id, DEFAULT_PORTFOLIO)) {
+          portfolioOverrides = Object.assign({}, portfolioOverrides, { [id]: fields });
+        } else {
+          customPortfolio = customPortfolio.map(p => p.id === id ? Object.assign({}, p, fields) : p);
+        }
+        portfolio = combine(DEFAULT_PORTFOLIO, customPortfolio, deletedPortfolioIds, portfolioOverrides);
+        persistPortfolio(); renderPortfolio(); renderAdminLists();
+        cancelEditPortfolio();
+        showToast('Project updated.');
+      } else {
+        fields.img = imgVal || 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80';
+        const item = Object.assign({ id: nextId(portfolio) }, fields);
+        portfolio.push(item); customPortfolio.push(item);
+        persistPortfolio(); renderPortfolio(); renderAdminLists(); e.target.reset();
+        showToast('Project added.');
+      }
     });
     function deletePortfolio(id) {
       if (!confirm('Delete this project?')) return;
       portfolio = portfolio.filter(p => p.id !== id);
       if (customPortfolio.some(p => p.id === id)) customPortfolio = customPortfolio.filter(p => p.id !== id);
       else deletedPortfolioIds.push(id);
+      if (editingPortfolioId === id) cancelEditPortfolio();
       persistPortfolio(); renderPortfolio(); renderAdminLists();
     }
 
+    /* ───────── NEWS ───────── */
+    function editNews(id) {
+      const n = newsItems.find(x => x.id === id);
+      if (!n) return;
+      editingNewsId = id;
+      document.getElementById('newsTitle').value = n.title;
+      document.getElementById('newsDate').value = n.date;
+      document.getElementById('newsContent').value = n.content;
+      document.getElementById('newsImage').value = '';
+      document.getElementById('newsStatus').value = n.status;
+      document.getElementById('newsProgress').value = n.progress || '';
+      document.getElementById('newsFormTitle').textContent = 'Edit News / Project';
+      document.getElementById('newsSubmitBtn').textContent = 'Save Changes';
+      document.getElementById('newsCancelBtn').style.display = 'flex';
+      if (n.gallery && n.gallery.length) showToast('Note: photo galleries can\'t be edited here — text and cover photo only.');
+      document.getElementById('newsFormTitle').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function cancelEditNews() {
+      editingNewsId = null;
+      document.getElementById('addNewsForm').reset();
+      document.getElementById('newsFormTitle').textContent = 'Add News / Project';
+      document.getElementById('newsSubmitBtn').textContent = 'Add News Item';
+      document.getElementById('newsCancelBtn').style.display = 'none';
+    }
     document.getElementById('addNewsForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const item = {
-        id: nextId(newsItems),
+      const imgVal = document.getElementById('newsImage').value;
+      const fields = {
         title: document.getElementById('newsTitle').value,
         date: document.getElementById('newsDate').value,
         content: document.getElementById('newsContent').value,
-        image: document.getElementById('newsImage').value || 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
         status: document.getElementById('newsStatus').value,
-        progress: parseInt(document.getElementById('newsProgress').value) || 0,
-        gallery: [], tags: []
+        progress: parseInt(document.getElementById('newsProgress').value) || 0
       };
-      newsItems.push(item); customNews.push(item);
-      persistNews(); renderNews(); renderAdminLists(); e.target.reset();
-      showToast('News item added.');
+      if (editingNewsId !== null) {
+        const id = editingNewsId;
+        if (imgVal) fields.image = imgVal; // blank = keep current photo (and gallery is untouched either way)
+        if (isBuiltIn(id, DEFAULT_NEWS)) {
+          newsOverrides = Object.assign({}, newsOverrides, { [id]: fields });
+        } else {
+          customNews = customNews.map(n => n.id === id ? Object.assign({}, n, fields) : n);
+        }
+        newsItems = combine(DEFAULT_NEWS, customNews, deletedNewsIds, newsOverrides);
+        persistNews(); renderNews(); renderAdminLists();
+        cancelEditNews();
+        showToast('News item updated.');
+      } else {
+        fields.image = imgVal || 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80';
+        fields.gallery = []; fields.tags = [];
+        const item = Object.assign({ id: nextId(newsItems) }, fields);
+        newsItems.push(item); customNews.push(item);
+        persistNews(); renderNews(); renderAdminLists(); e.target.reset();
+        showToast('News item added.');
+      }
     });
     function deleteNews(id) {
       if (!confirm('Delete this news item?')) return;
       newsItems = newsItems.filter(n => n.id !== id);
       if (customNews.some(n => n.id === id)) customNews = customNews.filter(n => n.id !== id);
       else deletedNewsIds.push(id);
+      if (editingNewsId === id) cancelEditNews();
       persistNews(); renderNews(); renderAdminLists();
     }
 
