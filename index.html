@@ -1767,6 +1767,7 @@
         <div class="ki-admin-form-group"><label>Category</label><input type="text" id="pfCat" placeholder="Robotics" required></div>
         <div class="ki-admin-form-group"><label>Title</label><input type="text" id="pfTitle" required></div>
         <div class="ki-admin-form-group"><label>Year</label><input type="text" id="pfYear" placeholder="2026" required></div>
+        <div class="ki-admin-form-group"><label>Location</label><input type="text" id="pfLocation" placeholder="Ouagadougou, Burkina Faso" required></div>
         <div class="ki-admin-form-group"><label>Image URL <span style="opacity:0.6;">(leave blank to keep current photo)</span></label><input type="url" id="pfImage" placeholder="https://..."></div>
         <div class="ki-admin-form-group"><label>Description</label><textarea id="pfDesc" required></textarea></div>
         <div class="ki-admin-form-group"><label>Tools / Tags</label><input type="text" id="pfTools" placeholder="Arduino, Python"></div>
@@ -1941,12 +1942,12 @@
     ];
 
     const DEFAULT_PORTFOLIO = [
-      { id: 1, cat: "Robotics", title: "Connected Weather Station", year: "2026", img: IMG.daroulHero, desc: "A live weather station built with our students at Daroul Houda, streaming temperature, humidity, air quality and rain data to a web dashboard in real time.", tools: "ESP32, DHT11, Rain Sensor" },
-      { id: 2, cat: "Robotics", title: "Automated Dump Truck", year: "2024", img: IMG.itmG3, desc: "Low-cost line-follower dump truck designed for teaching robotics and mechanical concepts to students, controlled via Arduino.", tools: "Arduino, IR Sensors" },
-      { id: 3, cat: "Sustainability", title: "Metal Boat Model", year: "2023", img: IMG.boatG4, desc: "A fully dimensioned, hand-crafted boat model built entirely from repurposed 2mm sheet metal — a statement on giving scrap material a second life.", tools: "Sheet Metal, 3D Modeling" },
-      { id: 4, cat: "Smart Agriculture", title: "Smart Agriculture Setup", year: "2024", img: IMG.itmG4, desc: "Soil-sensor and LED based smart agriculture demo built by students to monitor and respond to soil conditions.", tools: "Soil Sensors, LEDs" },
-      { id: 5, cat: "IoT", title: "Water Alarm System", year: "2024", img: IMG.itmG1, desc: "A flood-resistant smart home model that sounds an alarm when water levels rise, built as a STEAM exhibition project.", tools: "Buzzer, Water Sensor" },
-      { id: 6, cat: "Education", title: "Calculator — Math Logic", year: "2024", img: IMG.itmG5, desc: "A hands-on calculator project built on mathematical logic, helping students bridge core math concepts with electronics.", tools: "Logic Circuits" }
+      { id: 1, cat: "Robotics", title: "Connected Weather Station", year: "2026", img: IMG.daroulHero, desc: "A live weather station built with our students at Daroul Houda, streaming temperature, humidity, air quality and rain data to a web dashboard in real time.", tools: "ESP32, DHT11, Rain Sensor", location: "Ouagadougou, Burkina Faso" },
+      { id: 2, cat: "Robotics", title: "Automated Dump Truck", year: "2024", img: IMG.itmG3, desc: "Low-cost line-follower dump truck designed for teaching robotics and mechanical concepts to students, controlled via Arduino.", tools: "Arduino, IR Sensors", location: "ITM Global School, India" },
+      { id: 3, cat: "Sustainability", title: "Metal Boat Model", year: "2023", img: IMG.boatG4, desc: "A fully dimensioned, hand-crafted boat model built entirely from repurposed 2mm sheet metal — a statement on giving scrap material a second life.", tools: "Sheet Metal, 3D Modeling", location: "ITM University, Gwalior, India" },
+      { id: 4, cat: "Smart Agriculture", title: "Smart Agriculture Setup", year: "2024", img: IMG.itmG4, desc: "Soil-sensor and LED based smart agriculture demo built by students to monitor and respond to soil conditions.", tools: "Soil Sensors, LEDs", location: "ITM Global School, India" },
+      { id: 5, cat: "IoT", title: "Water Alarm System", year: "2024", img: IMG.itmG1, desc: "A flood-resistant smart home model that sounds an alarm when water levels rise, built as a STEAM exhibition project.", tools: "Buzzer, Water Sensor", location: "ITM Global School, India" },
+      { id: 6, cat: "Education", title: "Calculator — Math Logic", year: "2024", img: IMG.itmG5, desc: "A hands-on calculator project built on mathematical logic, helping students bridge core math concepts with electronics.", tools: "Logic Circuits", location: "ITM Global School, India" }
     ];
 
     const DEFAULT_NEWS = [
@@ -2168,7 +2169,7 @@
       document.getElementById('modalTitle').textContent = p.title;
       document.getElementById('modalCat').textContent = p.cat;
       document.getElementById('modalDesc').textContent = p.desc;
-      document.getElementById('modalClient').textContent = 'Ouagadougou';
+      document.getElementById('modalClient').textContent = p.location || 'Ouagadougou, Burkina Faso';
       document.getElementById('modalYear').textContent = p.year;
       document.getElementById('modalServices').textContent = p.tools || '—';
       const imgEl = document.getElementById('modalImg');
@@ -2682,6 +2683,7 @@
       document.getElementById('pfCat').value = p.cat;
       document.getElementById('pfTitle').value = p.title;
       document.getElementById('pfYear').value = p.year;
+      document.getElementById('pfLocation').value = p.location || '';
       document.getElementById('pfImage').value = '';
       document.getElementById('pfDesc').value = p.desc;
       document.getElementById('pfTools').value = p.tools || '';
@@ -2704,6 +2706,7 @@
         cat: document.getElementById('pfCat').value,
         title: document.getElementById('pfTitle').value,
         year: document.getElementById('pfYear').value,
+        location: document.getElementById('pfLocation').value,
         desc: document.getElementById('pfDesc').value,
         tools: document.getElementById('pfTools').value
       };
