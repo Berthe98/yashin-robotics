@@ -178,6 +178,21 @@
         radial-gradient(ellipse at 50% 80%, rgba(201,169,110,0.03) 0%, transparent 40%);
     }
 
+    #webglCanvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: block;
+    }
+
+    .ki-hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(ellipse at center, transparent 25%, var(--bg) 90%);
+      pointer-events: none;
+    }
+
     .ki-hero-grid {
       position: absolute;
       inset: 0;
@@ -259,22 +274,34 @@
     .ki-btn-primary {
       background: var(--accent);
       color: var(--bg);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.25), 0 6px 16px rgba(0,0,0,0.2);
     }
 
     .ki-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(201,169,110,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 0 rgba(0,0,0,0.25), 0 16px 40px rgba(201,169,110,0.35);
+    }
+
+    .ki-btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.25), 0 4px 10px rgba(0,0,0,0.2);
     }
 
     .ki-btn-outline {
       background: transparent;
       color: var(--text-primary);
       border: 1px solid var(--border);
+      transition: all 0.3s ease, transform 0.15s ease-out;
     }
 
     .ki-btn-outline:hover {
       border-color: var(--accent);
       color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .ki-btn-outline:active {
+      transform: translateY(0);
     }
 
     .ki-scroll {
@@ -438,6 +465,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
+      perspective: 1400px;
     }
 
     .ki-project-card {
@@ -447,14 +475,27 @@
       border-radius: 4px;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.4s ease;
+      transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.12s ease-out;
+      transform-style: preserve-3d;
+      will-change: transform;
       aspect-ratio: 4/5;
     }
 
     .ki-project-card:hover {
-      transform: translateY(-8px);
       border-color: var(--accent);
       box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--accent-glow);
+    }
+
+    /* Shared "light sheen" overlay for the 3D tilt interaction — reused on
+       service/course/portfolio/news cards. JS positions it at the cursor. */
+    .ki-sheen {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 5;
+      transition: opacity 0.25s;
+      background: radial-gradient(circle 220px at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.14), transparent 60%);
     }
 
     .ki-project-img {
@@ -561,12 +602,13 @@
       max-height: 90vh;
       overflow-y: auto;
       position: relative;
-      transform: translateY(30px);
-      transition: transform 0.4s ease;
+      transform: perspective(1200px) translateY(30px) rotateX(8deg) scale(0.97);
+      transform-origin: center bottom;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .ki-modal-overlay.active .ki-modal {
-      transform: translateY(0);
+      transform: perspective(1200px) translateY(0) rotateX(0) scale(1);
     }
 
     .ki-modal-close {
@@ -661,6 +703,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
+      perspective: 1400px;
     }
 
     .ki-service-card {
@@ -668,7 +711,9 @@
       border: 1px solid var(--border);
       border-radius: 4px;
       padding: 2.5rem 2rem;
-      transition: all 0.4s;
+      transition: box-shadow 0.4s, border-color 0.4s, transform 0.12s ease-out;
+      transform-style: preserve-3d;
+      will-change: transform;
       position: relative;
       overflow: hidden;
     }
@@ -691,8 +736,7 @@
 
     .ki-service-card:hover {
       border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
     }
 
     .ki-service-icon {
@@ -1133,17 +1177,20 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
+      perspective: 1400px;
     }
     .ki-course-card {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: 4px;
       overflow: hidden;
-      transition: all 0.3s;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.12s ease-out;
+      transform-style: preserve-3d;
+      will-change: transform;
       display: flex;
       flex-direction: column;
     }
-    .ki-course-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .ki-course-card:hover { border-color: var(--accent); box-shadow: 0 18px 40px rgba(0,0,0,0.35); }
     .ki-course-head {
       padding: 1.8rem 1.8rem 1.2rem;
       border-bottom: 1px solid var(--border);
@@ -1185,15 +1232,19 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
+      perspective: 1400px;
     }
     .ki-news-card {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: 4px;
       overflow: hidden;
-      transition: all 0.3s;
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.12s ease-out;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
-    .ki-news-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .ki-news-card:hover { border-color: var(--accent); box-shadow: 0 18px 40px rgba(0,0,0,0.35); }
     .ki-news-img { position: relative; height: 200px; overflow: hidden; }
     .ki-news-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .ki-news-badge {
@@ -1256,6 +1307,11 @@
     }
     .ki-lightbox.active { display: flex; }
     .ki-lightbox img { max-width: 90vw; max-height: 78vh; object-fit: contain; border-radius: 4px; }
+    .ki-lightbox img.ki-pop-in { animation: kiLightboxPop 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes kiLightboxPop {
+      from { opacity: 0; transform: perspective(900px) scale(0.92) rotateY(6deg); }
+      to { opacity: 1; transform: perspective(900px) scale(1) rotateY(0); }
+    }
     .ki-lightbox-caption { color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem; text-align: center; max-width: 600px; }
     .ki-lightbox-close, .ki-lightbox-prev, .ki-lightbox-next {
       position: absolute; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
@@ -1444,8 +1500,8 @@
 
   <!-- Hero -->
   <section class="ki-hero" id="hero">
-    <div class="ki-hero-bg"></div>
-    <div class="ki-hero-grid"></div>
+    <canvas id="webglCanvas"></canvas>
+    <div class="ki-hero-vignette"></div>
     <div class="ki-hero-content">
       <div class="ki-hero-tag">Ouagadougou, Burkina Faso — Est. 2020</div>
       <h1>Where Building <em>Arts</em><br>Meet <em>Science</em> & Tools</h1>
@@ -1810,6 +1866,9 @@
     <button class="ki-btn-logout" id="logoutBtn">Logout</button>
   </div>
 
+  <!-- Three.js (WebGL hero scene) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <!-- Firebase (shared comments + admin auth for moderation) -->
   <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore-compat.js"></script>
@@ -2114,6 +2173,7 @@
       const c = document.getElementById('servicesGrid');
       c.innerHTML = services.map(s => `
         <div class="ki-service-card ki-fade-in visible">
+          <div class="ki-sheen"></div>
           <div class="ki-service-icon">${esc(s.icon)}</div>
           <h3>${esc(s.title)}</h3>
           <p>${esc(s.desc)}</p>
@@ -2128,6 +2188,7 @@
       const c = document.getElementById('coursesGrid');
       c.innerHTML = courses.map(course => `
         <div class="ki-course-card ki-fade-in visible">
+          <div class="ki-sheen"></div>
           <div class="ki-course-head">
             <div class="ki-course-age">${esc(course.age)}</div>
             <div class="ki-course-name">${esc(course.name)}</div>
@@ -2149,6 +2210,7 @@
       const c = document.getElementById('portfolioGrid');
       c.innerHTML = portfolio.map((p, i) => `
         <div class="ki-project-card ki-fade-in visible" onclick="openModal(${i})">
+          <div class="ki-sheen"></div>
           <div class="ki-project-img" style="background-image:url('${esc(p.img)}');"></div>
           <div class="ki-project-info">
             <div class="ki-project-cat">${esc(p.cat)}</div>
@@ -2242,6 +2304,7 @@
           ` : '';
           html += `
             <div class="ki-news-card ki-fade-in visible">
+              <div class="ki-sheen"></div>
               <div class="ki-news-img">
                 <img src="${esc(n.image)}" alt="${esc(n.title)}" loading="lazy">
                 <span class="ki-news-badge ${badgeClass(n.status)}">${badgeText(n.status)}</span>
@@ -2269,7 +2332,9 @@
     function openLightbox(allImgs, startIdx, caption) {
       lightboxGallery = allImgs;
       lightboxIndex = startIdx;
-      document.getElementById('lightboxImg').src = lightboxGallery[lightboxIndex];
+      const imgEl = document.getElementById('lightboxImg');
+      imgEl.src = lightboxGallery[lightboxIndex];
+      imgEl.classList.remove('ki-pop-in'); void imgEl.offsetWidth; imgEl.classList.add('ki-pop-in');
       document.getElementById('lightboxCaption').textContent = caption + ' — photo ' + (lightboxIndex + 1) + ' of ' + lightboxGallery.length;
       document.getElementById('lightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -2280,7 +2345,9 @@
     }
     function lightboxNav(dir) {
       lightboxIndex = (lightboxIndex + dir + lightboxGallery.length) % lightboxGallery.length;
-      document.getElementById('lightboxImg').src = lightboxGallery[lightboxIndex];
+      const imgEl = document.getElementById('lightboxImg');
+      imgEl.src = lightboxGallery[lightboxIndex];
+      imgEl.classList.remove('ki-pop-in'); void imgEl.offsetWidth; imgEl.classList.add('ki-pop-in');
       const cap = document.getElementById('lightboxCaption').textContent.split(' — ')[0];
       document.getElementById('lightboxCaption').textContent = cap + ' — photo ' + (lightboxIndex + 1) + ' of ' + lightboxGallery.length;
     }
@@ -2812,6 +2879,136 @@
     renderNews();
     renderComments();
     document.querySelectorAll('.logo-mark-src, #logoDblClick').forEach(()=>{});
+
+    /* ═══════════════════════════════════════════════════════════
+       3D TILT — "light catching an object on a workbench".
+       Uses event delegation on the stable grid container so it
+       keeps working after any re-render (Firestore updates,
+       admin edits) without re-attaching listeners to cards.
+    ═══════════════════════════════════════════════════════════ */
+    function enableTilt(containerId, cardSelector) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const reset = (card) => {
+        card.style.transform = '';
+        const sheen = card.querySelector('.ki-sheen');
+        if (sheen) sheen.style.opacity = '0';
+      };
+      container.addEventListener('mousemove', function(e) {
+        const hovered = e.target.closest(cardSelector);
+        container.querySelectorAll(cardSelector).forEach(function(card) {
+          if (card !== hovered) { reset(card); return; }
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          const rx = (py - 0.5) * -9;
+          const ry = (px - 0.5) * 9;
+          card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+          const sheen = card.querySelector('.ki-sheen');
+          if (sheen) {
+            sheen.style.opacity = '1';
+            sheen.style.setProperty('--mx', (px * 100) + '%');
+            sheen.style.setProperty('--my', (py * 100) + '%');
+          }
+        });
+      });
+      container.addEventListener('mouseleave', function() {
+        container.querySelectorAll(cardSelector).forEach(reset);
+      });
+    }
+    enableTilt('servicesGrid', '.ki-service-card');
+    enableTilt('coursesGrid', '.ki-course-card');
+    enableTilt('portfolioGrid', '.ki-project-card');
+    enableTilt('newsGrid', '.ki-news-card');
+
+    /* ═══════════════════════════════════════════════════════════
+       WEBGL HERO — "Circuit Constellation"
+       A drifting network of nodes and connecting lines, evoking
+       both a circuit diagram and a network of students/ideas.
+       Contained to the hero only, so the rest of the site stays
+       fast to load on mobile. Falls back to the plain gradient
+       background (already in the CSS) if Three.js can't load.
+    ═══════════════════════════════════════════════════════════ */
+    function initHeroScene() {
+      if (typeof THREE === 'undefined') return; // graceful fallback — CSS gradient still shows
+      const canvas = document.getElementById('webglCanvas');
+      if (!canvas) return;
+      const heroEl = document.getElementById('hero');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / heroEl.offsetHeight, 0.1, 1000);
+      camera.position.z = 26;
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, heroEl.offsetHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const NODE_COUNT = 85;
+      const nodePositions = [];
+      const nodes = new THREE.Group();
+      const nodeGeo = new THREE.SphereGeometry(0.09, 8, 8);
+      const nodeMat = new THREE.MeshBasicMaterial({ color: 0xc9a96e });
+      for (let i = 0; i < NODE_COUNT; i++) {
+        const x = (Math.random() - 0.5) * 32;
+        const y = (Math.random() - 0.5) * 18;
+        const z = (Math.random() - 0.5) * 14;
+        nodePositions.push(new THREE.Vector3(x, y, z));
+        const mesh = new THREE.Mesh(nodeGeo, nodeMat);
+        mesh.position.set(x, y, z);
+        nodes.add(mesh);
+      }
+      scene.add(nodes);
+
+      const lineMat = new THREE.LineBasicMaterial({ color: 0xc9a96e, transparent: true, opacity: 0.16 });
+      const lineGeo = new THREE.BufferGeometry();
+      const linePoints = [];
+      const MAX_DIST = 7;
+      for (let i = 0; i < nodePositions.length; i++) {
+        for (let j = i + 1; j < nodePositions.length; j++) {
+          if (nodePositions[i].distanceTo(nodePositions[j]) < MAX_DIST) {
+            linePoints.push(nodePositions[i].x, nodePositions[i].y, nodePositions[i].z);
+            linePoints.push(nodePositions[j].x, nodePositions[j].y, nodePositions[j].z);
+          }
+        }
+      }
+      lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePoints, 3));
+      const lines = new THREE.LineSegments(lineGeo, lineMat);
+      scene.add(lines);
+
+      let mouseX = 0, mouseY = 0;
+      heroEl.addEventListener('mousemove', function(e) {
+        const r = heroEl.getBoundingClientRect();
+        mouseX = ((e.clientX - r.left) / r.width - 0.5);
+        mouseY = ((e.clientY - r.top) / r.height - 0.5);
+      });
+
+      let rafId;
+      function animate() {
+        rafId = requestAnimationFrame(animate);
+        nodes.rotation.y += 0.0009;
+        lines.rotation.y += 0.0009;
+        nodes.rotation.x += (mouseY * 0.3 - nodes.rotation.x) * 0.02;
+        lines.rotation.x = nodes.rotation.x;
+        camera.position.x += (mouseX * 4 - camera.position.x) * 0.02;
+        camera.lookAt(scene.position);
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Pause rendering when the hero scrolls out of view — saves battery/CPU on long sessions
+      const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { if (!rafId) animate(); }
+          else { cancelAnimationFrame(rafId); rafId = null; }
+        });
+      }, { threshold: 0 });
+      io.observe(heroEl);
+
+      window.addEventListener('resize', function() {
+        camera.aspect = window.innerWidth / heroEl.offsetHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, heroEl.offsetHeight);
+      });
+    }
+    initHeroScene();
 
     // Close modal / lightbox / login on Escape key
     document.addEventListener('keydown', function(e) {
