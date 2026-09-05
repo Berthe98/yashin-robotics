@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WASSA | Koulé Ingenium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0a0a0b; --bg-card:#1a1a1d; --text-primary:#f5f5f7; --text-secondary:#a0a0a8; --accent:#c9a96e; --border:#2a2a2e; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text-primary); line-height:1.75; }
+  .wrap { max-width:860px; margin:0 auto; padding:60px 24px 100px; }
+  a.back { color:var(--accent); text-decoration:none; font-size:0.85rem; }
+  h1 { font-family:'Space Grotesk',sans-serif; font-size:2rem; margin:20px 0 10px; font-weight:600; }
+  .meta { color:var(--text-secondary); font-size:0.85rem; margin-bottom:30px; }
+  img { width:100%; border-radius:4px; margin:24px 0; border:1px solid var(--border); display:block; }
+  video { width:100%; border-radius:4px; margin:24px 0; border:1px solid var(--border); }
+  p { margin-bottom:1.2em; color:var(--text-primary); }
+  .btn-cta { display:inline-block; padding:0.7rem 1.6rem; background:var(--accent); color:#0a0a0b; border-radius:4px; text-decoration:none; font-weight:600; font-size:0.9rem; }
+  
+  .ki-shop-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:18px; margin:24px 0; }
+  .ki-shop-card { background:var(--bg-card); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+  .ki-shop-img { height:160px; background-size:cover; background-position:center; background-color:#151517; }
+  .ki-shop-body { padding:14px; }
+  .ki-shop-name { font-weight:600; margin-bottom:4px; }
+  .ki-shop-price { color:var(--accent); font-weight:600; margin-bottom:8px; }
+  .ki-shop-desc { font-size:0.85rem; color:var(--text-secondary); margin:0; }
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html">← Back to Koulé Ingenium</a>
+    <h1>WASSA</h1>
+    <div class="meta"></div>
+    <div class="ki-shop-grid"></div>
+  </div>
+  
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore-compat.js"></script>
+  <script>
+    try {
+      firebase.initializeApp({'apiKey': 'AIzaSyBoibopho7CBHBr4ih8OmkmMcGSm-CjIDs', 'authDomain': 'koule-ingenium.firebaseapp.com', 'projectId': 'koule-ingenium', 'storageBucket': 'koule-ingenium.firebasestorage.app', 'messagingSenderId': '1011011131882', 'appId': '1:1011011131882:web:ce29edfa0383f2388a3a93'});
+      var _db = firebase.firestore();
+      var _pageId = "wassa";
+      var _today = new Date().toISOString().slice(0, 10);
+      _db.collection('page_views').doc(_pageId).set({
+        path: _pageId, count: firebase.firestore.FieldValue.increment(1),
+        last_viewed: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true }).catch(function(e) { console.error('pageview log failed', e); });
+      _db.collection('daily_totals').doc(_today).set({
+        count: firebase.firestore.FieldValue.increment(1)
+      }, { merge: true }).catch(function(e) {});
+    } catch (e) { console.error('tracking init failed', e); }
+  </script>
+
+</body>
+</html>
