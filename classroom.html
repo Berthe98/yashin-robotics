@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classroom | Koulé Ingenium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0a0a0b; --bg-card:#1a1a1d; --text-primary:#f5f5f7; --text-secondary:#a0a0a8; --accent:#c9a96e; --border:#2a2a2e; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text-primary); line-height:1.6; }
+  .wrap { max-width:760px; margin:0 auto; padding:50px 24px 100px; }
+  a.back { color:var(--accent); text-decoration:none; font-size:0.85rem; }
+  h1 { font-family:'Space Grotesk',sans-serif; font-size:1.8rem; margin:16px 0 24px; font-weight:600; }
+  h2 { font-family:'Space Grotesk',sans-serif; font-size:1.2rem; margin:0 0 8px; font-weight:600; }
+  .card { background:var(--bg-card); border:1px solid var(--border); border-radius:4px; padding:20px; margin-bottom:16px; }
+  input { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text-primary); padding:10px 12px; border-radius:4px; font-size:0.9rem; margin-bottom:10px; }
+  button { background:var(--accent); color:#0a0a0b; border:none; padding:10px 20px; border-radius:4px; font-weight:600; cursor:pointer; font-size:0.9rem; }
+  button.secondary { background:transparent; border:1px solid var(--border); color:var(--text-primary); }
+  .error { color:#c96e6e; font-size:0.85rem; margin-top:6px; }
+  .lesson { border-top:1px solid var(--border); padding-top:14px; margin-top:14px; }
+  .lesson:first-child { border-top:none; margin-top:0; padding-top:0; }
+  video, img { width:100%; border-radius:4px; margin:10px 0; }
+  a.file-link { color:var(--accent); display:block; margin:4px 0; }
+  #signed-in-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:0.85rem; color:var(--text-secondary); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">← Back to Koulé Ingenium</a>
+    <h1>Classroom</h1>
+
+    <div class="card" style="border-color:var(--accent);">
+      <h2>New here? How to enroll</h2>
+      <p style="color:var(--text-secondary); margin:0 0 12px;">Pay via Orange Money to +226 54 32 36 58, or in cash in person, then message us your payment confirmation and the exact email you&#x27;ll sign in with here — we&#x27;ll grant access to your course. Prefer an offline, in-person class instead? Message us on WhatsApp to arrange it.</p>
+      <a href="https://wa.me/22651881725" target="_blank" style="display:inline-block; background:var(--accent); color:#0a0a0b; padding:8px 16px; border-radius:4px; text-decoration:none; font-weight:600; font-size:0.85rem;">Message us on WhatsApp</a>
+    </div>
+
+    <div id="auth-section" class="card">
+      <h2>Sign in</h2>
+      <input id="email" type="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Password">
+      <div style="display:flex; gap:8px;">
+        <button onclick="doSignIn()">Sign in</button>
+        <button class="secondary" onclick="doSignUp()">Create account</button>
+      </div>
+      <div id="auth-error" class="error"></div>
+    </div>
+
+    <div id="classroom-section" style="display:none;">
+      <div id="signed-in-bar">
+        <span id="signed-in-email"></span>
+        <button class="secondary" onclick="doSignOut()">Sign out</button>
+      </div>
+      <div id="courses-container"></div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore-compat.js"></script>
+  <script>
+    firebase.initializeApp({'apiKey': 'AIzaSyBoibopho7CBHBr4ih8OmkmMcGSm-CjIDs', 'authDomain': 'koule-ingenium.firebaseapp.com', 'projectId': 'koule-ingenium', 'storageBucket': 'koule-ingenium.firebasestorage.app', 'messagingSenderId': '1011011131882', 'appId': '1:1011011131882:web:ce29edfa0383f2388a3a93'});
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    function showError(msg) { document.getElementById('auth-error').textContent = msg; }
+
+    async function doSignIn() {
+      showError('');
+      try {
+        await auth.signInWithEmailAndPassword(document.getElementById('email').value.trim(), document.getElementById('password').value);
+      } catch (e) { showError(e.message); }
+    }
+
+    async function doSignUp() {
+      showError('');
+      try {
+        await auth.createUserWithEmailAndPassword(document.getElementById('email').value.trim(), document.getElementById('password').value);
+      } catch (e) { showError(e.message); }
+    }
+
+    function doSignOut() { auth.signOut(); }
+
+    function esc(s) {
+      const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML;
+    }
+
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        document.getElementById('auth-section').style.display = 'block';
+        document.getElementById('classroom-section').style.display = 'none';
+        return;
+      }
+      document.getElementById('auth-section').style.display = 'none';
+      document.getElementById('classroom-section').style.display = 'block';
+      document.getElementById('signed-in-email').textContent = user.email;
+
+      const container = document.getElementById('courses-container');
+      container.innerHTML = 'Loading your courses…';
+
+      const email = (user.email || '').toLowerCase();
+      const enrollSnap = await db.collection('classroom_enrollments').where('studentEmail', '==', email).get();
+
+      if (enrollSnap.empty) {
+        container.innerHTML = '<div class="card">No courses assigned to this account yet — see "How to enroll" above, or contact Koulé Ingenium if you believe this is a mistake.</div>';
+        return;
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const focusCourseId = params.get('course');
+
+      container.innerHTML = '';
+      for (const doc of enrollSnap.docs) {
+        const courseId = doc.data().courseId;
+        const lessonsSnap = await db.collection('classroom_lessons').where('courseId', '==', courseId).orderBy('order').get();
+        const progressSnap = await db.collection('classroom_progress').where('studentEmail', '==', email).where('courseId', '==', courseId).get();
+        const completedLessonIds = new Set(progressSnap.docs.map(d => d.data().lessonId));
+
+        const section = document.createElement('div');
+        section.className = 'card';
+        if (courseId === focusCourseId) { section.id = 'focused-course'; section.style.borderColor = 'var(--accent)'; }
+
+        const total = lessonsSnap.size;
+        const done = [...completedLessonIds].filter(id => lessonsSnap.docs.some(d => d.id === id)).length;
+        let html = `<h2>Course</h2><div style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:10px;">${done} of ${total} lessons completed</div>`;
+        if (total > 0) {
+          html += `<div style="background:var(--bg); border:1px solid var(--border); border-radius:3px; height:6px; margin-bottom:16px; overflow:hidden;"><div style="background:var(--accent); height:100%; width:${Math.round(done/total*100)}%;"></div></div>`;
+        }
+        if (lessonsSnap.empty) {
+          html += '<p style="color:var(--text-secondary)">No lessons published yet.</p>';
+        }
+        lessonsSnap.forEach(lessonDoc => {
+          const l = lessonDoc.data();
+          const isDone = completedLessonIds.has(lessonDoc.id);
+          html += `<div class="lesson"><h2>${esc(l.title)}</h2><p>${esc(l.body).replace(/\n/g,'<br>')}</p>`;
+          if (l.videoUrl) html += `<video src="${esc(l.videoUrl)}" controls></video>`;
+          (l.fileUrls || []).forEach((f, i) => {
+            html += `<a class="file-link" href="${esc(f)}" target="_blank">Download attachment ${i+1}</a>`;
+          });
+          html += isDone
+            ? `<div style="color:var(--accent); font-size:0.85rem; margin-top:8px;">✓ Completed</div>`
+            : `<button class="secondary" style="margin-top:8px;" onclick="markComplete('${lessonDoc.id}','${courseId}',this)">Mark as complete</button>`;
+          html += `</div>`;
+        });
+        section.innerHTML = html;
+        container.appendChild(section);
+      }
+
+      if (focusCourseId) {
+        const el = document.getElementById('focused-course');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    async function markComplete(lessonId, courseId, btn) {
+      const user = auth.currentUser;
+      if (!user) return;
+      const email = (user.email || '').toLowerCase();
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+      try {
+        await db.collection('classroom_progress').doc(`${email}_${lessonId}`).set({
+          studentEmail: email, lessonId: lessonId, courseId: courseId, completedAt: Date.now(),
+        });
+        btn.outerHTML = '<div style="color:var(--accent); font-size:0.85rem; margin-top:8px;">✓ Completed</div>';
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = 'Mark as complete — failed, try again';
+      }
+    }
+  </script>
+</body>
+</html>
